@@ -1,0 +1,2 @@
+https://github.com/YoungTimes/GNN/blob/master/GCN/dataset.py
+https://zhuanlan.zhihu.com/p/148107956

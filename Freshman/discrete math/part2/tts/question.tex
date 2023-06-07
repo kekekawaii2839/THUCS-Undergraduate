@@ -1,0 +1,28 @@
+\documentclass{exam}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{theorem}{}
+\newtheorem{proof}{}
+\begin{document}
+    \begin{theorem}请证明: 假设图$G=(V,E)$有$n$个顶点, 并且不包含$K_p$完全子图, 且$p \geq 2$, 那么
+        $$|E| \leq (1-\frac{1}{p-1})\frac{n^2}{2}$$.
+    \end{theorem}
+    \begin{proof}使用归纳法. 当$p=2$时, $|E|=0$, 显然成立.\\
+        \indent 当$p=3$时, $|E| \leq \frac{n^2}{4}$, 等号成立当且仅当$G$是完全二分图:\\
+        \indent \indent $d_i$表示第$i$个顶点的度数, 则根据握手定理可知: $$\sum_{i \in V}d_i=2|E|$$
+        \indent \indent 并且由于$G$中不存在三角形(即$K_3$子图), 可知若$e_{ij} \in E$, 则$$d_i+d_j \leq n, \forall 1\leq i,j\leq n$$
+        \indent \indent 因此可得$$\sum_{1\leq i,j\leq n}(d_i+d_j)\leq n|E|, i\neq j$$
+        \indent \indent 进一步化简. 第$i$个顶点在上式被计算$d_i$次, 由此可得: $$n|E|\geq \sum_{i\in V}d_i^2$$
+        \indent \indent 再根据Cauchy-Schwarz不等式, 可得$$n|E|\geq \sum_{i\in V}d_i^2\geq \frac{(\sum_{i\in V}d_i)^2}{n}=\frac{4|E|^2}{n}$$
+        \indent \indent 即$$|E|\leq \frac{n^2}{4}$$
+        \indent 对$n$归纳: 当$2 \sim n-1$均成立时, 证明$n$时也成立.\\
+        \indent \indent 首先考虑$n<p$的情况: 注意到$$|E|=\frac{n(n-1)}{2}=\frac{n^2}{2}-\frac{n^2}{2n}\leq \frac{n^2}{2}-\frac{n^2}{2(p-1)}=(1-\frac{1}{p-1})\frac{n^2}{2}$$
+        \indent \indent 此时图$G$中不存在$K_p$完全子图.\\
+        \indent \indent 再考虑$n\geq p$的情况: 令$G$为顶点集$V$上边数最多的不含$K_p$完全子图的图, 则$G$中一定包含$K_{p-1}$完全子图, 否则可以向$G$中加入一条边, 使得边数增加, 与$G$的定义矛盾.\\
+        \indent \indent 令$A$为其中任意一个$K_{p-1}$完全子图, $B=V\backslash A$, 则$A$中含有$\frac{(p-1)(p-2)}{2}$条边.\\
+        \indent \indent 由归纳条件知, $B$不含$K_p$完全子图, 其边数$|E_B|\leq (1-\frac{1}{p-1})\frac{(n-p+1)^2}{2}$.\\
+        \indent \indent 并且由于$G$不含$K_p$完全子图, $B$中每个顶点最多可以与$A$中的$p-2$个顶点相连, 得到: $$|E|\leq |E_A|+|E_B|+(p-2)(n-p+1)=(1-\frac{1}{p-1})\frac{n^2}{2}$$\\
+        \indent 得证.
+    \end{proof}
+\end{document}
