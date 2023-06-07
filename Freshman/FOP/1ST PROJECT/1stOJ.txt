@@ -1,0 +1,7 @@
+"Success"->"aaSuccess": test point 1 2 5 wrong
+"Fail"->"aaFail": test point 7 wrong
+reading "Error on instruction "->"rror on instruction ": test point no wrong
+result "Error on instruction "->"rror on instruction ": test point 4 8 wrong
+
+where's 3 & 6?
+answer: 3 & 6 are arguments of instrcutions are not integer
