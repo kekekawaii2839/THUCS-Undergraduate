@@ -1,0 +1,128 @@
+\documentclass{exam}
+\usepackage[heading=true]{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\title{Calculus T(1) Midterm}
+\date{November 5, 2022}
+\begin{document}
+\maketitle
+\section{填空题}
+\begin{questions}
+    \question[3]设$f(x)=5(\sqrt{1+x}-1), g(x)=\frac{k ln(1+x)}{x+2} (x \neq -2)$, $k$为常数. 若当$x \rightarrow 0$时, $f(x)$和$g(x)$为等价无穷小, 则$k= \underline{\hspace{1.5cm}}$.
+    \question[3]$f(x)=
+    \begin{cases}
+        e^{\frac{-1}{x^2}},& x \neq 0 \\
+        0,& x = 0
+    \end{cases}$, $n$为任意正整数, 则$f^{(n)}(0)= \underline{\hspace{1.5cm}}$.
+    \question[3]记$[x]$为不大于$x$的最大整数, 则极限$\lim\limits_{y \to 0} y[\frac{1}{y}]= \underline{\hspace{1.5cm}}$.
+    \question[3]极限$\lim\limits_{n \to +\infty} (n+\sqrt[3]{9n^2-n^3})= \underline{\hspace{1.5cm}}$.
+    \question[3]极限$\lim\limits_{n \to +\infty} \frac{8}{ln(n)}(1+\frac{1}{3}+\frac{1}{5}+\ldots+\frac{1}{2n-1})=\underline{\hspace{1.5cm}}$.
+    \question[3]设$f(x)$在点$x=1$处可导, 且$f^{'}(1)=1$, 则极限$\lim\limits_{x \to 1} \frac{f(x)-f(1)}{\sqrt{x}-1}=\underline{\hspace{1.5cm}}$.
+    \question[3]设$f^{'}(0)$存在, 且$\lim\limits_{x \to 0} \frac{1}{x}[f(x)-f(\frac{x}{4})]=\frac{3}{2}$, 则$f^{'}(0)=\underline{\hspace{1.5cm}}$.
+    \question[3]设$f(x)=
+    \begin{cases}
+        \frac{x^2-x}{|x|(x^2-1)},& x \neq 0, x^2 \neq 1, \\
+        \frac{1}{2},& x=0, x^2=1.
+    \end{cases}$, 则函数$f(x)$的间断点个数总共有$\underline{\hspace{1.5cm}}$个.
+    \question[3]极限$\lim\limits_{x \to 0} \frac{6x-sin 2x-sin 4x}{x^3}=\underline{\hspace{1.5cm}}$.
+    \question[3]极限$\lim\limits_{x \to 0} \frac{sin x-arctan x}{tan x-arcsin x}=\underline{\hspace{1.5cm}}$.
+    \question[3]设函数$f(x)$在开区间$(-1, 1)$上定义, 满足$|f(x)| \leq (sinx)^2 , \forall x \in (-1, 1)$,则$f^{'}(0)=\underline{\hspace{1.5cm}}$.
+    \question[3]极限$\lim\limits_{x \to +\infty} \frac{x^{lnx}}{(lnx)^x}=\underline{\hspace{1.5cm}}$.
+    \question[3]设$y=y(x)$是由方程$y=1+arctan \frac{y}{x}$在点$(x,y)=(0,1)$附近确定的可导函数, 则导数$y^{'}(0)=\underline{\hspace{1.5cm}}$.
+    \question[3]设$f(x)=x^2sin(3x)$, 则$f^{(100)}(0)=\underline{\hspace{1.5cm}}$.
+    \question[3]方程$x^4+2x^3+6x^2-4x-5=0$在实轴$\mathbb{R}$上有且仅有$\underline{\hspace{1.5cm}}$个根.
+\end{questions}
+\section{选择题}
+\begin{questions}
+    \question[3]当$n \to +\infty$时, 将无穷大量$n^{100}, e^n, ln(1+n^{1000}), n!$, 按它们趋于正无穷的速度由低到高排列, 正确的顺序为: 
+    \begin{choices}
+        \choice $ln(1+n^{1000}), n^{100}, e^n, n!$;
+        \choice $n^{100}, ln(1+n^{1000}), n!, e^n$;
+        \choice $n^{100}, ln(1+n^{1000}), e^n, n!$;
+        \choice $ln(1+n^{1000}), n^{100}, n!, e^n$.
+    \end{choices}
+    \question[3]设$f(x)=
+    \begin{cases}
+        ax+b,& x > 1, \\
+        x^2,& x \leq 1.
+    \end{cases}$, 假设$f(x)$在点$x=1$处可导, 则
+    \begin{choices}
+        \choice $(a, b)=(2, 1)$;
+        \choice $(a, b)=(-2, 1)$;
+        \choice $(a, b)=(-2, -1)$;
+        \choice $(a, b)=(2, -1)$.
+    \end{choices}
+    \question[3]函数$x^2cos x$的$100$阶导函数$(x^2cos x)^{100}$为
+    \begin{choices}
+        \choice $x^2cos x+200xsin x+9900cosx$;
+        \choice $x^2cos x-200xsin x+9900cosx$;
+        \choice $x^2cos x+200xsin x-9900cosx$;
+        \choice $x^2cos x-200xsin x-9900cosx$.
+    \end{choices}
+    \question[3]函数$\frac{1}{cos x}$在$x=0$处带Peano余项的四阶Taylor展式为
+    \begin{choices}
+        \choice $\frac{1}{cos x}=1-\frac{1}{2}x^2+\frac{5}{24}x^4+o(x^4)$;
+        \choice $\frac{1}{cos x}=1+\frac{1}{2}x^2+\frac{5}{24}x^4+o(x^4)$;
+        \choice $\frac{1}{cos x}=1-\frac{1}{2}x^2+\frac{1}{24}x^4+o(x^4)$;
+        \choice $\frac{1}{cos x}=1+\frac{1}{2}x^2-\frac{5}{24}x^4+o(x^4)$.
+    \end{choices}
+    \question[3]记$(x_0,y_0)$为旋轮线$x=t-sin t, y=1-cos t (0 \leq t \leq 2\pi)$上对应参数$t=\frac{\pi}{2}$的点, 则旋轮线在点$(x_0,y_0)$处的切线方程为
+    \begin{choices}
+        \choice $y=x-\frac{\pi}{2}+2$;
+        \choice $y=2$;
+        \choice $y=\frac{\pi}{2}x$;
+        \choice $y=x+\frac{\pi}{2}$.
+    \end{choices}
+    \question[3]设$f(x)$在实轴$\mathbb{R}$上可导, 则下列说法哪一个是错误的.
+    \begin{choices}
+        \choice 若$f(x)$是偶函数, 则$f^{'}(x)$是奇函数;
+        \choice 若$f(x)$是周期函数, 则$f^{'}(x)$是周期函数;
+        \choice 若$f(x)$在$\mathbb{R}$上有界, 则$f^{'}(x)$在$\mathbb{R}$上有界;
+        \choice 若$f(x)$是奇函数, 则$f^{'}(x)$是偶函数.
+    \end{choices}
+    \question[3]设$f(x)$在$(-\infty, +\infty)$上单调有界, ${x_n}$为一数列, 则下列命题正确的是
+    \begin{choices}
+        \choice 若$\{x_n\}$收敛, 则$\{f(x_n)\}$收敛;
+        \choice 若$\{f(x_n)\}$收敛, 则$\{x_n\}$收敛;
+        \choice 若$\{x_n\}$单调, 则$\{f(x_n)\}$收敛;
+        \choice 若$\{f(x_n)\}$单调, 则$\{x_n\}$收敛.
+    \end{choices}
+    \question[3]函数$x^x (x>0)$的导函数为
+    \begin{choices}
+        \choice $x^{\frac{1}{x}-2}$;
+        \choice $x^{\frac{1}{x}-2}(1-lnx)$;
+        \choice $x^{\frac{1}{x}}$;
+        \choice $x^{\frac{1}{x}-1}$.
+    \end{choices}
+    \question[3]函数$xln(1+x)$在$x=0$处的泰勒(Taylor)多项式为
+    \begin{choices}
+        \choice $\sum_{k=2}^{n}\frac{(-1)^kx^k}{k}$;
+        \choice $\sum_{k=2}^{n}\frac{(-1)^{k-1}x^k}{k}$;
+        \choice $\sum_{k=2}^{n}\frac{(-1)^kx^k}{k-1}$;
+        \choice $\sum_{k=2}^{n}\frac{(-1)^{k-1}x^k}{k-1}$.
+    \end{choices}
+    \question[3]极限$\lim\limits_{x \to 0}(\frac{2^x+3^x+4^x}{3})^{\frac{3}{x}}$等于
+    \begin{choices}
+        \choice 4;
+        \choice 2;
+        \choice 24;
+        \choice $+\infty$.
+    \end{choices}
+    \section{解答题}
+    \question[10]
+    \begin{parts}
+        \part 证明函数$f(x)=x+arctan x$在整个实轴$\mathbb{R}$上存在反函数, 记作$x=g(y), y \in \mathbb{R}$, 并且反函数$g(y)$为二次连续可微.
+        \part 计算$g^{''}(y)$.
+    \end{parts}
+    \question[10]设$n \geq 2$为正整数.
+    \begin{parts}
+        \part 证明方程$x+x^2+\ldots+x^{n-1}+x^n=1$在开区间$(\frac{1}{2},1)$内有且仅有一个实根, 记作$x_n$;
+        \part 证明$\lim\limits_{n \to +\infty}x_n=\frac{1}{2}$.
+    \end{parts}
+    \question[5]设$f(x)$在$[0,1]$上二阶连续可导.
+    \begin{parts}
+        \part 若$f(0)=f(1)$, 且$max_{0 \leq x \leq 1}|f^{''}(x)|\leq 2$, 证明$max_{0 \leq x \leq 1}|f^{'}(x)|\leq 1$.
+        \part 构造一个$[0,1]$上的二阶连续可微函数$f(x)$, 使得$f(0)=f(1)$, $max_{0 \leq x \leq 1}|f^{'}(x)|=1$, 以及\\$max_{0 \leq x \leq 1}|f^{''}(x)|=2$.
+    \end{parts}
+\end{questions}
+\end{document}
