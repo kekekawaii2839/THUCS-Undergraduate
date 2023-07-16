@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-bky-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>奶牛养殖场</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>全自动化养殖场有<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>头奶牛，每头奶牛每天要吃不少于<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>l</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">l</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0197em;">l</span></span></span></span></span> kg且不多于<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>u</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">u</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">u</span></span></span></span></span> kg饲料，能够产奶<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span>
+                      kg。养殖场为每头奶牛配备了一个<strong>专属</strong>智能饲料槽，每天定期自动往里补充<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>a</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">a</span></span></span></span></span>
+                      kg饲料。奶牛每天的进食在饲料补充后进行。每头牛总是提供多少饲料吃多少饲料，但智能饲料槽能够确保一头牛吃够<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>u</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">u</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">u</span></span></span></span></span>
+                      kg饲料后就不再提供饲料，剩余饲料留到之后使用（<strong>仅限该头牛使用</strong>）。产奶在进食之后进行，如果一头牛一天吃少于<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>l</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">l</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0197em;">l</span></span></span></span></span>
+                      kg饲料，则该天的产奶量减半；如果一头牛一天没有吃饲料，则该天的产奶量为0。你需要补充完成一个程序：根据<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span>天的饲养情况，计算<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span>天的产奶量之和。</p>
+                    <h3>输入格式</h3>
+                    <ul>
+                      <li>第一行是奶牛数<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>n</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">n</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span
+                                  class="mord mathnormal">n</span></span></span></span></span>，接下来<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>n</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">n</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span
+                                  class="mord mathnormal">n</span></span></span></span></span>行，每行包括一头奶牛的名字，以及相应的<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>l</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">l</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0197em;">l</span></span></span></span></span>，<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>u</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">u</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span
+                                  class="mord mathnormal">u</span></span></span></span></span>和<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>m</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">m</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span
+                                  class="mord mathnormal">m</span></span></span></span></span>，用空格隔开</li>
+                      <li>接下来一行是天数<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>k</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">k</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0315em;">k</span></span></span></span></span>，后面<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>k</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">k</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0315em;">k</span></span></span></span></span>行，第<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span>行行首是<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <msup>
+                                      <mi>n</mi>
+                                      <msup>
+                                        <mrow></mrow>
+                                        <mo mathvariant="normal" lspace="0em" rspace="0em">′</mo>
+                                      </msup>
+                                    </msup>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">n^{'}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.9425em;"></span><span class="mord"><span
+                                    class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height: 0.9425em;"><span class=""
+                                            style="top: -2.9425em; margin-right: 0.05em;"><span class="pstrut"
+                                              style="height: 2.5795em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                  class="mord mtight"><span class=""></span><span class="msupsub"><span
+                                                      class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                          style="height: 0.8278em;"><span class=""
+                                                            style="top: -2.931em; margin-right: 0.0714em;"><span
+                                                              class="pstrut" style="height: 2.5em;"></span><span
+                                                              class="sizing reset-size3 size1 mtight"><span
+                                                                class="mord mtight"><span
+                                                                  class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>（<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>0</mn>
+                                    <mo>≤</mo>
+                                    <msup>
+                                      <mi>n</mi>
+                                      <msup>
+                                        <mrow></mrow>
+                                        <mo mathvariant="normal" lspace="0em" rspace="0em">′</mo>
+                                      </msup>
+                                    </msup>
+                                    <mo>≤</mo>
+                                    <mi>n</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">0 \le n^{'} \le n</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">0</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 1.0784em; vertical-align: -0.136em;"></span><span class="mord"><span
+                                    class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height: 0.9425em;"><span class=""
+                                            style="top: -2.9425em; margin-right: 0.05em;"><span class="pstrut"
+                                              style="height: 2.5795em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                  class="mord mtight"><span class=""></span><span class="msupsub"><span
+                                                      class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                          style="height: 0.8278em;"><span class=""
+                                                            style="top: -2.931em; margin-right: 0.0714em;"><span
+                                                              class="pstrut" style="height: 2.5em;"></span><span
+                                                              class="sizing reset-size3 size1 mtight"><span
+                                                                class="mord mtight"><span
+                                                                  class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span
+                                  class="mord mathnormal">n</span></span></span></span></span>），表示第<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span>天为<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <msup>
+                                      <mi>n</mi>
+                                      <msup>
+                                        <mrow></mrow>
+                                        <mo mathvariant="normal" lspace="0em" rspace="0em">′</mo>
+                                      </msup>
+                                    </msup>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">n^{'}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.9425em;"></span><span class="mord"><span
+                                    class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height: 0.9425em;"><span class=""
+                                            style="top: -2.9425em; margin-right: 0.05em;"><span class="pstrut"
+                                              style="height: 2.5795em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                  class="mord mtight"><span class=""></span><span class="msupsub"><span
+                                                      class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                          style="height: 0.8278em;"><span class=""
+                                                            style="top: -2.931em; margin-right: 0.0714em;"><span
+                                                              class="pstrut" style="height: 2.5em;"></span><span
+                                                              class="sizing reset-size3 size1 mtight"><span
+                                                                class="mord mtight"><span
+                                                                  class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>头不同的奶牛补充了饲料，该行后面是用空格相间的<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <msup>
+                                      <mi>n</mi>
+                                      <msup>
+                                        <mrow></mrow>
+                                        <mo mathvariant="normal" lspace="0em" rspace="0em">′</mo>
+                                      </msup>
+                                    </msup>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">n^{'}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.9425em;"></span><span class="mord"><span
+                                    class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height: 0.9425em;"><span class=""
+                                            style="top: -2.9425em; margin-right: 0.05em;"><span class="pstrut"
+                                              style="height: 2.5795em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                  class="mord mtight"><span class=""></span><span class="msupsub"><span
+                                                      class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                          style="height: 0.8278em;"><span class=""
+                                                            style="top: -2.931em; margin-right: 0.0714em;"><span
+                                                              class="pstrut" style="height: 2.5em;"></span><span
+                                                              class="sizing reset-size3 size1 mtight"><span
+                                                                class="mord mtight"><span
+                                                                  class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>项记录，每项纪录的格式为<code>&lt;奶牛名字&gt; a</code>。比方说，<code>2 A 1 B 3</code>，意思是给名字为<code>A</code>的牛补充饲料<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">1</span></span></span></span></span>
+                        kg，给名字为<code>B</code>的牛补充饲料<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>3</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">3</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">3</span></span></span></span></span> kg</li>
+                      <li>所有输入数字都是整数</li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>k</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">k</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0315em;">k</span></span></span></span></span>天之前，饲料槽中的饲料剩余量为0
+                      </li>
+                    </ul>
+                    <h3>输出格式</h3>
+                    <ul>
+                      <li>输出<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>k</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">k</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0315em;">k</span></span></span></span></span>天的产奶量之和，保留一位小数
+                      </li>
+                    </ul>
+                    <h3>输入样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">2
+a 2 5 6
+b 3 4 7
+2
+2 b 6 a 2
+1 a 1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">19.5
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>要求</h3>
+                    <ul>
+                      <li>在下列代码的基础上，编写Cow类（奶牛类）和Farm类（养殖场类）的代码，完成上述要求。</li>
+                      <li><code>main.cpp</code> <a
+                          href="https://oj.cs.tsinghua.edu.cn/staticdata/1742.lFiG4HLMulVukOMW.pub/MDpMPdr1hnpevqrN.main.cpp/main.cpp">下载链接</a>。
+                      </li>
+                    </ul>
+                    <h3>提交格式</h3>
+                    <ul>
+                      <li>
+                        <p>你需要提交多个文件，包含Makefile，上述文件调用的各种头文件及其cpp文件；可以不包括提供的main.cpp文件。使用Makefile必须要能生成可执行文件main（不带扩展名）。
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          你应该将你的文件打包成一个zip压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</strong>评测时，OJ会将提供的main.cpp贴入你的目录下进行编译并执行。
+                        </p>
+                      </li>
+                    </ul>
+                    <h3>评分标准</h3>
+                    <ul>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>≤</mo>
+                                    <mi>k</mi>
+                                    <mo separator="true">,</mo>
+                                    <mi>n</mi>
+                                    <mo>≤</mo>
+                                    <mn>100</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1 \le k, n \le 100</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.8889em; vertical-align: -0.1944em;"></span><span
+                                  class="mord mathnormal" style="margin-right: 0.0315em;">k</span><span
+                                  class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord mathnormal">n</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">100</span></span></span></span></span></li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>≤</mo>
+                                    <mi>m</mi>
+                                    <mo separator="true">,</mo>
+                                    <mi>a</mi>
+                                    <mo>≤</mo>
+                                    <mn>100</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1 \le m, a \le 100</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.8304em; vertical-align: -0.1944em;"></span><span
+                                  class="mord mathnormal">m</span><span class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord mathnormal">a</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">100</span></span></span></span></span></li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>≤</mo>
+                                    <mi>l</mi>
+                                    <mo>≤</mo>
+                                    <mi>u</mi>
+                                    <mo>≤</mo>
+                                    <mn>100</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1 \le l \le u \le 100</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.8304em; vertical-align: -0.136em;"></span><span
+                                  class="mord mathnormal" style="margin-right: 0.0197em;">l</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                  class="mord mathnormal">u</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">100</span></span></span></span></span></li>
+                      <li>时限1s，OJ评分占100%。</li>
+                    </ul>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

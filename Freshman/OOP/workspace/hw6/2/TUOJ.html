@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>发年终奖</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>某公司年终要给所有员工发奖金，按照职级的不同，有不同的基础年终奖金额；根据绩效的评估有不同的
+                      bonus。该公司总共有3个职级：<code>P1</code>、<code>P2</code>、<code>P3</code>，其中 <code>P1</code> 基础年终奖金额为
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>2000</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">2000</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">2000</span></span></span></span></span> 元，<code>P2</code> 的基础年终奖金额为
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>5000</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">5000</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">5000</span></span></span></span></span> 元，<code>P3</code> 的基础年终奖金额为
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>10000</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">10000</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">10000</span></span></span></span></span> 元。</p>
+                    <p>绩效为任务的完成程度，按照绩效的大小，也有不同的 bonus 策略。绩效为0到1的小数，当绩效为 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mo stretchy="false">[</mo>
+                                  <mn>0</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>0.5</mn>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">[0,0.5)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span
+                                class="mspace" style="margin-right: 0.1667em;"></span><span class="mord">0.5</span><span
+                                class="mclose">)</span></span></span></span></span> 时，在已有的基础上增加 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1000</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1000</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">1000</span></span></span></span></span> 元。当绩效为 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mo stretchy="false">[</mo>
+                                  <mn>0.5</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>0.8</mn>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">[0.5, 0.8)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mopen">[</span><span class="mord">0.5</span><span class="mpunct">,</span><span
+                                class="mspace" style="margin-right: 0.1667em;"></span><span class="mord">0.8</span><span
+                                class="mclose">)</span></span></span></span></span> 时，年终奖增加金额为绩效乘以基础年终奖。当绩效为 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mo stretchy="false">[</mo>
+                                  <mn>0.8</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>1.0</mn>
+                                  <mo stretchy="false">]</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">[0.8, 1.0]</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mopen">[</span><span class="mord">0.8</span><span class="mpunct">,</span><span
+                                class="mspace" style="margin-right: 0.1667em;"></span><span class="mord">1.0</span><span
+                                class="mclose">]</span></span></span></span></span> 时，年终奖增加金额为两倍的绩效乘以基础年终奖。</p>
+                    <h3>输入样例</h3>
+                    <p>第一行一个整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>，代表需要计算年终奖金额的人数。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span> 行，每行一个字符串，一个小数，分别代表职级和绩效。
+                    </p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">2
+P1 0.3
+P3 0.9
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例</h3>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>
+                      个整数，表示每个人最终的年终奖金额。（如果为小数，则向下取整）</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3000
+28000
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>要求</h3>
+                    <ul>
+                      <li>不修改 <code>main.cpp</code>（<code>main.cpp</code> 在 <a
+                          href="https://oj.cs.tsinghua.edu.cn/staticdata/1805.N8d1I4PclONdlVQG.pub/yTrxqYUpwLZGV6Wm.main.cpp/main.cpp">这里</a>下载）。
+                      </li>
+                      <li>使用策略模式。</li>
+                      <li>你需要提交多个文件，包含 <code>Makefile</code>，上述文件调用的各种头文件及其 cpp 文件。使用 <code>Makefile</code> 必须要能生成可执行文件
+                        <code>main</code>（不带扩展名）。</li>
+                      <li>你应该将你的文件打包成一个 zip 压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</li>
+                    </ul>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

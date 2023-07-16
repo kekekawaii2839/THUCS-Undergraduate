@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h4>请回答下列单项选择题 （每道题有且仅有1个答案）</h4>
+                                        <h5>1. 以下说法不正确的是</h5>
+                                        <p>A. g++中<code>-c</code>选项要求只编译不链接</p>
+                                        <p>B. 进行宏定义 <code>#define M(y) y*y+3*y</code>, 则<code>M(1+1)</code>的值是7</p>
+                                        <p>C.
+                                            在一个编译单元内，全局整型变量<code>x</code>的定义<code>int x;</code>只能出现一次，但声明<code>extern int x;</code>可以出现多次
+                                        </p>
+                                        <p>D.
+                                            将main函数写成<code>int main(int argc, char** argv) {...}</code>形式后，<code>argv[0]</code>是指向程序的第一个命令行参数的指针
+                                        </p>
+                                        <h5>2. 关于下列代码的描述不正确的是</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class A {
+public:
+    const char* s;
+    A(const char* str) : s(str) { 
+        cout &lt;&lt; s &lt;&lt; " A constructing" &lt;&lt; endl;
+    }
+    ~A() { 
+        cout &lt;&lt; s &lt;&lt; " A destructing" &lt;&lt; endl; 
+    }
+};
+
+class B {
+public:
+    static A a1;
+    const A a2;
+    B(const char* str) : a2(str) { cout &lt;&lt; str &lt;&lt; " B constructing" &lt;&lt; endl; }
+    ~B() { cout &lt;&lt; "B destructing" &lt;&lt; endl; }
+};
+
+void foo() {
+    static A obj("static obj");
+}
+
+A B::a1("static B::a1");  // (1)
+
+int main() {
+    // (2)
+    cout &lt;&lt; "main starts" &lt;&lt; endl;
+    static B b("static b");
+    for (int i = 0; i &lt; 4; i++) {
+        foo();
+    }
+    cout &lt;&lt; B::a1.s &lt;&lt; endl;  // (3)
+    cout &lt;&lt; "main ends" &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1)处的代码可以被挪动至(2)处，编译仍能成功且输出结果不变</p>
+                                        <p>B. 将(3)处的代码修改为：<code>cout &lt;&lt; b.a1.s &lt;&lt; endl;</code>
+                                            ，编译仍能成功且输出结果不变</p>
+                                        <p>C. 在(2)后，一共调用了2次类A的构造函数</p>
+                                        <p>D. 在(3)后，一共有3个类A的对象执行析构</p>
+                                        <h5>3. 关于下列代码的描述不正确的是（编译时添加选项--std=c++11 -fno-elide-constructors）</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class MyInt{
+public:
+    MyInt(int i = 0) : val(i)  // (a)
+    {    }
+    MyInt(const MyInt&amp; src) : val(src.val)  // (b)
+    {    }
+    MyInt(MyInt&amp;&amp; src) : val(src.val)  // (c)
+    {    }
+    operator int() const  // (d)
+    { 
+        return val; 
+    }
+    MyInt&amp; operator=(MyInt&amp;&amp; rhs)  // (e)
+    {
+        val = rhs.val;
+        return *this;
+    }
+    MyInt&amp; operator=(const MyInt&amp; rhs)  // (f)
+    {
+        val = rhs.val;
+        return *this;
+    }
+    int get_value() const
+    {
+        return val;
+    }
+private:
+    int val;
+};
+
+void print(MyInt obj)
+{
+    cout &lt;&lt; obj.get_value() &lt;&lt; endl;
+}
+
+void print(int value)
+{
+    cout &lt;&lt; value &lt;&lt; endl;
+}
+
+int main()
+{
+    MyInt a;
+    a = -3.8;  // (1)
+    auto b = a + 1;  // (2)
+    auto c = a;  // (3)
+    print(a); print(b); print(c);  // (4)
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1)处会先将<code>double</code>转换为<code>int</code>，再调用(a)构造对象，最后调用(e)进行移动赋值</p>
+                                        <p>B. (2)处会先调用(d)将变量a转换为<code>int</code>，执行加法，然后调用(a)构造对象，最后调用(c)进行移动构造</p>
+                                        <p>C. (3)处会调用(b)进行拷贝构造</p>
+                                        <p>D. (4)处三个语句的输出是 <code>-3\n-2\n-3\n</code>，其中<code>\n</code>代表换行符</p>
+                                        <h5>4. 关于下面程序，说法正确的是</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+class A {
+public:
+    A() { fun(); }
+    virtual void fun() {}
+    ~A() {}
+};
+
+class B : A {
+public:
+    B() { fun(); }
+    void fun() {}
+    ~B() {}
+};
+
+class C : public B {
+public:
+    C() { fun(); }
+    virtual void fun() {}
+    ~C() {}
+};
+
+int main() {
+    B *pb = new C();
+    pb-&gt;fun();
+    delete pb;
+    cout &lt;&lt; "All done!" &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. <code>A::fun</code> 与 <code>C::fun</code> 是虚函数，而 <code>B::fun</code> 不是虚函数
+                                        </p>
+                                        <p>B. 程序执行过程中 <code>C::fun</code> 一共被调用了四次</p>
+                                        <p>C. 程序能够正常编译、运行、输出 <code>All done!</code> 并正常退出</p>
+                                        <p>D. 执行 <code>delete pb</code> 时会调用 <code>C</code> 的析构函数</p>
+                                        <h5>5. 以下关于多态与模板的说法正确的是</h5>
+                                        <p>A. 函数模板如果将声明写到头文件中，将定义写到源文件中，编译链接过程中未必会出错</p>
+                                        <p>B. 如果把重写覆盖实现成了重写隐藏，加 <code>override</code> 关键字可以让它变回重写覆盖</p>
+                                        <p>C. 抽象类的派生类需要实现抽象类的全部纯虚函数，否则可能会在运行过程中因调用纯虚函数导致程序崩溃</p>
+                                        <p>D. 将某类的指针使用 <code>dynamic_cast</code> 转换为另一个类的指针时，如果转换失败会抛出
+                                            <code>bad_cast</code> 异常</p>
+                                        <h5>6. 下列关于程序性能的说法正确的是</h5>
+                                        <p>A. 如果调用了函数模板，则对应函数需要在程序运行时实例化，这样会带来额外的时间成本</p>
+                                        <p>B. <code>std::vector</code> 的 <code>push_back</code> 方法<u>每次操作</u>的复杂度均为 O(1)
+                                        </p>
+                                        <p>C. 如果使用类的指针调用它的虚函数，则需要在程序运行时查询实际的函数</p>
+                                        <p>D. 设计模式的应用主要是为了提高程序运行效率，不能提高开发效率</p>
+                                        <h5>7. 下列关于 STL 的说法正确的是</h5>
+                                        <p>A. <code>std::tuple</code> 可以像数组一样用 <code>[]</code> 访问元素，如果越界则会在编译时直接报错</p>
+                                        <p>B. 使用流式文件输出写入文本文件时，每次完成 <code>&lt;&lt;</code> 运算符的操作后便会完成一次文件写入，不存在缓冲机制</p>
+                                        <p>C. 对元素类型为 <code>T</code> 的数组使用 <code>std::sort</code>
+                                            时，如果想通过类来实现一个函数对象作为比较函数传入 <code>std::sort</code> ，则对应的类应当实现了方法
+                                            <code>bool operator(const T&amp;a, const T&amp;b)</code></p>
+                                        <p>D. 即便使用了智能指针也可能会出现内存泄漏的情况</p>
+                                        <h5>8. 下列关于设计模式的说法中错误的是</h5>
+                                        <p>A. 逻辑复杂而结构稳定的场景下使用模板方法比策略模式更合适</p>
+                                        <p>B. 在使用迭代器模式时，外部算法使用迭代器，一般需要针对不同的底层数据结构进行不同的实现</p>
+                                        <p>C. 适配器模式可以用于在接入第三方组件时完成接口对接</p>
+                                        <p>D. 代理模式常在被代理对象不存在时主动创建被代理对象，而装饰器模式通常不会创建被装饰对象</p>
+                                        <h3>提交格式</h3>
+                                        <p>注意：考试期间选择题的提交不反馈得分，合法的提交答案都会显示50分</p>
+                                        <p>请你提交一个文本文件，第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行是A\B\C\D之一，代表第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题的答案。
+                                        </p>
+                                        <p>若你不想提交第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题，请将第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行留空。
+                                        </p>
+                                        <p>你提交的文本文件至少要有8行，且前8行必须由A\B\C\D组成，否则将被认为是无效提交。</p>
+                                        <p>以下给出一个合法的提交答案的例子：</p>
+                                        <div style="position: relative;">
+                                            <pre>A
+B
+C
+D
+A
+C
+A
+A
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+
+                                        <p>评测器对第一行的解析结果如下：</p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">Valid answer: ['A']
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div>
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+    <script src="./TUOJ_files/runtime.cb420fb85c21aced.js.下载" type="module"></script>
+    <script src="./TUOJ_files/polyfills.d9a49da5e8f07d6c.js.下载" type="module"></script>
+    <script src="./TUOJ_files/scripts.418e33c5b26b2b67.js.下载" defer=""></script>
+    <script src="./TUOJ_files/main.3552bd6ca6c89a70.js.下载" type="module"></script>
+
+    <script type="text/javascript" src="./TUOJ_files/loader.js.下载"></script>
+    <div class="monaco-aria-container">
+        <div class="monaco-alert" role="alert" aria-atomic="true"></div>
+        <div class="monaco-alert" role="alert" aria-atomic="true"></div>
+        <div class="monaco-status" role="complementary" aria-live="polite" aria-atomic="true"></div>
+        <div class="monaco-status" role="complementary" aria-live="polite" aria-atomic="true"></div>
+    </div>
+</body>
+
+</html>

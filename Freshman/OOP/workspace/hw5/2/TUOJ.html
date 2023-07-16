@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>函数计算器</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>
+                      小明在计算函数值时发现很多函数都可以使用C++来实现，而cmath头文件中提供了大量实用的数学函数，在做数学题的他想偷偷懒，于是编写了一个函数类，并且自己实现了一个指数函数类。他现在又想偷懒了，于是找到了你，希望你完善一次函数、组合函数、复合函数的实现。
+                    </p>
+                    <p>文件下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1789.RORausiW13Yj3QFC.pub/UbJBUK07VmKu1qA5.download.zip/download.zip">下载链接</a>
+                    </p>
+                    <h3>输入样例</h3>
+                    <p>第一行包括一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span></p>
+                    <p>后面会跟相应的函数构造</p>
+                    <p>对于<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>的解释如下</p>
+                    <p>0 代表构造常值函数后面会跟一个浮点数 c，如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">0
+1.5
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>表示构造了一个</p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.5</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=1.5</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1.5</span></span></span></span></span>这样的常量（ConstFunc）函数</p>
+                    <p>1代表构造线性函数，后面会跟两个浮点数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>a</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">a</span></span></span></span></span>, <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span> 表示构造一个 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>y</mi>
+                                  <mo>=</mo>
+                                  <mi>a</mi>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">y=ax+b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">y</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6667em; vertical-align: -0.0833em;"></span><span
+                                class="mord mathnormal">a</span><span class="mord mathnormal">x</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span> 这样的函数，如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1
+3.3 1.2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>构造了一个 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>3.3</mn>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mn>1.2</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=3.3x + 1.2</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">3.3</span><span class="mord mathnormal">x</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1.2</span></span></span></span></span> 这样的线性（LinearFunc）函数</p>
+                    <p>2 代表构造指数函数，后面会跟一个浮点数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span> 表示构造一个 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>y</mi>
+                                  <mo>=</mo>
+                                  <msup>
+                                    <mi>b</mi>
+                                    <mi>x</mi>
+                                  </msup>
+                                </mrow>
+                                <annotation encoding="application/x-tex">y=b^x</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">y</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6944em;"></span><span class="mord"><span
+                                  class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>
+                      这样的函数，如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">2 
+2.5
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>构造了一个<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>2.</mn>
+                                  <msup>
+                                    <mn>5</mn>
+                                    <mi>x</mi>
+                                  </msup>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=2.5^x</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6644em;"></span><span class="mord">2.</span><span class="mord"><span
+                                  class="mord">5</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>这样的指数（ExpFunc）函数
+                    </p>
+                    <p>3 代表构造一个复合函数。后面会跟两组构造（这个构造过程可能是递归的，复合函数再复合）</p>
+                    <p>先构造内层函数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span>，再构造外层函数 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span></p>
+                    <p>如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+2
+1.2
+1
+1.6 2.5
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>其中</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">2
+1.2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>表示构造了一个<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mi>x</mi>
+                                  </msup>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x)=1.2^x</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6644em;"></span><span class="mord">1.</span><span class="mord"><span
+                                  class="mord">2</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>这样的指数函数
+                    </p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1
+1.6 2.5
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>表示构造了一个 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.6</mn>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mn>2.5</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=1.6x+2.5</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.6</span><span class="mord mathnormal">x</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">2.5</span></span></span></span></span> 这样的线性函数</p>
+                    <p>复合起来就是 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.6</mn>
+                                  <mo>×</mo>
+                                  <mn>1.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mi>x</mi>
+                                  </msup>
+                                  <mo>+</mo>
+                                  <mn>2.5</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(g(x))=1.6\times1.2^x+2.5</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal"
+                                style="margin-right: 0.0359em;">g</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">))</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.6</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7477em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.</span><span class="mord"><span class="mord">2</span><span
+                                  class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">2.5</span></span></span></span></span></p>
+                    <p>4 代表构造一个组合函数，下面会跟两个浮点数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>a</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">a</span></span></span></span></span>, <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span></p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">4
+3.3 4.4 // a b
+2       // 指数函数
+1.2     // f(x) = 1.2^x
+0       // 常值函数
+1.6     // g(x) = 1.6
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>得到的函数就是 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>h</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mi>a</mi>
+                                  <mo>⋅</mo>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>+</mo>
+                                  <mi>b</mi>
+                                  <mo>⋅</mo>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">h(x)=a \cdot f(x) + b \cdot g(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">h</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.4445em;"></span><span class="mord mathnormal">a</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">⋅</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6944em;"></span><span class="mord mathnormal">b</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">⋅</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span> </p>
+                    <p>这个例子中为 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>h</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>3.3</mn>
+                                  <mo>×</mo>
+                                  <mn>1.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mi>x</mi>
+                                  </msup>
+                                  <mo>+</mo>
+                                  <mn>4.4</mn>
+                                  <mo>×</mo>
+                                  <mn>1.6</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">h(x)=3.3\times1.2^x+4.4\times1.6</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">h</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">3.3</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7477em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.</span><span class="mord"><span class="mord">2</span><span
+                                  class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span
+                                class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span
+                                class="strut" style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">4.4</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1.6</span></span></span></span></span></p>
+                    <p>接下来有一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span>，表示有 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span> 个点需要求这个函数的函数值，接下来一行有
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span> 个浮点数</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">4
+0.1 2.2 3.3 4.4
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>虽然有这么多个不同的构造，你会发现实际上我们得到了一个函数</p>
+                    <p>它可能由多个函数复合或组合起来而成</p>
+                    <p>你可以看下面的例子</p>
+                    <h3>样例1</h3>
+                    <p><strong>输入</strong></p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1
+1.2
+3.3
+4
+0 1.1 2.2 3.3
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>这里构造了一个线性函数<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.2</mn>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mn>3.3</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=1.2x+3.3</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.2</span><span class="mord mathnormal">x</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">3.3</span></span></span></span></span></p>
+                    <p>有4个测试点</p>
+                    <p>0 1.1 2.2 3.3</p>
+                    <p><strong>输出</strong></p>
+                    <p>结果已经自动保留了5位小数</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3.30000
+4.62000
+5.94000
+7.26000
+YES
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>最后一行YES代表代码会检测你的程序不存在内存泄露，如果存在则会输出NO</p>
+                    <h3>样例2</h3>
+                    <p><strong>输入</strong></p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+3
+1
+1.2 3.3
+2
+5.2
+1
+1.6 2.8
+3
+1.1 2.2 3.3
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>样例解释：</p>
+                    <p>这个样例构造了一个经过两次复合得到的函数</p>
+                    <p>第一行3表示最终我们要的函数我们记作 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>h</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">h(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">h</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span>，他由 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span> 和 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span> 复合而成，<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>h</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">h(x)=f(g(x)) </annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">h</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.1076em;">f</span><span class="mopen">(</span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">))</span></span></span></span></span></p>
+                    <p>第二行表示我们构造内层的函数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span></span></span></span></span>，他是一个复合函数由下面4行的函数复合而成</p>
+                    <p>记 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mi>u</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>w</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo stretchy="false">)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x) = u(w(x))</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">u</span><span class="mopen">(</span><span
+                                class="mord mathnormal" style="margin-right: 0.0269em;">w</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">))</span></span></span></span></span></p>
+                    <p>第3、4行构造了一个线性函数<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>w</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.2</mn>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mn>3.3</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">w(x)=1.2x+3.3</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0269em;">w</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.2</span><span class="mord mathnormal">x</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">3.3</span></span></span></span></span></p>
+                    <p>第5、6行构造了一个指数函数<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>u</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>5.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mi>x</mi>
+                                  </msup>
+                                </mrow>
+                                <annotation encoding="application/x-tex">u(x)=5.2^x</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">u</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6644em;"></span><span class="mord">5.</span><span class="mord"><span
+                                  class="mord">2</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.6644em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>
+                    </p>
+                    <p>复合得到的结果即 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mi>u</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>w</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>5.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mrow>
+                                      <mn>1.2</mn>
+                                      <mi>x</mi>
+                                      <mo>+</mo>
+                                      <mn>3.3</mn>
+                                    </mrow>
+                                  </msup>
+                                </mrow>
+                                <annotation encoding="application/x-tex">g(x)=u(w(x))=5.2^{1.2x+3.3}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal">u</span><span class="mopen">(</span><span
+                                class="mord mathnormal" style="margin-right: 0.0269em;">w</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">))</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8141em;"></span><span class="mord">5.</span><span class="mord"><span
+                                  class="mord">2</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                class="mord mtight">1.2</span><span
+                                                class="mord mathnormal mtight">x</span><span
+                                                class="mbin mtight">+</span><span
+                                                class="mord mtight">3.3</span></span></span></span></span></span></span></span></span></span></span></span></span>
+                    </p>
+                    <p>第7、8行构造了一个线性函数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.6</mn>
+                                  <mi>x</mi>
+                                  <mo>+</mo>
+                                  <mn>2.8</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(x)=1.6x+2.8</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal">x</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.6</span><span class="mord mathnormal">x</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">2.8</span></span></span></span></span></p>
+                    <p>最外层复合的结果即为 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>f</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>g</mi>
+                                  <mo stretchy="false">(</mo>
+                                  <mi>x</mi>
+                                  <mo stretchy="false">)</mo>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>=</mo>
+                                  <mn>1.6</mn>
+                                  <mo>×</mo>
+                                  <mo stretchy="false">(</mo>
+                                  <mn>5.</mn>
+                                  <msup>
+                                    <mn>2</mn>
+                                    <mrow>
+                                      <mn>1.2</mn>
+                                      <mi>x</mi>
+                                      <mo>+</mo>
+                                      <mn>3.3</mn>
+                                    </mrow>
+                                  </msup>
+                                  <mo stretchy="false">)</mo>
+                                  <mo>+</mo>
+                                  <mn>2.8</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(g(x)) = 1.6 \times ( 5.2 ^{1.2 x+3.3}) + 2.8
+                                </annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.1076em;">f</span><span
+                                class="mopen">(</span><span class="mord mathnormal"
+                                style="margin-right: 0.0359em;">g</span><span class="mopen">(</span><span
+                                class="mord mathnormal">x</span><span class="mclose">))</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">1.6</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1.0641em; vertical-align: -0.25em;"></span><span
+                                class="mopen">(</span><span class="mord">5.</span><span class="mord"><span
+                                  class="mord">2</span><span class="msupsub"><span class="vlist-t"><span
+                                      class="vlist-r"><span class="vlist" style="height: 0.8141em;"><span class=""
+                                          style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut"
+                                            style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                class="mord mtight">1.2</span><span
+                                                class="mord mathnormal mtight">x</span><span
+                                                class="mbin mtight">+</span><span
+                                                class="mord mtight">3.3</span></span></span></span></span></span></span></span></span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">2.8</span></span></span></span></span></p>
+                    <p>最终3个测试点为1.1 2.2 3.3</p>
+                    <p><strong>输出</strong></p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3254.08792
+28656.44288
+252527.72887
+YES
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>要求</h3>
+                    <ol>
+                      <li>不修改 <code>main.cpp</code> <code>expfunc.h</code> <code>constfunc.h</code>。</li>
+                      <li>如果你增加了其他的.cpp文件请相应修改Makefile</li>
+                      <li>补充完整<code>combfunc.h</code> <code>compfunc.h</code> <code>func.h</code>
+                        <code>linearfunc.h</code> </li>
+                      <li>防止出现内存泄漏，否则答案也将视为错误</li>
+                    </ol>
+                    <h3>限制与约定</h3>
+                    <p>计算过程中结果不会超出 double 能表示的范围</p>
+                    <p><strong>时间限制：1s</strong></p>
+                    <p><strong>空间限制：256MB</strong></p>
+                    <h3>提交格式</h3>
+                    <ul>
+                      <li>根据提供的压缩包内的内容，补充相应的代码（ <code>combfunc.h</code> <code>compfunc.h</code> <code>func.h</code>
+                        <code>linearfunc.h</code>）。</li>
+                      <li>你应该将你的文件打包成一个zip压缩包并上传。评测时，OJ会将提供的 <code>main.cpp</code> <code>constfunc.h</code>
+                        <code>expfunc.h</code>贴入你的目录下进行编译并执行。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</strong></li>
+                    </ul>
+                    <h3>评分标准</h3>
+                    <p>OJ评分占100%</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

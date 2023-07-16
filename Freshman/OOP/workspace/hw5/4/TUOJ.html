@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>动态多维数组</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>C++的模板是一个强大的存在<del>（指报错很多）</del>。比如，我们可以使用模板推导，在编译时进行一些计算。</p>
+                    <p>比如下面这个计算阶乘的程序：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">int</span> k<span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">Factorial</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">int</span> value <span class="token operator">=</span> k <span class="token operator">*</span> Factorial<span class="token operator">&lt;</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">Factorial</span><span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">int</span> value <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> Factorial<span class="token operator">&lt;</span><span class="token number">10</span><span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>value <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> 
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>在一些编辑器中，当你把光标悬停在 <code>Factorial&lt;10&gt;::value</code>
+                      上时，你会发现已经可以看到最终的计算结果，这是因为上面的结果并非在程序<strong>运行时</strong>得到的，而是在<strong>编译期</strong>得到的。</p>
+                    <p><strong>借助以上模板推导的思路</strong>，我们可以通过模板实现一个动态多维数组类（MultiDimArray）。</p>
+                    <p>动态多维数组类需要实现一下 3 种功能：</p>
+                    <h5>1. 初始化</h5>
+                    <p>动态多维数组有两个最基本的属性：数据类型、维数，通过模板参数确定。</p>
+                    <p>在初始化时，我们需要指定动态多维数组在不同维度上的初始大小，如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">using</span> std<span class="token double-colon punctuation">::</span>vector<span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> init_1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">&gt;</span> <span class="token function">arr_1</span><span class="token punctuation">(</span>init_1<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// int 型的三维数组，大小为 2*3*4</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> init_2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">float</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">&gt;</span> <span class="token function">arr_2</span><span class="token punctuation">(</span>init_2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// float 型的一维数组，大小为 7</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>保证初始化时所用 <code>vector&lt;int&gt;</code> 的大小和动态多维数组指定的维数一致。</p>
+                    <h5>2. 拷贝和移动</h5>
+                    <p>动态多维数组支持元素的拷贝和移动。</p>
+                    <p>在这个过程中，数组的维数保持不变，但各个维度的大小可能改变（所谓“动态”）。例如，一个三维数组的初始尺寸是 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>3</mn>
+                                  <mo>×</mo>
+                                  <mn>3</mn>
+                                  <mo>×</mo>
+                                  <mn>3</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">3 \times 3 \times 3</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">3</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">3</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">3</span></span></span></span></span>，虽然不能将其改成四维数组或二维数组，但是可以把它的尺寸改为
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>2</mn>
+                                  <mo>×</mo>
+                                  <mn>3</mn>
+                                  <mo>×</mo>
+                                  <mn>4</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">2 \times 3 \times 4</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">2</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                class="mord">3</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                class="mbin">×</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">4</span></span></span></span></span>。如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">using</span> std<span class="token double-colon punctuation">::</span>vector<span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> init_3 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">&gt;</span> <span class="token function">arr_3</span><span class="token punctuation">(</span>init_3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">&gt;</span> arr_4 <span class="token operator">=</span> arr_3<span class="token punctuation">;</span>    <span class="token comment">// 正确，arr_4 是 arr_3 的一个副本</span>
+<span class="token comment">// MultiDimArray&lt;int, 4&gt; arr_5 = arr_3; // 错误，维数不同不能复制或移动</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">&gt;</span> <span class="token function">arr_5</span><span class="token punctuation">(</span>init_3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> init_6 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+MultiDimArray<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">&gt;</span> <span class="token function">arr_6</span><span class="token punctuation">(</span>init_6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+arr_6 <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>arr_5<span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token comment">// 正确，arr_6 尺寸变为 2*3*4</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>当然，你需要避免内存泄露的出现。</p>
+                    <h5>3. 元素的访问</h5>
+                    <p>和普通数组一样，动态多维数组支持使用下标运算符对数组中的元素进行访问（读和写），如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> arr_6<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+arr_6<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>你需要编写 <code>multidimarray.hpp</code>，在其中完成 <code>MultiDimArray</code> 类的实现。</p>
+                    <p>为了便于你调试，我们提供了 <code>capsule.hpp</code> 和 <code>main-for-show.cpp</code>。</p>
+                    <p><code>capsule.hpp</code> 为检测程序正确性的辅助类，<code>main-for-show.cpp</code> 为数组维度为 3，数据类型为 int 时对应的示例
+                      <code>main.cpp</code>。</p>
+                    <p>文件下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1781.h3gbJTg84MW46k1e.pub/BbrRA04Uf4IYGth7.download.zip/download.zip">下载链接</a>
+                    </p>
+                    <h3>输入说明</h3>
+                    <p>每个测试点的维数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span> 和数据类型
+                      <code>TestDataType</code> 由 <code>main.cpp</code> 指定。</p>
+                    <p>输入的第一行包含一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>，表示需要创建的数组个数，后续的所有操作均在这些数组间进行。
+                    </p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span> 行，每行包含 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span> 个整数 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>a</mi>
+                                    <mn>1</mn>
+                                  </msub>
+                                  <mo separator="true">,</mo>
+                                  <mo>…</mo>
+                                  <mo separator="true">,</mo>
+                                  <msub>
+                                    <mi>a</mi>
+                                    <mi>k</mi>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a_1,\dots,a_k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">1</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="minner">…</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3361em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight"
+                                              style="margin-right: 0.0315em;">k</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>，用于初始化一个数组。其中
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span>
+                      为本测试点制定的数组维数，<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>a</mi>
+                                    <mi>i</mi>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a_i</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3117em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mathnormal mtight">i</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>
+                      表示数组第 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>i</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">i</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6595em;"></span><span
+                                class="mord mathnormal">i</span></span></span></span></span> 维的初始大小。</p>
+                    <p>输入的第 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                  <mo>+</mo>
+                                  <mn>2</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n+2</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6667em; vertical-align: -0.0833em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span class="mord">2</span></span></span></span></span>
+                      行包含一个整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span>，表示操作数量。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">m</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">m</span></span></span></span></span> 行，每行以一个字符串开头，对应一个操作：</p>
+                    <ul>
+                      <li><code>copy i j</code>：将第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span>
+                        个创建的数组<strong>拷贝</strong>到第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>j</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">j</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.854em; vertical-align: -0.1944em;"></span><span
+                                  class="mord mathnormal"
+                                  style="margin-right: 0.0572em;">j</span></span></span></span></span>
+                        个初始创建的数组。（拷贝过程中应当出现数据元素的复制）</li>
+                      <li><code>move i j</code>：将第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span>
+                        个创建的数组<strong>移动</strong>到第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>j</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">j</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.854em; vertical-align: -0.1944em;"></span><span
+                                  class="mord mathnormal"
+                                  style="margin-right: 0.0572em;">j</span></span></span></span></span>
+                        个初始创建的数组。（移动过程中<strong>不</strong>应当出现数据元素的复制）</li>
+                      <li><code>assign i a1 ... ak p</code>：将第 <span><span class="katex"><span
+                              class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span> 个创建的数组下标为 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mo stretchy="false">[</mo>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mn>1</mn>
+                                    </msub>
+                                    <mo stretchy="false">]</mo>
+                                    <mo>…</mo>
+                                    <mo stretchy="false">[</mo>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mi>k</mi>
+                                    </msub>
+                                    <mo stretchy="false">]</mo>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">[a_1]\dots[a_k]</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                  class="mopen">[</span><span class="mord"><span class="mord mathnormal">a</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                          class="vlist" style="height: 0.3011em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mtight">1</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span><span
+                                  class="mclose">]</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="minner">…</span><span
+                                  class="mspace" style="margin-right: 0.1667em;"></span><span
+                                  class="mopen">[</span><span class="mord"><span class="mord mathnormal">a</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                          class="vlist" style="height: 0.3361em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mathnormal mtight"
+                                                style="margin-right: 0.0315em;">k</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span><span
+                                  class="mclose">]</span></span></span></span></span> 位置的元素赋值为 <code>p</code>，其中
+                        <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mi>i</mi>
+                                    </msub>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">a_i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                  class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span
+                                      class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.3117em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mathnormal mtight">i</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span></span></span></span></span>
+                        表示数组第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span> 维的元素下标，<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>p</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">p</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                  class="mord mathnormal">p</span></span></span></span></span> 为
+                        <code>TestDataType</code> 类型。</li>
+                      <li><code>get i a1 ... ak</code>：输出第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span> 个创建的数组下标为 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mo stretchy="false">[</mo>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mn>1</mn>
+                                    </msub>
+                                    <mo stretchy="false">]</mo>
+                                    <mo>…</mo>
+                                    <mo stretchy="false">[</mo>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mi>k</mi>
+                                    </msub>
+                                    <mo stretchy="false">]</mo>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">[a_1]\dots[a_k]</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                  class="mopen">[</span><span class="mord"><span class="mord mathnormal">a</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                          class="vlist" style="height: 0.3011em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mtight">1</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span><span
+                                  class="mclose">]</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="minner">…</span><span
+                                  class="mspace" style="margin-right: 0.1667em;"></span><span
+                                  class="mopen">[</span><span class="mord"><span class="mord mathnormal">a</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                          class="vlist" style="height: 0.3361em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mathnormal mtight"
+                                                style="margin-right: 0.0315em;">k</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span><span
+                                  class="mclose">]</span></span></span></span></span> 位置的元素，其中 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <msub>
+                                      <mi>a</mi>
+                                      <mi>i</mi>
+                                    </msub>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">a_i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                  class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span
+                                      class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.3117em;"><span class=""
+                                            style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                              class="pstrut" style="height: 2.7em;"></span><span
+                                              class="sizing reset-size6 size3 mtight"><span
+                                                class="mord mathnormal mtight">i</span></span></span></span><span
+                                          class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                          style="height: 0.15em;"><span
+                                            class=""></span></span></span></span></span></span></span></span></span></span>
+                        表示数组第 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi>i</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">i</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6595em;"></span><span
+                                  class="mord mathnormal">i</span></span></span></span></span> 维的元素下标。</li>
+                    </ul>
+                    <h3>输出说明</h3>
+                    <p>按照 <code>get</code> 指令的要求，依次输出数组元素。</p>
+                    <p>浮点数保留 6 位小数，已包含在 <code>main.cpp</code> 中，只要正确地实现了对应的功能接口，即可得到正确输出。</p>
+                    <h3>样例输入</h3>
+                    <h5>子任务 1:</h5>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+1 2 3
+2 3 1
+3 1 2
+9
+assign 1 0 1 2 111
+assign 2 1 2 0 222
+assign 3 2 0 1 333
+get 1 0 1 2
+get 1 0 0 0
+get 2 1 2 0
+get 2 0 0 0
+get 3 2 0 1
+get 3 0 0 0
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h5>子任务 2:</h5>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+1 2 3
+2 3 1
+3 1 2
+10
+assign 1 0 0 0 111
+assign 2 0 0 0 222
+assign 3 0 0 0 333
+get 1 0 0 0
+get 2 0 0 0
+get 3 0 0 0
+copy 1 2
+get 2 0 0 0
+move 1 3
+get 3 0 0 0
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>样例输出</h3>
+                    <h5>子任务 1:</h5>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">111
+0
+222
+0
+333
+0
+sanity check: ok
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h5>子任务 2:</h5>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">111
+222
+333
+111
+111
+sanity check: ok
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>数据规模和约定</h3>
+                    <p>本题共设置 2 个子任务，各占 50 分，分别对应测试点 1-5 和 6-10。</p>
+                    <ul>
+                      <li>子任务 1：初始化、元素访问（读和写）。</li>
+                      <li>子任务 2：拷贝、移动。注意，测试中会使用元素访问功能。</li>
+                    </ul>
+                    <p>对于所有测试点，保证 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>10</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1\le n\le 10</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">10</span></span></span></span></span>，<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>m</mi>
+                                  <mo>≤</mo>
+                                  <mn>1000</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1\le m\le 1000</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">m</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1000</span></span></span></span></span>。</p>
+                    <p>对于赋值操作，保证设置的 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>p</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">p</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal">p</span></span></span></span></span> 不会造成数据溢出。</p>
+                    <p><strong>每个测试点只检测某一固定维数的数组。</strong></p>
+                    <p><strong>注意：在评测程序中使用名字为 DIM 的宏指定数组维度，请避免使用同名变量。</strong></p>
+                    <h3>提交格式</h3>
+                    <p>仅需要提交 <code>multidimarray.hpp</code> 文件。</p>
+                    <p>我们会将你提交的文件和预先设置好的 <code>main.cpp</code>，<code>capsule.hpp</code>，<code>Makefile</code> 一起编译运行。
+                    </p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

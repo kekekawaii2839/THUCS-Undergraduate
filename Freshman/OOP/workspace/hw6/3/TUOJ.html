@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>容器的可查询化</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h3>题目描述</h3>
+                                        <p>请在头文件 <code>myqueriable.h</code> 中，实现一个序列容器的模板类 MyQueriable。它需要支持：</p>
+                                        <ul>
+                                            <li>使用 <code>obj.size()</code> 得到容器的长度</li>
+                                            <li>使用 <code>obj[i]</code> 访问第i个元素</li>
+                                        </ul>
+                                        <p>同时需要支持 <code>where</code>、<code>apply</code>、<code>sum</code> 三个成员函数。其中：</p>
+                                        <ul>
+                                            <li><code>where</code> 接受一个函数对象 <code>f</code> 作为参数，返回值为
+                                                <code>{x|f(x)==true, x 属于原来的 MyQueriable}</code> 表示的 MyQueriable（此处
+                                                <code>{}</code> 表示的是序列而不是集合，因此请保持元素顺序与原来的 MyQueriable 一致，且不需要进行去重）；</li>
+                                            <li><code>apply</code> 以一个函数对象 <code>f</code> 作为参数，返回值为
+                                                <code>{f(x)|x 属于原来的 MyQueriable}</code> 表示的 MyQueriable（此处
+                                                <code>{}</code> 表示的是序列而不是集合，因此请保持元素顺序与原来的 MyQueriable 一致，且不需要进行去重）；</li>
+                                            <li><code>sum</code> 不带参数，返回值为 MyQueriable 中各元素之和。</li>
+                                        </ul>
+                                        <p>此外，你还需要实现模板函数 <code>from</code>：</p>
+                                        <ul>
+                                            <li>它以一个 <code>std::vector</code> 为参数，返回值为对应的 MyQueriable</li>
+                                        </ul>
+                                        <p><strong>提交注意事项：你只需要提交 <code>myqueriable.h</code> 文件即可，请不要提交压缩包。请直接使用 OJ
+                                                的“上传文件”按钮，而不是将文件内容粘贴至 OJ 的编辑器中。</strong></p>
+                                        <p>示例1：</p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include&lt;iostream&gt;
+#include"myqueriable.h"
+
+using namespace std;
+
+bool op1(int x){return x &gt; 2 &amp;&amp; x &lt; 10;}
+class Op2{
+public:
+    int operator()(int x) {return x * 2;}
+}op2;
+
+int main(){
+    vector&lt;int&gt; arr = {1, 4, 6, 2, 10};
+    auto out = from(arr)
+        .where(op1)  // 4, 6
+        .apply(op2)  // 8, 12
+        .sum();
+    cout &lt;&lt; out &lt;&lt; endl;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>示例1输出：</p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">20
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>示例2：</p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;cmath&gt;
+#include&lt;functional&gt;
+#include"myqueriable.h"
+
+using namespace std;
+
+float opfn(float x){return sqrt(x);}
+function&lt;float(float)&gt; op = opfn;
+
+int main(){
+    vector&lt;float&gt; vec = {2.0, 3.0, 4.0, 5.0};
+    auto li = from(vec)
+        .apply(op);
+    for(int i = 0; i &lt; li.size(); i++){
+        cout &lt;&lt; li[i] &lt;&lt; endl;
+    }
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>示例2输出：</p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">1.41421
+1.73205
+2
+2.23607
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <h3>数据说明</h3>
+                                        <ol>
+                                            <li>我们保证测试中不会出现 MyQueriable 对象中长度为 0 的情况；</li>
+                                            <li><code>apply</code>、<code>sum</code> 返回值的元素类型应和原 MyQueriable
+                                                的元素类型相同：例如原来是 <code>int</code>，<code>sum</code> 的返回值也该是
+                                                <code>int</code>。</li>
+                                            <li>为了避免浮点误差，本题的测试中不包含 <code>float</code> 等浮点数类型。</li>
+                                        </ol>
+                                        <h3>测试点</h3>
+                                        <p>一共设置 6 个测试点。<strong>为了方便同学调试，我们提供了前 4 个测试点作为补充样例（<a
+                                                    href="https://oj.cs.tsinghua.edu.cn/staticdata/1803.Xxd7CXOZAY8bpnvy.pub/WlS26EMdn6HTItQT.download_hw6_p2.zip/download_hw6_p2.zip">下载链接</a>）。</strong>
+                                        </p>
+                                        <ol>
+                                            <li>（20 分）只包含
+                                                <code>from(std::vector&lt;int&gt;)</code>，<code>MyQueriable::sum</code>，<code>MyQueriable::size</code>，以及
+                                                <code>MyQueriable</code> 的下标访问。</li>
+                                            <li>（20 分）在测试点 1 要求的基础上，额外包含 <code>MyQueriable::where</code>。</li>
+                                            <li>（20 分）在测试点 1 要求的基础上，额外包含 <code>MyQueriable::apply</code>。</li>
+                                            <li>（20 分）在测试点 1 要求的基础上，额外包含
+                                                <code>MyQueriable::where</code>，<code>MyQueriable::apply</code>。</li>
+                                            <li>（10 分，隐藏测例）与测试点 4 要求一致。</li>
+                                            <li>（10 分，隐藏测例）在测试点 4 要求的基础上，额外包含
+                                                <code>from(std::vector&lt;long long&gt;)</code>。</li>
+                                        </ol>
+                                        <p>最朴素的实现即可通过本题的所有测试点，不需要考虑优化时间效率或空间效率。</p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">oop_custom</td>
+                                            <td><code>make</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">65536 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

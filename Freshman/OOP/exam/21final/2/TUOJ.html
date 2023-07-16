@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>交通工具生产</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h3>题目描述</h3>
+										<p>⼀家⼯厂⽣产飞机、汽车和摩托车：</p>
+										<ul>
+											<li>⼀架飞机需要3个轮⼦，和2个机翼</li>
+											<li>⼀辆汽车需要4个轮⼦</li>
+											<li>⼀辆摩托车需要2个轮⼦</li>
+										</ul>
+										<p>一个新的交通工具的轮子数和机翼数的初始值均为0，工厂的装配工人在装配交通工具时每次操作只能为一个交通工具装配1个轮子或1个机翼。当一辆汽车或一辆摩托车装配的轮子数量达到要求时需要输出“I
+											am running”，当一架飞机装配的轮子数和机翼数达到要求时输出“I am running and
+											flying”。当一个交通工具装配完成时，将有新的同种交通工具等待装配。</p>
+										<p>题目已提供<code>main.cpp</code>实现数据的读入输出，以及<code>Car.h</code>和<code>Motor.h</code>（<a
+												href="https://oj.cs.tsinghua.edu.cn/download.php?type=problem&amp;id=99">下载链接</a>），请编写<code>Vehicle.h</code>和<code>Plane.h</code>，使<code>Car</code>类,
+											<code>Plane</code>类, <code>Motor</code>类继承自<code>Vehicle</code>类，并实现上述功能。
+										</p>
+										<h3>输入说明</h3>
+										<p>输入第一行是n（100≤n≤1000），代表装配工人装配零件的次数（每次装配1个机翼或1个轮子）。</p>
+										<p>接下来n行，每行包括1个或2个整数。当装配飞机时该行为2个整数，其中第1个整数为0，第二个整数为0（表示装配机翼）或1（表示装配轮子）；当装配汽车时仅有1个整数，值为1（表示装配轮子）；当装配摩托车时也仅有1个整数，值为2（表示装配轮子）。
+										</p>
+										<h3>输出说明</h3>
+										<p>每当装配完一个交通工具时，输出“I am running”或“I am running and flying”。</p>
+										<h3>输入样例</h3>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">11
+0 0
+0 0
+0 1
+0 1
+0 1
+1
+1
+2
+2
+1
+1
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>输出样例</h3>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">I am running and flying 
+I am running 
+I am running
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>样例说明</h3>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">11  //共装配11次零件
+0 0 //装配飞机1个机翼，现有1个机翼
+0 0 //装配飞机1个机翼，现有2个机翼
+0 1 //装配飞机，1个轮子，现有1个轮子，2个机翼
+0 1 //装配飞机，1个轮子，现有2个轮子，2个机翼
+0 1 //装配飞机，1个轮子，现有3个轮子，2个机翼，一架飞机装配完成，输出"I am runing and flying"
+1   //装配汽车，1个轮子，现有1个轮子
+1   //装配汽车，1个轮子，现有2个轮子
+2   //装配摩托车，1个轮子，现有1个轮子
+2   //装配摩托车，1个轮子，现有2个轮子，一辆摩托车装配完成，输出"I am runing"
+1   //装配汽车，1个轮子，现有3个轮子
+1   //装配汽车，1个轮子，现有4个轮子，一辆汽车装配完成，输出"I am runing"
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>提交格式</h3>
+										<ul>
+											<li>
+												<p>你需要提交多个文件，包括<code>Vehicle.h</code>和<code>Plane.h</code>。评测时，OJ会将提供的<code>main.cpp</code>,
+													<code>Motor.h</code>, <code>Car.h</code>,
+													<code>Makefile</code>贴入你的目录下进行编译并执行。</p>
+											</li>
+											<li>
+												<p>编译指令：</p>
+											</li>
+										</ul>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">main: main.cpp Vehicle.h Plane.h Motor.h Car.h
+    g++ -std=c++11 -o main main.cpp
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<ul>
+											<li>文件下载：<a
+													href="https://oj.cs.tsinghua.edu.cn/staticdata/1821.qIxHbiYLyvrwuS0R.pub/M6ZZtHHxcyjlsdgN.download.zip/download.zip">下载地址</a>
+											</li>
+										</ul>
+										<h3>评分标准</h3>
+										<p>OJ评分 100%</p>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">oop_custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">65536 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div>
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

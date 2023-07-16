@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-bky-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>小肖的饭店</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h1>小肖的饭店</h1>
+                    <h2>问题描述</h2>
+                    <p>小肖是一家大饭店的经理，这家饭店共有 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>C</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">C</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6833em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0715em;">C</span></span></span></span></span> 位大厨（编号从 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>0</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">0</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">0</span></span></span></span></span> 至 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>C</mi>
+                                  <mo>−</mo>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">C-1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7667em; vertical-align: -0.0833em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0715em;">C</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">−</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span>），每位大厨都有一道自己擅长的招牌菜。</p>
+                    <p>
+                      小肖每天要处理许多订单。方便起见，我们假设每个订单只包含一道菜品。当小肖收到一个订单后，他会优先安排擅长该菜品的大厨制作（如果没有，再安排其他大厨制作）。如果一个订单有多位可选的大厨，小肖会选择编号更小的那位。
+                    </p>
+                    <p>特别地，一些订单指定了大厨编号，小肖必须安排指定的大厨来制作这些订单，无论他们是否擅长这些菜品。</p>
+                    <p>小肖想知道，在给定所有已知信息的情况下，每个订单都会由哪些大厨制作。</p>
+                    <h2>要求</h2>
+                    <p>给定 <code>main.cpp</code> 以及 <code>chef.h</code>（<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1738.ZYx7PE3IH0VGuvYf.pub/aF2UEg1rQHAnRJoD.download_oop_hw1_p4.zip/download_oop_hw1_p4.zip">下载链接</a>），请你实现如下文件：
+                    </p>
+                    <ul>
+                      <li><code>manager.h</code>：根据 <code>main.cpp</code> 的接口调用，确定经理类 <code>Manager</code> 的接口；</li>
+                      <li><code>manager.cpp</code>：根据 <code>manager.h</code> 的接口设计，实现经理类 <code>Manager</code>；</li>
+                      <li><code>chef.cpp</code>：根据 <code>chef.h</code> 的接口设计，实现大厨类 <code>Chef</code>；</li>
+                      <li><code>Makefile</code>：使用 <code>make</code> 命令必须要能生成可执行文件 <code>main</code>。</li>
+                    </ul>
+                    <p>你不能修改我们给定的 <code>main.cpp</code> 和 <code>chef.h</code>，也不必要提交它们。在编译运行时，我们会为你自动补充这两个文件。</p>
+                    <p><strong>请将你的文件打包成一个 zip
+                        格式的压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到上述四个文件，而不是一个包含它们的文件夹。</strong>
+                    </p>
+                    <h2>输入格式</h2>
+                    <p>第 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span> 行一个正整数 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>C</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">C</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6833em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0715em;">C</span></span></span></span></span>，表示大厨的数量。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>C</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">C</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6833em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0715em;">C</span></span></span></span></span> 行，依次描述每位大厨。其中第
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>i</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">i</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6595em;"></span><span
+                                class="mord mathnormal">i</span></span></span></span></span> 行描述编号为 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>i</mi>
+                                  <mo>−</mo>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">i-1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7429em; vertical-align: -0.0833em;"></span><span
+                                class="mord mathnormal">i</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span><span class="mbin">−</span><span class="mspace"
+                                style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span class="mord">1</span></span></span></span></span>
+                      的大厨，包含两个由小写字母组成的字符串，分别表示该大厨的名字及其擅长的菜品名称。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span> 行一个正整数 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>N</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">N</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6833em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.109em;">N</span></span></span></span></span>，表示订单数量。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>N</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">N</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6833em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.109em;">N</span></span></span></span></span> 行依次描述所有订单，每行的开头是一个整数
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>t</mi>
+                                  <mo>∈</mo>
+                                  <mrow>
+                                    <mo fence="true">{</mo>
+                                    <mn>0</mn>
+                                    <mo separator="true">,</mo>
+                                    <mn>1</mn>
+                                    <mo fence="true">}</mo>
+                                  </mrow>
+                                </mrow>
+                                <annotation encoding="application/x-tex">t\in\left\{0, 1\right\}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6542em; vertical-align: -0.0391em;"></span><span
+                                class="mord mathnormal">t</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">∈</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1em; vertical-align: -0.25em;"></span><span class="minner"><span
+                                  class="mopen delimcenter" style="top: 0em;">{</span><span class="mord">0</span><span
+                                  class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord">1</span><span
+                                  class="mclose delimcenter"
+                                  style="top: 0em;">}</span></span></span></span></span></span>，表示该订单没有指定大厨（<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>t</mi>
+                                  <mo>=</mo>
+                                  <mn>0</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">t=0</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6151em;"></span><span
+                                class="mord mathnormal">t</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">0</span></span></span></span></span>）或指定了大厨（<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>t</mi>
+                                  <mo>=</mo>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">t=1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6151em;"></span><span
+                                class="mord mathnormal">t</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span>）。接下来是一个小写字母组成的字符串，描述订单对应的菜品名称。如果该订单指定了大厨（<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>t</mi>
+                                  <mo>=</mo>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">t=1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6151em;"></span><span
+                                class="mord mathnormal">t</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span>），则接下来是一个额外的非负整数 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>i</mi>
+                                  <mo>∈</mo>
+                                  <mrow>
+                                    <mo fence="true">{</mo>
+                                    <mn>0</mn>
+                                    <mo separator="true">,</mo>
+                                    <mn>1</mn>
+                                    <mo separator="true">,</mo>
+                                    <mo>⋯</mo> <mo separator="true">,</mo>
+                                    <mi>C</mi>
+                                    <mo>−</mo>
+                                    <mn>1</mn>
+                                    <mo fence="true">}</mo>
+                                  </mrow>
+                                </mrow>
+                                <annotation encoding="application/x-tex">i\in \left\{0, 1, \cdots, C-1\right\}
+                                </annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6986em; vertical-align: -0.0391em;"></span><span
+                                class="mord mathnormal">i</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">∈</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 1em; vertical-align: -0.25em;"></span><span class="minner"><span
+                                  class="mopen delimcenter" style="top: 0em;">{</span><span class="mord">0</span><span
+                                  class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord">1</span><span
+                                  class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="minner">⋯</span><span
+                                  class="mspace" style="margin-right: 0.1667em;"></span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mpunct">,</span><span
+                                  class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal"
+                                  style="margin-right: 0.0715em;">C</span><span class="mspace"
+                                  style="margin-right: 0.2222em;"></span><span class="mbin">−</span><span class="mspace"
+                                  style="margin-right: 0.2222em;"></span><span class="mord">1</span><span
+                                  class="mclose delimcenter"
+                                  style="top: 0em;">}</span></span></span></span></span></span>，表示指定的大厨编号。</p>
+                    <h2>输出格式</h2>
+                    <p>对于每个订单，依次输出处理结果：如果订单由一位擅长该菜品的大厨制作，输出 <code>{chef} made an awesome {dish}</code>；否则，输出
+                      <code>{chef} made a plain {dish}</code>。这里 <code>{chef}</code> 和 <code>{dish}</code>
+                      分别表示大厨的名字和菜品的名称，详见【样例输出】</p>
+                    <h2>样例</h2>
+                    <h3>样例输入</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+alice kungpaochicken
+bob friednoodles
+carol friednoodles
+5
+0 kungpaochicken
+0 friednoodles
+0 beautifulchicken
+1 friednoodles 2
+1 kungpaochicken 2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>样例输出</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">alice made an awesome kungpaochicken
+bob made an awesome friednoodles
+alice made a plain beautifulchicken
+carol made an awesome friednoodles
+carol made a plain kungpaochicken
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>提示</h2>
+                    <ol>
+                      <li>在调试样例时，请善用 <code>diff</code>（对于 Linux、MacOS、WSL 等类 UNIX 终端）或 <code>fc</code>（对于 Windows
+                        原生命令提示符）命令进行输出的比对，避免输出格式问题。</li>
+                      <li>由于你不能修改 <code>chef.h</code>，并且我们没有声明 <code>Chef</code> 类的默认构造函数，因此你可能需要使用一些避免调用
+                        <code>Chef</code> 类默认构造函数的方法来存储 <code>Chef</code> 对象，如借助 <code>std::vector</code> 等。</li>
+                    </ol>
+                    <h2>数据规模</h2>
+                    <ul>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>≤</mo>
+                                    <mi>C</mi>
+                                    <mo>≤</mo>
+                                    <mn>500</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1\leq C\leq 500</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.8193em; vertical-align: -0.136em;"></span><span
+                                  class="mord mathnormal" style="margin-right: 0.0715em;">C</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">500</span></span></span></span></span></li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>≤</mo>
+                                    <mi>N</mi>
+                                    <mo>≤</mo>
+                                    <mn>1000</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1\leq N\leq 1000</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                  class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.8193em; vertical-align: -0.136em;"></span><span
+                                  class="mord mathnormal" style="margin-right: 0.109em;">N</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">1000</span></span></span></span></span></li>
+                      <li>大厨名字、菜品名称长度不超过 <span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>16</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">16</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">16</span></span></span></span></span></li>
+                    </ul>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+
+</body>
+
+</html>

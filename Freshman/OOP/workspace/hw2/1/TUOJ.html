@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+        <div class="container">
+                    <div class="page-header">
+                        <h1>选择题（第 2 次）</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <ol>
+                                            <li>
+                                                <p>【多选】关于构造函数和析构函数，阅读以下代码，并选出正确的说法（所有选项之间相互独立）：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+
+class Test {
+public:
+    int data = -1;
+    Test() = default; // (A)
+    Test(int dat){ // (B)
+        this-&gt;data = dat; // (C)
+    }
+    ~Test(){ // (D)
+        std::cout&lt;&lt;data;
+    }
+};
+
+int main() {
+    Test* t = new Test();
+    delete t;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A. 如果将注释 <code>(A)</code> 所在的行删除，则该代码<strong>无法</strong>通过编译，原因是
+                                                    <code>main</code> 函数中调用了未定义的缺省构造函数。</p>
+                                                <p> B. 如果将注释 <code>(B)</code> 所在的行改为
+                                                    <code>Test(int dat = 2023){ // (B)</code>，则该代码<strong>可以</strong>通过编译，运行输出结果为
+                                                    <code>-1</code>。</p>
+                                                <p> C. 如果将注释 <code>(A)</code> 和 <code>(C)</code> 所在的行删除，并将注释
+                                                    <code>(B)</code> 所在的行改为
+                                                    <code>Test(int dat = 2023):data(dat){ // (B)</code>，则该代码<strong>可以</strong>通过编译，运行输出结果为
+                                                    <code>2023</code>。</p>
+                                                <p> D. 如果将注释 <code>(D)</code> 所在的行改为
+                                                    <code>~Test(int data = 0){ // (D)</code>，该代码<strong>可以</strong>通过编译，运行输出结果为
+                                                    <code>0</code>。</p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】关于构造函数和析构函数，阅读以下<strong>可以通过编译的</strong>代码，并选出其运行输出结果：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+
+class Member{
+public:
+    Member(){std::cout&lt;&lt;"Constructing member.";}
+    ~Member(){std::cout&lt;&lt;"Destructing member.";}
+};
+
+class Group{
+public:
+    Member member;
+    Group(){std::cout&lt;&lt;"Constructing group.";}
+    ~Group(){std::cout&lt;&lt;"Destructing group.";}
+};
+
+int main(){
+    Group group;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A.
+                                                    <code>Constructing member.Constructing group.Destructing member.Destructing group.</code>
+                                                </p>
+                                                <p> B.
+                                                    <code>Constructing member.Constructing group.Destructing group.Destructing member.</code>
+                                                </p>
+                                                <p> C.
+                                                    <code>Constructing group.Constructing member.Destructing member.Destructing group.</code>
+                                                </p>
+                                                <p> D.
+                                                    <code>Constructing group.Constructing member.Destructing group.Destructing member.</code>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】关于运算符重载，下列说法正确的是：</p>
+                                                <p> A. 对于下列代码中的两个运算符重载实现：虽然它们的参数类型都是 <code>int</code> 与
+                                                    <code>Test</code> 的组合，这段代码仍<strong>可以通过编译</strong>。这是因为在两个重载实现中，
+                                                    <code>int</code> 与 <code>Test</code>
+                                                    在参数中的顺序不同，编译器能够唯一地确定调用哪个运算符实现代码。</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Test{
+public:
+    int data;
+    Test(int d):data(d){}
+};
+
+Test operator +(const Test&amp; a, const int&amp; b){
+    return Test(a.data + b);
+}
+
+Test operator +(const int&amp; b, const Test&amp; a){
+    return Test(- a.data - b);
+}
+
+int main(){
+Test obj(1);
+int data = 2;
+cout &lt;&lt; (obj + data).data &lt;&lt; endl;
+cout &lt;&lt; (data + obj).data &lt;&lt; endl;
+return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> B. A 的说法是错误的。这是因为加法满足交换律，因此即便调换 <code>A</code> 和 <code>int</code>
+                                                    的顺序，加法运算的实现仍必须保持一致，编译器在编译时也会检查这一点。如将后一处 <code>int</code> 改为
+                                                    <code>double</code>，则可通过编译。</p>
+                                                <p> C. A 和 B
+                                                    的说法都是错误的。运算符重载时，所有参数以及返回值的类型必须完全相同。因此，即便是下列代码中的运算符重载实现，也<strong>不能通过编译</strong>。
+                                                </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Test{
+public:
+    int data;
+    Test(int d):data(d){}
+};
+
+Test operator +(const Test&amp; a, const int&amp; b){
+    return Test(a.data + b);
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> D. A、B、C 的说法都是错误的。</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】下列说法正确的有</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;  	// cout
+#include &lt;cstring&gt;    // strcmp
+using namespace std;
+
+char week_name[7][4] = { 	"mon", "tu", "wed", 
+                                "thu", "fri", "sat", "sun"};
+
+class WeekTemperature {
+    int temperature[7] = {0};
+    int error_temperature = -100;
+public:
+    int operator[] (const char* name)  // (D)
+    {
+        for (int i = 0; i &lt; 7; i++) {
+            if (strcmp(week_name[i], name) == 0) 
+                return temperature[i];
+        }
+        return error_temperature; 
+    }
+};
+
+void ref(int &amp;x) {
+    cout &lt;&lt; "left " &lt;&lt; x &lt;&lt; endl;
+    // x = 1;  // (C)
+}
+
+void ref(int &amp;&amp;x) {
+    cout &lt;&lt; "right " &lt;&lt; x &lt;&lt; endl;
+    // x = 1;  // (A)
+}
+
+int main() 
+{
+    WeekTemperature beijing;
+    // beijing["mon"] = -3;	 // (B)
+    ref(beijing["mon"]);
+    cout 	&lt;&lt; "Monday Temperature: " 
+            &lt;&lt; beijing["mon"] &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A. 该段代码运行输出是
+                                                    <code>right 0\nMonday Temperature: 0\n</code>（<code>\n</code>
+                                                    代表换行符，下同）。</p>
+                                                <p> B. 如果复原 <code>(A)</code> 处代码（即取消注释，下同），则代码无法通过编译，因为 <code>x</code>
+                                                    是右值，不能被赋值。</p>
+                                                <p> C. 如果复原 <code>(A)</code> 处代码，则代码运行输出为
+                                                    <code>right 1\nMonday Temperature: 1\n</code>。</p>
+                                                <p> D. 如果将 <code>(D)</code> 处代码改为
+                                                    <code>int&amp; operator[] (const char* name)</code>，复原
+                                                    <code>(B)</code> <code>(C)</code>
+                                                    处代码，则代码运行输出为<code>left -3\nMonday Temperature: 1\n</code>。</p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】下列说法正确的是</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+
+class Student{
+    friend class School;
+private: // (B)
+    ~Student(){std::cout&lt;&lt;"Student fired.";}
+public:
+    class School* school;
+    void interfereSchool();
+};
+
+class School{
+private:
+    void access(){std::cout&lt;&lt;"School accessed.";}
+public:
+    Student* student;
+    void fireStudent();
+};
+
+void Student::interfereSchool(){
+    school -&gt; access(); // (A)
+}
+void School::fireStudent(){
+    delete student;
+}
+
+int main(){
+    School* school = new School();
+    Student* student = new Student();
+    school -&gt; student = student;
+    student -&gt; school = school;
+
+    student -&gt; interfereSchool();
+    delete student;  // (C)
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A. 该代码<strong>不能</strong>通过编译。原因：<code>Student</code> 类的
+                                                    <code>interfereSchool</code> 成员函数访问了 <code>School</code> 类的私有成员
+                                                    <code>access</code>。解决方案：删除该调用（即：删除代码中注释 <code>(A)</code>
+                                                    所在的行），方可通过编译。</p>
+                                                <p> B. 该代码<strong>不能</strong>通过编译，原因：<code>Student</code>
+                                                    类的析构函数被定义为私有成员。解决方案：将其更改为公有成员（即：将代码中注释 <code>(B)</code> 所在的行改为
+                                                    <code>public:</code>），方可通过编译。</p>
+                                                <p> C. 该代码<strong>不能</strong>通过编译，原因：<code>(C)</code> 处调用了
+                                                    <code>Student</code> 类私有的析构函数。解决方案：将代码中注释 <code>(C)</code> 所在的行改为
+                                                    <code>school -&gt; fireStudent();</code>，方可通过编译。</p>
+                                                <p> D. 该代码<strong>不能</strong>通过编译，且 A、C 所述原因都正确，因此必须同时应用 A、C
+                                                    的解决方案，该代码才能通过编译。</p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】关于常量成员和常量对象，阅读以下<strong>可以通过编译的</strong>代码，并选出描述正确的选项：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Student{
+private:
+const int id;
+double gpa;
+public:
+Student(int _id): id(_id), gpa(0.0) {} // (A)
+    int getId() const {
+    return id;
+}
+    void updateGpa(double _gpa) {
+        gpa = _gpa;
+    }
+    double getGpa() {
+        return gpa;
+    }
+};
+
+int main(){
+    Student alice(1);
+    alice.getId();
+    alice.updateGpa(4.0);
+    alice.getGpa();
+
+    const Student bob(2);
+    bob.getId();
+
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A. 使用 <code>Student(int _id) {id = _id; gpa = 0.0;}</code> 替换原代码中的
+                                                    <code>Student</code> 类构造函数（即注释 <code>(A)</code>
+                                                    所在的行）不会影响编译，因为它们的效果是完全一致的。</p>
+                                                <p> B. 在 <code>main</code> 函数中 <code>bob</code> 对象定义后，可以调用
+                                                    <code>bob.getGpa()</code>，因为没有对 <code>bob</code> 的任何成员变量作修改。</p>
+                                                <p> C. <code>Student</code> 类的 <code>getId</code> 成员函数不能改为非常量成员函数，否则
+                                                    <code>main</code> 函数中常量对象 <code>bob</code> 将无法调用
+                                                    <code>bob.getId()</code>。</p>
+                                                <p> D. <code>Student</code> 类的 <code>getGpa</code>
+                                                    成员函数不能改为常量成员函数，因为该函数的实现中访问了非常量成员 <code>gpa</code>。</p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】关于下列代码的描述不正确的是</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class A {
+public:
+    const char* s;
+    A(const char* str) : s(str) { }
+    ~A() { }
+};
+
+class B {
+public:
+    static A a1;
+    const A a2;
+    B(const char* str) : a2(str) { }
+    ~B() {  }
+};
+
+void foo() {
+    static A obj("static obj");
+}
+
+A B::a1("static B::a1");  // (1)
+
+int main() {
+    // (2)
+    cout &lt;&lt; "main starts" &lt;&lt; endl;
+    static B b("static b");
+    for (int i = 0; i &lt; 4; i++) {
+        foo();
+    }
+    cout &lt;&lt; B::a1.s &lt;&lt; endl; // (3)
+    cout &lt;&lt; "main ends" &lt;&lt; endl;
+    return 0; // (4)
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> A. <code>(1)</code> 处的代码可以被挪动至 <code>(2)</code> 处，不影响编译和输出结果。</p>
+                                                <p> B. 将 <code>(3)</code>
+                                                    处的代码可修改为：<code>cout &lt;&lt; b.a1.s &lt;&lt; endl;</code>，不影响编译和输出结果。
+                                                </p>
+                                                <p> C. 在 main 函数执行过程中，一共调用了 2 次类 <code>A</code> 的构造函数。</p>
+                                                <p> D. 在程序退出过程中（即 <code>(4)</code> 处代码执行时），一共有 4 个类 <code>A</code> 或类
+                                                    <code>B</code> 的对象执行析构。</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】下列说法中，错误的是：</p>
+                                                <p> A. 使用 <code>new[]</code> 构造的对象可以使用 <code>delete</code> 释放内存，如下面代码所示。
+                                                </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Test{};
+
+int main() {
+Test* a = new Test[10];
+delete a;
+return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> B. 下列代码可以通过编译，但由于在函数 <code>func</code>
+                                                    中返回了局部对象的引用，因此可能在编译时引发警告（Warning），或引起运行时错误。</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Test{};
+
+Test&amp; func(){
+Test t;
+return t;
+}
+
+int main() {
+Test&amp; t = func();
+return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> C. <code>int</code> 类型的常量静态数据成员可以在类内初始化，如下代码所示。</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Test{
+public:
+    static const int x = 0;
+};
+
+int main(){
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p> D. 使用 <code>delete</code> 释放指针 <code>p</code>
+                                                    指向的内存单元后，<code>p</code> 将指向 <code>nullptr</code>。即下列代码能够正常运行：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;cassert&gt;
+
+class Test{};
+
+int main(){
+Test* p = new Test();
+delete p;
+assert(p == nullptr);
+return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+
+</body>
+
+</html>

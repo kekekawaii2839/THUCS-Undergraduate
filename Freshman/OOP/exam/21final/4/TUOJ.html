@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>小明的MagicArray</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h3>题目描述</h3>
+										<p>小明最近学习了C++的多态，多态的一个重要意义是为不同类型的对象复用相同的代码。小明尝试设计了一个<code>MagicArray</code>，这个<code>MagicArray</code>不保存具体数值，但可以对它及它的元素做一些操作，这些操作之后能够复用到一个同样长度的<code>std::vector</code>容器中去。
+										</p>
+										<p>首先为了简单，小明只允许<code>arr[0] += i</code>这样的操作，其中数组长度固定为1，<code>i</code>为int类型。具体来说：
+										</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">//subtask1
+MagicArray arr(1);  // create a MagicArray with length=1
+for(int i = 0; i &lt; 10;  i++){
+    arr[0] += 1;
+}
+
+cout &lt;&lt; "#### Test Case 1-1 ####" &lt;&lt; endl;
+std::vector&lt;int&gt; vec1{0};
+arr.apply(vec1); //apply "vec1[0] += 1" for 10 times
+cout &lt;&lt; vec1[0] &lt;&lt; endl; // 10
+
+cout &lt;&lt; "#### Test Case 1-2 ####" &lt;&lt; endl;
+std::vector&lt;int&gt; vec2{5};
+arr.apply(vec2); //apply "vec2[0] += 1" for 10 times
+cout &lt;&lt; vec2[0] &lt;&lt; endl; // 15
+
+cout &lt;&lt; "#### Test Case 1-3 ####" &lt;&lt; endl;
+std::vector&lt;double&gt; vec3{1.5}; // You can even use vector&lt;double&gt;
+arr.apply(vec3); //apply "vec3[0] += 1" for 10 times
+cout &lt;&lt; vec3[0] &lt;&lt; endl; // 11.5
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>接下来，小明希望<code>MagicArray</code>能够支持更长的数组。同时为了方便理解，<code>MagicArray</code>能够输出自己记录的操作：
+										</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">//subtask2
+MagicArray arr(5);  // create a MagicArray with length=5
+for(int i = 0; i &lt; 5;  i++){
+    arr[i] += i;
+}
+
+cout &lt;&lt; "#### TestCase 2: Output Instructions ####" &lt;&lt; endl;
+static_assert(std::is_abstract&lt;Instruction&gt;(), "Instruction should be an abstract class");
+std::vector&lt;Instruction*&gt; &amp;instructions = arr.getInstructions();
+for(auto ins : instructions) {
+    ins -&gt; output();
+}
+// arr[0] += 0
+// arr[1] += 1
+// arr[2] += 2
+// arr[3] += 3
+// arr[4] += 4
+
+cout &lt;&lt; "#### TestCase 2-1 ####" &lt;&lt; endl;
+std::vector&lt;int&gt; vec1{0, 0, 0, 0, 0};
+arr.apply(vec1);
+for(auto x : vec1) cout &lt;&lt; x &lt;&lt; " "; // 0 1 2 3 4
+cout &lt;&lt; endl;
+
+cout &lt;&lt; "#### TestCase 2-2 ####" &lt;&lt; endl;
+std::vector&lt;double&gt; vec2{5.5, 4.4, 3.3, 2.2, 1.1};
+arr.apply(vec2);
+for(auto x : vec2) cout &lt;&lt; x &lt;&lt; " "; // 5.5 5.4 5.3 5.2 5.1
+cout &lt;&lt; endl;
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>其中<code>Instruction</code>为抽象类，小明打算为不同的的操作设计不同的<code>Instruction</code>子类。小明已经写好了该基类的接口。如果有必要，你也可以对该接口做一些修改。
+										</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Instruction
+{
+public:
+    virtual void apply(std::vector&lt;int&gt; &amp;vec) = 0;
+    virtual void apply(std::vector&lt;double&gt; &amp;vec) = 0;
+    virtual void output() = 0;
+};
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>接下来，小明希望<code>MagicArray</code>可以支持更多操作，例如<code>a[i] = a[j]</code>和<code>a[i] += a[j]</code>。
+										</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">//subtask3
+MagicArray arr(3);  // create a MagicArray with length=3
+for(int i = 0; i &lt; 2;  i++){
+    arr[i+1] += arr[i];
+    arr[i] = arr[i+1];
+    arr[i] += i+1;
+}
+
+cout &lt;&lt; "#### TestCase 3: Output Instructions ####" &lt;&lt; endl;
+static_assert(std::is_abstract&lt;Instruction&gt;(), "Instruction should be an abstract class");
+std::vector&lt;Instruction*&gt; instructions = arr.getInstructions();
+for(auto ins : instructions) {
+    ins -&gt; output();
+}
+
+// arr[1] += arr[0]
+// arr[0] = arr[1]
+// arr[0] += 1
+// arr[2] += arr[1]
+// arr[1] = arr[2]
+// arr[1] += 2
+
+cout &lt;&lt; "#### TestCase 3-1 ####" &lt;&lt; endl;
+std::vector&lt;int&gt; vec1{0, 0, 0};
+arr.apply(vec1);
+for(auto x : vec1) cout &lt;&lt; x &lt;&lt; " "; //1 2 0
+cout &lt;&lt; endl;
+
+cout &lt;&lt; "#### TestCase 3-2 ####" &lt;&lt; endl;
+std::vector&lt;double&gt; vec2{0.3, 0.2, 0.1};
+arr.apply(vec2);
+for(auto x : vec2) cout &lt;&lt; x &lt;&lt; " "; //1.5 2.6 0.6
+cout &lt;&lt; endl;
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>最后，小明为<code>MagicArray</code>添加了一个输出操作，例如<code>cout &lt;&lt; arr[i]</code>。该输出操作不会立即执行，而是会等到调用<code>apply</code>时才会进行输出。为了在apply时换行，小明使用了<code>arr.endl()</code>代替了原有的<code>endl</code>。
+										</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">//subtask4
+MagicArray arr(3);  // create a MagicArray with length=3
+for(int i = 0; i &lt; 2;  i++){
+    arr[i] += arr[i+1];
+    arr[i] += i + 1;
+    arr[i+1] = arr[i];
+    cout &lt;&lt; arr[i] &lt;&lt; arr.endl(); // arr.endl() is a special object for linebreak
+}
+
+cout &lt;&lt; "#### TestCase 4: Output Instructions ####" &lt;&lt; endl;
+static_assert(std::is_abstract&lt;Instruction&gt;(), "Instruction should be an abstract class");
+std::vector&lt;Instruction*&gt; instructions = arr.getInstructions();
+for(auto ins : instructions) {
+    ins -&gt; output();
+}
+// arr[0] += arr[1]
+// arr[0] += 1
+// arr[1] = arr[0]
+// cout &lt;&lt; arr[0]
+// cout &lt;&lt; endl
+// arr[1] += arr[2]
+// arr[1] += 2
+// arr[2] = arr[1]
+// cout &lt;&lt; arr[1]
+// cout &lt;&lt; endl
+
+cout &lt;&lt; "#### TestCase 4-1 ####" &lt;&lt; endl;
+std::vector&lt;int&gt; vec1{0, 0, 0};
+arr.apply(vec1);
+//6
+//9
+for(auto x : vec1) cout &lt;&lt; x &lt;&lt; " "; //6 9 9
+cout &lt;&lt; endl;
+
+cout &lt;&lt; "#### TestCase 4-2 ####" &lt;&lt; endl;
+std::vector&lt;double&gt; vec2{0.3, 0.2, 0.1};
+arr.apply(vec2);
+//1.5
+//3.6
+for(auto x : vec2) cout &lt;&lt; x &lt;&lt; " "; //1.5 3.6 3.6
+cout &lt;&lt; endl;
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<ul>
+											<li>提示：<ul>
+													<li>你应该自定义一个类型作为<code>MagicArray</code>中<code>operate[]</code>返回的元素
+													</li>
+													<li>对于<code>MagicArray</code>及其元素的任意操作都应转换为相应的<code>Instruction</code>派生类，储存在<code>MagicArray</code>中
+													</li>
+												</ul>
+											</li>
+											<li>为了简单考虑，我们对题目做出以下限制：<ul>
+													<li>你只用考虑<code>vector&lt;int&gt;</code>和<code>vector&lt;double&gt;</code>
+													</li>
+													<li>元素下标访问保证不会越界</li>
+													<li>保证<code>apply</code>中传入的<code>vector</code>长度与<code>MagicArray</code>一致
+													</li>
+												</ul>
+											</li>
+											<li>我们的<code>main.cpp</code>和<code>Makefile</code>已经给定，同时我们也给出了<code>Instruction.h</code>的基类接口。如果需要，你可以适当修改<code>Instruction.h</code>。该<code>Makefile</code>将自动的将该目录下的所有的后缀名为<code>cpp</code>的程序编译并链接。
+												<ul>
+													<li>特殊地，<code>Makefile</code>支持测试部分subtask。如果你只想测试<code>subtask1</code>，可以使用<code>make subtask1</code>命令。
+													</li>
+													<li>**你可以修改<code>Instruction.h</code>，但不能修改<code>main.cpp</code>和<code>Makefile</code>**。无论你是否修改<code>Instruction.h</code>，你都应该上传该文件。
+													</li>
+												</ul>
+											</li>
+											<li>文件下载地址：<a
+													href="https://oj.cs.tsinghua.edu.cn/staticdata/1811.j4VXV3kbgUyuChmk.pub/SQhHx4zsldviA38h.download.zip/download.zip">下载链接</a>
+											</li>
+										</ul>
+										<h3>样例输出</h3>
+										<p>针对我们给出的<code>main.cpp</code>，输出如下。</p>
+										<div style="position: relative;">
+											<pre class="language-txt" tabindex="0"><code class="language-txt">#### Test Case 1-1 ####
+10
+#### Test Case 1-2 ####
+15
+#### Test Case 1-3 ####
+11.5
+#### TestCase 2: Output Instructions ####
+arr[0] += 0
+arr[1] += 1
+arr[2] += 2
+arr[3] += 3
+arr[4] += 4
+#### TestCase 2-1 ####
+0 1 2 3 4
+#### TestCase 2-2 ####
+5.5 5.4 5.3 5.2 5.1
+#### TestCase 3: Output Instructions ####
+arr[1] += arr[0]
+arr[0] = arr[1]
+arr[0] += 1
+arr[2] += arr[1]
+arr[1] = arr[2]
+arr[1] += 2
+#### TestCase 3-1 ####
+1 2 0
+#### TestCase 3-2 ####
+1.5 2.6 0.6
+#### TestCase 4: Output Instructions ####
+arr[0] += arr[1]
+arr[0] += 1
+arr[1] = arr[0]
+cout &lt;&lt; arr[0]
+cout &lt;&lt; endl
+arr[1] += arr[2]
+arr[1] += 2
+arr[2] = arr[1]
+cout &lt;&lt; arr[1]
+cout &lt;&lt; endl
+#### TestCase 4-1 ####
+6
+9
+6 9 9
+#### TestCase 4-2 ####
+1.5
+3.6
+1.5 3.6 3.6
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>提交格式</h3>
+										<p>你可以提交一个压缩包，其中必须包含<code>MagicArray.h</code>和<code>Instruction.h</code>。我们会将你提交的文件和我们预先设置好的<code>main.cpp</code>、<code>Makefile</code>一起编译运行。
+										</p>
+										<p><strong>注意：你的所有文件应该放在压缩包的根目录下，且文件名中不能包含中文，若提交后发现OJ反馈不正常，请尽快与监考老师联系。</strong>
+										</p>
+										<h3>评分标准</h3>
+										<p>我们会有1个样例测试点，即下发的<code>main.cpp</code>。另外有1个隐藏测试点，会相应的更改<code>main.cpp</code>中内容进行测试。一般来说，如果正确实现了题目要求，并能通过样例测试点（而不是通过某种方法直接输出标准答案），也应该能够通过隐藏测试点。（<strong>若提交后存在问题，请及时联系监考老师。</strong>）
+										</p>
+										<p>本题按照以上描述分为了4个子任务，每个子任务各占25分。只有你通过了同一个子任务的样例测试点和隐藏测试点，你才能获得该子任务的分数。</p>
+										<ul>
+											<li>SUBTASK1：保证<code>MagicArray</code>长度为1，只有<code>+=(int)</code>操作</li>
+											<li>SUBTASK2：保证<code>MagicArray</code>长度小于100，在SUBTASK1基础上，有输出<code>Instruction</code>操作
+											</li>
+											<li>SUBTASK3：保证<code>MagicArray</code>长度小于100，在SUBTASK2基础上，有<code>+=(元素)</code>、<code>=(元素)</code>操作
+											</li>
+											<li>SUBTASK4：保证<code>MagicArray</code>长度小于100，在SUBTASK3基础上，有<code>cout &lt;&lt; 元素</code>、<code>cout &lt;&lt; MagicArray::string("xx")</code>操作。
+											</li>
+										</ul>
+										<p>注意你不用同时通过4个子任务再提交，我们会将每一个子任务的代码拆开，分别编译。（但是后一个子任务会依赖于前一个子任务，例如：如果想要第三个子任务正确，必须先保证第一、二个子任务正确。）
+										</p>
+										<p>考试100%为OJ评分。</p>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">oop_custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">65536 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div>
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

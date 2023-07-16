@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+    <app-root ng-version="14.1.2">
+        <div class="container"><router-outlet></router-outlet><app-contest-nav>
+                <router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h1>选择题</h1>
+                                        <p>所有题目编译时添加 <code>--std=c++11</code></p>
+                                        <ol>
+                                            <li>
+                                                <p>在命令行提示符下，以下哪个命令可以列出当前目录下的所有文件和文件夹，包括隐藏文件和文件夹？</p>
+                                                <p>A. <code>ls -a</code></p>
+                                                <p>B. <code>ls -l</code></p>
+                                                <p>C. <code>ls -r</code></p>
+                                                <p>D. <code>ls -t</code></p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】假设你有一个C++源代码文件 <code>test.cpp</code>，其中包含以下内容：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main() {
+    int a = 123;
+    cout &lt;&lt; "The value of a is: " &lt;&lt; a &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>下面那条命令可以正确生成可执行文件？</p>
+                                                <p>A. <code>g++ -o test test.cpp</code></p>
+                                                <p>B. <code>g++ test.cpp -o test</code></p>
+                                                <p>C. <code>g++ -c test.cpp -o test</code></p>
+                                                <p>D. <code>g++ -o test.cpp test</code></p>
+                                            </li>
+                                            <li>
+                                                <p>有以下两个文件代码段，分别保存在 <code>file1.cpp</code> 和 <code>file2.cpp</code> 文件中：
+                                                </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none"> // File: file1.cpp
+ #include &lt;iostream&gt;
+ extern int x;
+
+ void foo() {
+     int x;
+     x = 10;
+ }
+
+ int main() {
+     foo();
+     std::cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; std::endl;
+     return 0;
+ }
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none"> // File: file2.cpp
+ int x;
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>使用 <code>g++ file1.cpp file2.cpp -o main</code> 编译，如果编译成功则运行
+                                                    <code>./main</code>，以下说法正确的是：</p>
+                                                <p> A. 编译错误</p>
+                                                <p> B. 运行错误</p>
+                                                <p> C. 运行输出"x = 0"</p>
+                                                <p> D. 运行输出"x = 10"</p>
+                                            </li>
+                                            <li>
+                                                <p>这段代码运行后，输出结果是什么？</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+ 
+using namespace std;
+
+#define Max(a, b) (a &gt; b ? a : b)
+
+int main(){
+    
+    int i = 1;
+    i = i++;
+    cout &lt;&lt; Max(++i, 1) &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. 1</p>
+                                                <p>B. 2</p>
+                                                <p>C. 3</p>
+                                                <p>D. 4</p>
+                                            </li>
+                                            <li>
+                                                <p>C++中函数重载的实现原理是什么？</p>
+                                                <p>A. 通过传入参数的类型不同来区分不同函数；</p>
+                                                <p>B. 通过函数名不同来区分不同函数；</p>
+                                                <p>C. 通过返回值不同来区分不同函数；</p>
+                                                <p>D. 通过传入参数的名称不同来区分不同函数。</p>
+                                            </li>
+                                            <li>
+                                                <p>以下类定义不能通过编译的是</p>
+                                                <p>A. </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">    class A {
+    public:
+        void func(int a, int b, int c) {}; 
+    };
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>B. </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">    class B {
+    public:
+        void func(int a, int b=1, int c=1){}
+    };
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>C. </p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">    class C {
+    public:
+        void func(int a=3, int b, int c){}
+    };
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>D.</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">    class D {
+    public:
+        void func(int a=3, int b=1, int c=0){}
+    };
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <p>【多选】以下哪些描述属于下面代码无法通过编译的原因</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class P {
+    int data = 1;
+    void func(P a);
+    int func(int a, int b=1) {data += a - b; return data;}
+    int func(int i, int j=2) { data += i + j; return data;}
+      int func2(float i) { data += i; return data;}
+};
+void P::func(P a) { data += a.data; }
+
+int main(){
+    P a;
+    a.func2(1);
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. 没有设置成员变量、成员函数的访问权限；</p>
+                                                <p>B. <code>P</code> 中 <code>func(int, int)</code>函数重复定义；</p>
+                                                <p>C. 类 <code>P</code> 的 <code>func(P a) </code>中修改了私有成员变量；</p>
+                                                <p>D. <code>main()</code> 函数中调用了 <code>a</code>的私有成员函数。</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】关于C++内联函数以下哪一项是正确的？</p>
+                                                <p>A、类声明中定义的函数默认为内联函数；</p>
+                                                <p>B、内联操作减少了调用内联函数的开销；</p>
+                                                <p>C、一些情况下内联函数可以提升程序运行速度；</p>
+                                                <p>D、任何标记为inline的函数，编译器都会对函数进行内联化处理。</p>
+                                            </li>
+                                        </ol>
+                                        <h3>提交格式</h3>
+                                        <p>请你提交一个文本文件，第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行是一个由A\B\C\D组成的字符串，代表第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题的答案。
+                                        </p>
+                                        <p>若你不想提交第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题，请将第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行留空。
+                                        </p>
+                                        <p>你提交的文本文件至少要有8行，且前10行必须由A\B\C\D组成，否则将被认为是无效提交。</p>
+                                        <p>你可以通过测试点的详细信息，看到评测对你提交文件的解析。若存在问题，请联系助教。</p>
+                                        <p>以下给出一个合法的提交答案的例子：</p>
+                                        <div style="position: relative;">
+                                            <pre>A
+B
+C
+ACD
+B
+CD
+C
+C
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+
+                                        <p>评测器对第一行的解析结果如下：</p>
+                                        <div style="position: relative;">
+                                            <pre>Valid answer: ['A']
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+                                        <p><strong>注意：作业截止之前本题的评测器只检查提交格式是否正确，不检查具体答案。只要提交格式正确就显示100分。每道题的具体答案会在作业截止之后重新评测，以最后一次提交的答案为准</strong>
+                                        </p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+#
+#
+###
+SIZE = 7
+#SIZE = 10000
+SIZE = 4
+RAND = 30
+SDCNJSNC
+#

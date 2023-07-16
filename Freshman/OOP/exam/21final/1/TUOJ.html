@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h4>请回答下列单项选择题 （每道题有且仅有1个选项）</h4>
+                                        <ol>
+                                            <li>
+                                                <p>下列说法正确的是：</p>
+                                                <p>A. 公有继承的派生类的成员函数不能直接访问基类中继承来的保护成员和私有成员</p>
+                                                <p>B. 类的成员变量可以是该类对象的指针</p>
+                                                <p>C. <code>return</code>语句中的表达式类型和函数返回值类型必须完全相同</p>
+                                                <p>D. 基类的公有成员函数和公有成员变量在派生类中一定仍然是公有的</p>
+                                            </li>
+                                            <li>
+                                                <p>关于下面程序，说法正确的是：</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include&lt;iostream&gt;
+using namespace std;
+
+class Base {
+public:
+    virtual void print(){
+        cout &lt;&lt; "Base" &lt;&lt; endl;
+    }
+};
+
+class Derive: public Base {
+    void print(){ // (3)
+        cout &lt;&lt; "Derive" &lt;&lt; endl;
+    }
+};
+
+void print(Base p){
+    p.print();
+}
+void print(Base* p){
+    p-&gt;print(); // (4)
+};
+
+int main(){
+    Base a;
+    Derive b;
+    print(&amp;a);
+    print(&amp;b); // (1)
+
+    print(a);
+    print(b); // (2)  
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. <code>（1）</code>处发生了对象切片</p>
+                                                <p>B. <code>（2）</code>处发生了向上类型转换</p>
+                                                <p>C. <code>（4）</code>处调用的函数在编译期确定，是早绑定</p>
+                                                <p>D. <code>（3）</code>处发生了重写隐藏</p>
+                                            </li>
+                                            <li>
+                                                <p>下列说法正确的是：</p>
+                                                <p>A. 类的静态数据成员只能被类的静态成员函数修改</p>
+                                                <p>B.
+                                                    若类<code>B</code>被声明为类<code>A</code>的友元类，则<code>B</code>的对象对<code>A</code>的派生类对象的一切成员都有访问权限
+                                                </p>
+                                                <p>C. 无论类型是什么，所有常量静态数据成员必须在类外进行初始化</p>
+                                                <p>D. 私有继承的派生类对象不允许向上类型转换</p>
+                                            </li>
+                                            <li>
+                                                <p>下列说法正确的是：</p>
+                                                <p>A. <code>std:function</code>在编译期确定函数调用的地址</p>
+                                                <p>B. 当智能指针的引用计数归0时，其指向的对象才会被销毁</p>
+                                                <p>C. 智能指针可以方便的管理一个对象的生命周期，在任何情况下都可以避免内存泄露</p>
+                                                <p>D.
+                                                    可以使用智能指针维护对象数组，不会有内存泄漏的风险，如，<code>shared_ptr&lt;Object&gt; p(new Object[10]);</code>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>下列叙述<strong>错误</strong>的是：</p>
+                                                <p>A. 返回值类型不可以用来区分重载函数</p>
+                                                <p>B. 运算符重载一般有全局函数重载和成员函数重载两种方式</p>
+                                                <p>C.
+                                                    编程时不建议在头文件中定义<code>inline</code>函数，因为一旦该头文件被多个文件包含，就会造成该<code>inline</code>函数的“重复定义”
+                                                </p>
+                                                <p>D. 编译器会对内联函数进行类型检查</p>
+                                            </li>
+                                            <li>
+                                                <p>以下说法正确的是：</p>
+                                                <p>A.
+                                                    调用非空<code>vector</code>对象的<code>push_back</code>方法时，指向第一个元素的迭代器不会失效
+                                                </p>
+                                                <p>B. <code>map</code>中的元素<code>key</code>必须互不相同</p>
+                                                <p>C. <code>vector</code>在任意位置插入的均摊复杂度为<code>O(1)</code></p>
+                                                <p>D. <code>vector</code>是需要手动扩展容量的数组</p>
+                                            </li>
+                                            <li>
+                                                <p>以下关于虚函数说法<strong>错误</strong>的是：</p>
+                                                <p>A. 运行时的多态性可通过虚函数实现</p>
+                                                <p>B. 虚函数表VTABLE和虚函数指针VPTR都是在编译期间建立的</p>
+                                                <p>C. 构造函数不可以是虚函数</p>
+                                                <p>D. 某基类成员函数为虚函数，当派生类重写该函数后，该函数仍然是虚函数</p>
+                                            </li>
+                                            <li>
+                                                <p>以下关于设计模式说法正确的是：</p>
+                                                <p>A. 模板方法模式优先类的组合，策略模式优先类的继承</p>
+                                                <p>B. 装饰器模式中，通常会重新实现被装饰对象的原有功能</p>
+                                                <p>C. 代理模式中多重嵌套的现象比较常见</p>
+                                                <p>D. 在迭代器模式中，对于上层算法，算法的执行只依赖于抽象的迭代器接口，而无需关注最底层的具体数据结构</p>
+                                            </li>
+                                        </ol>
+                                        <h3>提交格式</h3>
+                                        <p><strong>注意：考试期间选择题的提交不反馈得分</strong></p>
+                                        <p>请你提交一个文本文件，第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行是A\B\C\D之一，代表第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题的答案。
+                                        </p>
+                                        <p>若你不想提交第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题，请将第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行留空。
+                                        </p>
+                                        <p>你提交的文本文件至少要有8行，且前8行必须由A\B\C\D组成，否则将被认为是无效提交。</p>
+                                        <p>以下给出一个合法的提交答案的例子：</p>
+                                        <div style="position: relative;">
+                                            <pre>A
+B
+C
+D
+A
+C
+A
+B
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div>
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

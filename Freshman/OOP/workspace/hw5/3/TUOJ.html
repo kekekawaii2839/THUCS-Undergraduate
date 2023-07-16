@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>文本编辑器</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>
+                      有了STL的帮助，我们可以做出很多东西。这次让我们来做一个简单的文本编辑器<code>TextEditor</code>。它的行为和一般的文本编辑器基本一致，如windows自带的记事本、vscode等。如有困惑，可在这些编辑器上尝试以作参考，但<strong>一切请以题目描述为准</strong>。
+                    </p>
+                    <p><code>TextEditor</code>的基本构成有：</p>
+                    <ul>
+                      <li>
+                        <p>文本：被编辑的对象。文本可以被加载到<code>TextEditor</code>内部进行操作，也可以由<code>TextEditor</code>输出。</p>
+                      </li>
+                      <li>
+                        <p>光标：指示正在进行编辑的位置，由行号和列号确定，即<code>(row, col)</code>。<strong>为方便起见，一切编号从0开始，</strong>同时约定：</p>
+                        <ul>
+                          <li>对于一个<span><span class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mi>n</mi>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">n</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 0.4306em;"></span><span
+                                      class="mord mathnormal">n</span></span></span></span></span>行的文件，其合法行号为<span><span
+                                class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mo stretchy="false">[</mo>
+                                        <mn>0</mn>
+                                        <mo separator="true">,</mo>
+                                        <mi>n</mi>
+                                        <mo stretchy="false">)</mo>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">[0,n)</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                      class="mopen">[</span><span class="mord">0</span><span
+                                      class="mpunct">,</span><span class="mspace"
+                                      style="margin-right: 0.1667em;"></span><span class="mord mathnormal">n</span><span
+                                      class="mclose">)</span></span></span></span></span>；</li>
+                          <li>对于有<span><span class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mi>k</mi>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">k</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                      style="margin-right: 0.0315em;">k</span></span></span></span></span>个字符的一行，其合法列号为<span><span
+                                class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mo stretchy="false">[</mo>
+                                        <mn>0</mn>
+                                        <mo separator="true">,</mo>
+                                        <mi>k</mi>
+                                        <mo stretchy="false">]</mo>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">[0, k]</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                      class="mopen">[</span><span class="mord">0</span><span
+                                      class="mpunct">,</span><span class="mspace"
+                                      style="margin-right: 0.1667em;"></span><span class="mord mathnormal"
+                                      style="margin-right: 0.0315em;">k</span><span
+                                      class="mclose">]</span></span></span></span></span>。当列号为0时，意味着位于<strong>该行第一个字符上</strong>；当列号为<span><span
+                                class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mi>k</mi>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">k</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                      style="margin-right: 0.0315em;">k</span></span></span></span></span>时，意味着位于<strong>该行最后的换行符上</strong>。
+                          </li>
+                        </ul>
+                        <p>举例如下：</p>
+                        <div style="position: relative;">
+                          <pre class="language-none" tabindex="0"><code class="language-none">abc
+hello
+</code></pre>
+                          <div
+                            style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                            <app-copy-button><button class="btn btn-default btn-sm"><i
+                                  class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                        </div>
+                        <p><span><span class="katex"><span class="katex-mathml"><math
+                                  xmlns="http://www.w3.org/1998/Math/MathML">
+                                  <semantics>
+                                    <mrow>
+                                      <mo stretchy="false">(</mo>
+                                      <mn>0</mn>
+                                      <mo separator="true">,</mo>
+                                      <mn>0</mn>
+                                      <mo stretchy="false">)</mo>
+                                    </mrow>
+                                    <annotation encoding="application/x-tex">(0,0)</annotation>
+                                  </semantics>
+                                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                    class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                    class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span
+                                    class="mspace" style="margin-right: 0.1667em;"></span><span
+                                    class="mord">0</span><span
+                                    class="mclose">)</span></span></span></span></span>即为<strong>字符a的位置</strong>，<span><span
+                              class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                  <semantics>
+                                    <mrow>
+                                      <mo stretchy="false">(</mo>
+                                      <mn>1</mn>
+                                      <mo separator="true">,</mo>
+                                      <mn>5</mn>
+                                      <mo stretchy="false">)</mo>
+                                    </mrow>
+                                    <annotation encoding="application/x-tex">(1,5)</annotation>
+                                  </semantics>
+                                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                    class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                    class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span
+                                    class="mspace" style="margin-right: 0.1667em;"></span><span
+                                    class="mord">5</span><span
+                                    class="mclose">)</span></span></span></span></span>即为o之后<strong>换行符的位置</strong>。</p>
+                      </li>
+                    </ul>
+                    <p><code>TextEditor</code>具有以下功能：</p>
+                    <ul>
+                      <li>
+                        <p>创建：</p>
+                        <ul>
+                          <li>构造函数（<code>TextEditor</code>）：创建编辑器。初始状态下，文本为空（即没有任何文本，打印的时候表现为一个空行），光标位置为<span><span
+                                class="katex"><span class="katex-mathml"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                      <mrow>
+                                        <mo stretchy="false">(</mo>
+                                        <mn>0</mn>
+                                        <mo separator="true">,</mo>
+                                        <mn>0</mn>
+                                        <mo stretchy="false">)</mo>
+                                      </mrow>
+                                      <annotation encoding="application/x-tex">(0,0)</annotation>
+                                    </semantics>
+                                  </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                      class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                      class="mopen">(</span><span class="mord">0</span><span
+                                      class="mpunct">,</span><span class="mspace"
+                                      style="margin-right: 0.1667em;"></span><span class="mord">0</span><span
+                                      class="mclose">)</span></span></span></span></span>（即光标在这个空行的开头），处于非选中状态。</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>光标：</p>
+                        <ul>
+                          <li>
+                            <p>
+                              选择（<code>SELECT</code>）：接受两个位置<code>beg</code>、<code>end</code>，选中<code>[beg,end)</code>区域，以便进一步编辑。需要注意，空行包含一个换行符，被选中时应将其包含。在<code>beg</code>、<code>end</code>相等时，选中区域为空，<strong>此时是有选中区域的状态，选中的区域为空字符串</strong>。
+                            </p>
+                          </li>
+                          <li>
+                            <p>移动光标（<code>MOVE</code>）：接受一个位置<code>beg</code>，移动光标至该位置。若当前有选中区域，则先取消选中状态再移动光标。</p>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>编辑：</p>
+                        <ul>
+                          <li>
+                            <p>
+                              写入（<code>WRITE</code>）：接受一个字符串<code>data</code>，若无选中区域，则在光标处写入该字符串；若有选中区域，则替换之，即先删除再写入。写入完成后，光标均移动至写入内容末尾。例如：
+                            </p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+*abc
+// 写入hello
+hello*abc
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+*ab*c
+// 写入hello
+hello*c
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                          <li>
+                            <p>
+                              换行（<code>NEWLINE</code>）：在光标所在行下方新插入一行，若无选中区域，则将光标所在行光标之后的字符移动至新行；若有选中区域，则先删除再换行。换行后，光标位于新一行开头。例如：
+                            </p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+abc*
+// 换行
+abc
+*
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+*ab*c
+// 换行
+
+*c
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                          <li>
+                            <p>
+                              删除（<code>DELETE</code>）：若无选中区域，则删除光标位置的一个字符，光标位置不变；若有选中区域，则删除已选中的内容，同时退出选中状态，光标置于选中区域靠近开头的位置。光标位于行末时，将会删除行末换行符，将其与下一行合并；而若光标位于最后一行行末，则<strong>不会有任何操作</strong>。例如：
+                            </p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+*abc
+// 删除后
+*bc
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+*ab*c
+// 删除后
+*c
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始
+ab
+c*
+d
+// 删除后
+ab
+c*d
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                          <li>
+                            <p>
+                              复制（<code>COPY</code>）：如果有选中区域，复制选中区域的内容至剪贴板，<strong>如果剪切板之前有内容则覆盖之</strong>。若无选中区域，则<strong>无任何影响</strong>。例如：
+                            </p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">ab*c
+
+*hello
+// 执行复制，复制后的剪贴板内容如下（注意，复制了两个换行符）：
+c
+
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                          <li>
+                            <p>
+                              粘贴（<code>PASTE</code>）：若无选中区域，将剪贴板现有内容粘贴到光标处；若有选中区域，则替换之，即先删除再粘贴。剪贴板为空时<strong>不产生任何写入操作</strong>，但是可以将选中区域清除。在粘贴完成后，光标移动到粘贴内容末尾。例如：
+                            </p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始（剪贴板内容如上）
+ab*c
+
+hello
+// 粘贴后
+abc
+
+*c
+
+hello
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">// 初始（剪贴板内容如上）
+ab*c*
+
+hello
+// 粘贴后
+abc
+
+*
+
+hello
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                          <li>
+                            <p>截屏（<code>SCREEN</code>）：将目前文本编辑器处理得到的文本逐行输出至标准输出。用<code>*</code>标出光标的位置或选中区域的位置。如：</p>
+                            <p>光标在<span><span class="katex"><span class="katex-mathml"><math
+                                      xmlns="http://www.w3.org/1998/Math/MathML">
+                                      <semantics>
+                                        <mrow>
+                                          <mo stretchy="false">(</mo>
+                                          <mn>0</mn>
+                                          <mo separator="true">,</mo>
+                                          <mn>2</mn>
+                                          <mo stretchy="false">)</mo>
+                                        </mrow>
+                                        <annotation encoding="application/x-tex">(0,2)</annotation>
+                                      </semantics>
+                                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                        class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                        class="mopen">(</span><span class="mord">0</span><span
+                                        class="mpunct">,</span><span class="mspace"
+                                        style="margin-right: 0.1667em;"></span><span class="mord">2</span><span
+                                        class="mclose">)</span></span></span></span></span>处：</p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">ab*c
+
+hello
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                            <p>选中区域为<span><span class="katex"><span class="katex-mathml"><math
+                                      xmlns="http://www.w3.org/1998/Math/MathML">
+                                      <semantics>
+                                        <mrow>
+                                          <mo stretchy="false">[</mo>
+                                          <mo stretchy="false">(</mo>
+                                          <mn>0</mn>
+                                          <mo separator="true">,</mo>
+                                          <mn>0</mn>
+                                          <mo stretchy="false">)</mo>
+                                          <mo separator="true">,</mo>
+                                          <mo stretchy="false">(</mo>
+                                          <mn>1</mn>
+                                          <mo separator="true">,</mo>
+                                          <mn>0</mn>
+                                          <mo stretchy="false">)</mo>
+                                          <mo stretchy="false">)</mo>
+                                        </mrow>
+                                        <annotation encoding="application/x-tex">[(0,0),(1,0))</annotation>
+                                      </semantics>
+                                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                        class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                        class="mopen">[(</span><span class="mord">0</span><span
+                                        class="mpunct">,</span><span class="mspace"
+                                        style="margin-right: 0.1667em;"></span><span class="mord">0</span><span
+                                        class="mclose">)</span><span class="mpunct">,</span><span class="mspace"
+                                        style="margin-right: 0.1667em;"></span><span class="mopen">(</span><span
+                                        class="mord">1</span><span class="mpunct">,</span><span class="mspace"
+                                        style="margin-right: 0.1667em;"></span><span class="mord">0</span><span
+                                        class="mclose">))</span></span></span></span></span>：</p>
+                            <div style="position: relative;">
+                              <pre class="language-none" tabindex="0"><code class="language-none">*abc
+*
+hello
+</code></pre>
+                              <div
+                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                      class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <h3>输入输出格式</h3>
+                    <p>输入的第一行包含一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi mathvariant="monospace">m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{m}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathtt">m</span></span></span></span></span> ，表示操作数量；</p>
+                    <p>接下来输入<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi mathvariant="monospace">m</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{m}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathtt">m</span></span></span></span></span>行，每行先输入一个字符串<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi mathvariant="monospace">o</mi>
+                                  <mi mathvariant="monospace">p</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{op}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                class="mord"><span
+                                  class="mord mathtt">op</span></span></span></span></span></span>，为上述功能的其中之一：</p>
+                    <ul>
+                      <li>对于光标移动操作：再输入两个正整数<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">r</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">w</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{row}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.4306em;"></span><span class="mord"><span
+                                    class="mord mathtt">row</span></span></span></span></span></span>、<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">c</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">l</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{col}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">col</span></span></span></span></span></span>，代表光标移动的位置，保证光标的位置合法；
+                      </li>
+                      <li>对于选择操作：再输入四个正整数<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">r</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">w</mi>
+                                    <mn mathvariant="monospace">1</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{row1}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">row1</span></span></span></span></span></span>、<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">c</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">l</mi>
+                                    <mn mathvariant="monospace">1</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{col1}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">col1</span></span></span></span></span></span>、<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">r</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">w</mi>
+                                    <mn mathvariant="monospace">2</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{row2}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">row2</span></span></span></span></span></span>、<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">c</mi>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">l</mi>
+                                    <mn mathvariant="monospace">2</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{col2}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">col2</span></span></span></span></span></span>，代表选择区域的起始、终止位置，保证终止位置不小于起始位置且这两个位置合法；
+                      </li>
+                      <li>对于写入操作：再输入一个字符串<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">d</mi>
+                                    <mi mathvariant="monospace">a</mi>
+                                    <mi mathvariant="monospace">t</mi>
+                                    <mi mathvariant="monospace">a</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{data}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">data</span></span></span></span></span></span>，代表写入的字符串，保证该字符串不为空且不包含换行符；
+                      </li>
+                      <li>对于其他操作：没有其他的输入。</li>
+                    </ul>
+                    <p>对于每个截屏操作，将目前文本编辑器处理得到的文本逐行输出。</p>
+                    <h3>数据规模与约定</h3>
+                    <ul>
+                      <li>对10%的数据，仅存在创建、写入、换行、删除、光标相关操作和截屏操作，<strong>不涉及</strong>选中状态下写入/换行/删除；</li>
+                      <li>对另外50%的数据，<strong>不涉及</strong>选中状态下粘贴；</li>
+                      <li>对100%的数据，<span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">m</mi>
+                                    <mo>&lt;</mo>
+                                    <mo>=</mo>
+                                    <mn>200</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{m} &lt;= 200</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span
+                                  class="mord mathtt">m</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">&lt;=</span><span
+                                  class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">200</span></span></span></span></span>，每次新增的字符串长度不超过60。</li>
+                    </ul>
+                    <h3>样例</h3>
+                    <p><strong>样例1</strong></p>
+                    <p>输入：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">23
+SELECT 0 0 0 0
+SCREEN
+WRITE helloworld
+SCREEN
+NEWLINE
+SCREEN
+MOVE 0 10
+DELETE
+SCREEN
+MOVE 0 0
+SCREEN
+DELETE
+SCREEN
+WRITE h
+SCREEN
+SELECT 0 0 0 5
+SCREEN
+DELETE
+SCREEN
+MOVE 0 1
+SCREEN
+NEWLINE
+SCREEN
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>输出:</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">#1:
+**
+#2:
+helloworld*
+#3:
+helloworld
+*
+#4:
+helloworld*
+#5:
+*helloworld
+#6:
+*elloworld
+#7:
+h*elloworld
+#8:
+*hello*world
+#9:
+*world
+#10:
+w*orld
+#11:
+w
+*orld
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><strong>样例2</strong></p>
+                    <p>输入：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">17
+WRITE helloworld
+NEWLINE
+WRITE abcde
+SCREEN
+SELECT 0 0 0 5
+SCREEN
+COPY
+MOVE 1 0
+PASTE
+SCREEN
+SELECT 0 5 1 5
+SCREEN
+COPY
+MOVE 1 10
+SCREEN
+PASTE
+SCREEN
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>输出：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">#1:
+helloworld
+abcde*
+#2:
+*hello*world
+abcde
+#3:
+helloworld
+hello*abcde
+#4:
+hello*world
+hello*abcde
+#5:
+helloworld
+helloabcde*
+#6:
+helloworld
+helloabcdeworld
+hello*
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><strong>样例3</strong></p>
+                    <p>输入：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">13
+WRITE helloworld
+SELECT 0 0 0 5
+WRITE replace!
+SCREEN
+SELECT 0 8 0 13
+SCREEN
+COPY
+SELECT 0 0 0 8
+PASTE
+SCREEN
+SELECT 0 5 0 10
+NEWLINE
+SCREEN
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>输出：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">#1:
+replace!*world
+#2:
+replace!*world*
+#3:
+world*world
+#4:
+world
+*
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><strong>样例4</strong></p>
+                    <p>见下载文件中4.in和4.out</p>
+                    <p><strong>样例5</strong></p>
+                    <p>见下载文件中5.in和5.out</p>
+                    <h3>要求</h3>
+                    <ol>
+                      <li>不能修改<code>main.cpp</code></li>
+                      <li>下载文件提供了一些已有代码供你参考，但你可以自由选择是否使用。这些文件里还有一些帮助性的说明。
+                        请进一步编写<code>editor.h</code>，也可以增加文件。将除<code>main.cpp</code>以外的文件和makefile打包提交。
+                        <strong>注意：</strong>下载文件提供了makefile的样本，请仅对objects、requires两个字段进行修改，请勿修改其他部分
+                      </li>
+                      <li>文件下载：<a
+                          href="https://oj.cs.tsinghua.edu.cn/staticdata/1784.b0l0SFmRuxZLNxqu.pub/YFnZJJAOoi65e3mp.download.zip/download.zip">下载地址</a>
+                      </li>
+                    </ol>
+                    <h3>提交格式</h3>
+                    <p>请将你的文件打包成一个 zip 格式的压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到一系列 cpp
+                        文件、h 文件等代码文件，而不是一个包含它们的文件夹。</strong>评测时，OJ会将提供的文件贴入你的目录下进行编译并执行。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

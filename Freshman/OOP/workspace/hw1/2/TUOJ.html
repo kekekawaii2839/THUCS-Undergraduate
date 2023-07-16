@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+  <app-root ng-version="14.1.2">
+    <div class="container"><router-outlet></router-outlet><app-contest-nav>
+        <router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>断点测试</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>现有待调试代码文件 main.cpp，文件内容见<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1746.qL2YDqZbBCc0P3Hm.pub/TnsZ6r0cnMorP0hi.main.cpp/main.cpp">下载地址</a>。
+                    </p>
+                    <p>你不需要理解文件的内容，但是请你按以下的操作完成调试的任务：</p>
+                    <p>1、请确定并记录 <code>tot[7]</code> 第一次被修改时的代码行号 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>1</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">1</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>，以及
+                      <code>tot[7]</code> 改变前的值 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_2</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">2</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>，以及改变后的值
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>3</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_3</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">3</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>。
+                    </p>
+                    <p>2、执行完步骤 1 后，运行程序，直到 <code>tot[7]</code> 下一次被修改之前，记录 <code>cumsum</code> 的值<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>4</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_4</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">4</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>。
+                    </p>
+                    <p>3、修改 <code>tot[1]</code> 的值为 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>4</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_4</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">4</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>。
+                    </p>
+                    <p>4、删除所有断点，继续运行程序，记录程序的最后输出值 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>5</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_5</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.5806em; vertical-align: -0.15em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">5</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>。
+                    </p>
+                    <p>你可以借助 GDB、命令行、IDE 等工具完成本题。理论上你也可以不使用任何调试工具完成这道题，但我们希望你掌握基本的调试方法。</p>
+                    <h3>提交要求</h3>
+                    <p>提交一个纯文本文件 <code>result.txt</code>，逐行依次记录 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>1</mn>
+                                  </msub>
+                                  <mo separator="true">,</mo>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                  </msub>
+                                  <mo separator="true">,</mo>
+                                  <mi mathvariant="normal">.</mi>
+                                  <mi mathvariant="normal">.</mi>
+                                  <mi mathvariant="normal">.</mi>
+                                  <mo separator="true">,</mo>
+                                  <msub>
+                                    <mi>n</mi>
+                                    <mn>5</mn>
+                                  </msub>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n_1, n_2 , ... , n_5</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">1</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">2</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mord">...</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span class="mord"><span
+                                  class="mord mathnormal">n</span><span class="msupsub"><span
+                                    class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.3011em;"><span class=""
+                                          style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span
+                                            class="pstrut" style="height: 2.7em;"></span><span
+                                            class="sizing reset-size6 size3 mtight"><span
+                                              class="mord mtight">5</span></span></span></span><span
+                                        class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                        style="height: 0.15em;"><span
+                                          class=""></span></span></span></span></span></span></span></span></span></span>。
+                    </p>
+                    <h3>评分标准</h3>
+                    <p>OJ 自动评测占 100%。</p>
+                    <p>注意：作业截止之前本题的评测器只检查提交格式是否正确，不检查具体答案。只要提交格式正确就显示 100 分。每道题的具体答案会在作业截止之后重新评测，以最后一次提交的答案为准。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">answer</td>
+                      <td><code>cp</code></td>
+                      <td><!----></td>
+                      <td class="text-center">1048576 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+\documentclass{exam}
+\usepackage[heading=true]{ctex}
+\usepackage{amssymb}
+\title{Discrete Mathematics for Computer Science Spring 2023\\
+       Midterm}
+\date{April 29, 2023}
+\begin{document}
+\maketitle
+\begin{questions}
+    \question[8]现在有A, B, C, D, E, F六个人, 围在一张桌子旁坐成一圈. 已知: 
+    \begin{enumerate}
+        \item[1)] 每个人与另外两人相邻, 与剩余三人不相邻
+        \item[2)] F, D相邻
+        \item[3)] B至少与C, D中的一个人相邻
+        \item[4)] A, C不相邻
+        \item[5)] 如果C, F相邻, 则E, C不相邻
+    \end{enumerate}
+    \begin{parts}
+        \part P(x, y)表示x与y相邻, 请将上述条件表示为谓词公式的集合.
+        \part 如果A, E相邻, 则B不可能在\underline{\hspace{1.5cm}}之间, 并证明.
+        \begin{enumerate}
+            \item[(1)] A, C
+            \item[(2)] A, D
+            \item[(3)] C, D
+            \item[(4)] C, F
+            \item[(5)] D, E
+        \end{enumerate}
+    \end{parts}
+    \question[4]求出$\neg ((P \rightarrow \neg Q)\rightarrow R)$的主合取范式和主析取范式.
+    \question[8]填空并证明: $((Q \square S) \square R) \land (S \square (P \square R)) \Leftrightarrow (S \land (P \rightarrow Q)) \rightarrow R$
+    \question[8]求出以下公式的$\forall$-前束范式和$\exists$-前束范式: \\
+    $(\exists x)((\exists y)P(x, y) \rightarrow \neg((\exists y)Q(y) \rightarrow R(x)))$
+    \question[6]使用归结法证明: \\
+    $(\forall x)(P(x) \lor Q(x)) \land (\forall x)(Q(x) \rightarrow \neg R(x)) \Rightarrow (\forall x)(R(x) \rightarrow P(x))$
+    \question[10]判断: 
+    \begin{enumerate}
+        \item[1)] 空集的幂集是空集
+        \item[2)] 对于非空集合$A$, $\bigcup (P(A))=A$
+        \item[3)] 空关系不具有传递性
+        \item[4)] 存在一个关系R, 使得R是对称的, 并且R是反对称的
+        \item[5)] 非空集合上的关系$R_1$和$R_2$满足$S(R_1) \bigcup S(R_2)=S(R_1 \bigcup R_2)$
+        \item[6)] $A=\{1, 2, 3, 4\}$上可以给出18个等价关系
+        \item[7)] 存在一个函数$f$, 使得$f$既不存在左逆, 也不存在右逆
+        \item[8)] 集合A上的关系$R_1$和$R_2$, 如果$R_1$和$R_2$都是反对称的, 则$R_1 \circ R_2$也是反对称的
+        \item[9)] 集合的等势具有传递性
+        \item[10)] 如果$A \times B$ = $A \times C$, 则$B=C$
+    \end{enumerate}
+    \question[10]回答下列问题: 
+    \begin{parts}
+        \part $A = \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}$, 请写出$\bigcup A$, $\bigcap A$, $\bigcup P(A)$, $\bigcap P(A)$.
+        \part 证明: $\bigcup (A \bigcup B)=(\bigcup A) \bigcup (\bigcup B)$.
+        \part 证明: $(A-B)-C=(A-C)-(B-C)$.
+    \end{parts}
+    \question[5]$A=\{1, 2, 3, 4, 5, 6, 7\}$, 求出有多少种关系$R$, 使得$R$是反对称的, 但$R$既不是自反的也不是非自反的.
+    \question[9]$A=\{1, 2, 3, 4\}$, $R=\{<1, 2>, <1, 4>, <3, 3>, <4, 1>\}$, 求出包含$R$且满足下列要求的最小关系: 
+    \begin{enumerate}
+        \item[1)] 对称的且传递的
+        \item[2)] 自反的且传递的
+        \item[3)] 自反的, 对称的, 传递的
+    \end{enumerate}
+    \question[10]$\mathbb{N}_+$上的偏序关系$R=\{<x, y>| x \in \mathbb{N}_+ \land y \in \mathbb{N}_+ \land (\exists p)(p \in \mathbb{N}_+ \land y=x^p)\}$, 定义$\mathbb{N}_+$的子集$A=\{2, 2^2, 2^3, \ldots, 2^{12}\}$.
+    \begin{parts}
+        \part $R_1=(A \times A) \bigcap R$, 求出$<A, R_1>$的Hasse图.
+        \part 偏序集$<A, R_1>$, 求出它的最大元, 最小元, 极大元, 极小元.
+        \part 偏序集$< \mathbb{N}_+ , R_1>$, 求出它的上界, 下界, 上确界, 下确界.
+    \end{parts}
+    \question[10]$R$是在非空集合$A$上的关系, $R$是自反的并且是传递的,
+    \begin{parts}
+        \part 证明: $R \bigcap R^{-1}$是等价关系.
+        \part 设$S$是在$A\backslash(R \bigcap R^{-1})$上的关系, 并且$<C,D> \in S$当且仅当$(\exists c)(\exists d)(c \in C \land d \in D \land <c, d> \in R )$, 证明$R$是偏序关系.
+    \end{parts}
+    \question[6]函数$f: A \rightarrow B, g: B \rightarrow C, h: C \rightarrow A$, 且$h \circ g \circ f=I_A, f \circ h \circ g=I_B, g \circ f \circ h=I_C$, 证明: $f, g, h$均为双射.
+    \question[13]使用集合等势的定义证明: $\mathbb{R} \approx [-1, 1] - \{0\}$.
+    \question[2](Bonus) 请阐述你在逻辑部分体会到的数学之美, 列举要点和理解.
+\end{questions}
+\end{document}

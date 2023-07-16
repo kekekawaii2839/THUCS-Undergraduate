@@ -1,0 +1,10 @@
+#
+#
+###
+SIZE = 7
+#SIZE = 10000
+SIZE = 5
+RAND = 50
+SDCNJSNC
+LOG = output.txt
+#

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题（第 3 次）</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <ol>
+                                            <li>
+                                                <p>【多选】下列哪些成员函数/运算符，当用户没有显式定义时，编译器会根据自身需要自动合成（）</p>
+                                                <p>A. 拷贝构造函数</p>
+                                                <p>B. 移动构造函数</p>
+                                                <p>C. 拷贝赋值运算符</p>
+                                                <p>D. 析构函数</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】以下说法正确的有（）</p>
+                                                <p>A. private继承中派生类的成员函数可以访问基类的protected成员</p>
+                                                <p>B. private继承中可以利用using关键字使得基类访问权限为public的成员能被派生类的对象访问</p>
+                                                <p>C. public继承中基类的private成员成为派生类的private成员，与派生类定义的private成员具有相同的访问权限</p>
+                                                <p>D. 继承中除了构造函数，析构函数之外的基类成员函数都可以被派生类继承</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】以下说法正确的是（）</p>
+                                                <p>A. 常量左值引用既能绑定左值，也能绑定右值</p>
+                                                <p>B. 频繁使用拷贝构造会造成程序效率的显著下降</p>
+                                                <p>C. 在禁止编译器进行返回值优化的前提下, 如果某函数的形参是类的对象，则调用该函数时，传入参数的过程一定会调用拷贝构造函数</p>
+                                                <p>D. 移动构造函数的形参类型为右值引用，可以绑定左值也可以绑定右值</p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】关于以下代码，说法正确是（）</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Identity {
+    int number = 1;
+    int type = 0;
+public:
+    Identity(){cout &lt;&lt; "Identity::Identity()" &lt;&lt; endl;}
+    Identity(int _t):type(_t){cout &lt;&lt; "Identity::Identity(" &lt;&lt; type &lt;&lt; ")" &lt;&lt; endl;}
+    Identity(const Identity &amp;other) {
+        number = other.number + 1;
+        type = other.type;
+    }
+};
+
+class Appearance {
+    double weight = 0;
+public:
+    Appearance(){cout &lt;&lt; "Appearance::Appearance()" &lt;&lt; endl;}
+    Appearance(double _w):weight(_w){cout &lt;&lt; "Appearance::Appearance(" &lt;&lt; weight &lt;&lt; ")" &lt;&lt; endl;}
+};
+
+class Animal {
+    Identity I;
+    Appearance A;
+public:
+    Animal(int _t, double _w){
+        I = Identity(_t);
+        A = Appearance(_w);
+    }
+};
+
+int main(){
+    Animal a1(2, 7.5);
+    Animal a2(a1);
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>输出结果为__；实例<code>a2</code>的
+                                                    <code>number</code>，<code>type</code>，<code>weight</code>值分别为__；最后完成析构的是__。
+                                                </p>
+                                                <p>A.
+                                                    <code>Identity::Identity(2)\nAppearance::Appearance(7.5)</code>；2，2，7.5；a1
+                                                </p>
+                                                <p>B.
+                                                    <code>Identity::Identity()\nAppearance::Appearance()\nIdentity::Identity(2)\nAppearance::Appearance(7.5)</code>；1，2，7.5；a1.I
+                                                </p>
+                                                <p>C.
+                                                    <code>Identity::Identity()\nAppearance::Appearance()\nIdentity::Identity(2)\nAppearance::Appearance(7.5)</code>；2，2，7.5；a1.I
+                                                </p>
+                                                <p>D.
+                                                    <code>Identity::Identity()\nAppearance::Appearance()\nIdentity::Identity(2)\nAppearance::Appearance(7.5)</code>；2，2，7.5；a1
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】关于下叙两个函数的说法，正确的是（）</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">void f(int&amp; x) {
+}
+
+void f(int&amp;&amp; x) {
+    int&amp; y = x; //(1)
+    const int&amp; z = y+1; //(2)
+    int&amp; w=2; //(3)
+    f(z); //(4)
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. (1)处会发生编译错误，因为左值引用无法绑定右值</p>
+                                                <p>B. (2)处不会发生编译错误，因为常量左值引用可以绑定右值</p>
+                                                <p>C. (3)处会发生编译错误，因为左值引用无法绑定右值</p>
+                                                <p>D. (4)处调用了void f(int&amp; x)函数，且不会发生编译错误</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】关于以下代码，说法正确有（）</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include&lt;iostream&gt;
+using namespace std;
+
+
+class Appearance {
+    int weight = 0;
+public:
+    Appearance(){}
+    Appearance(int _w):weight(_w){}
+    ~Appearance(){}
+};
+
+class Small{
+protected:
+    Appearance A;
+};
+
+class Animal {
+protected:
+    Appearance A;
+public:
+    Animal(){} // (1)
+    Animal(int _w){A = Appearance(_w);} // (2)
+    ~Animal(){}
+};
+
+class Rabbit: public Animal { // (3)
+    Animal N{1};
+public:
+    Rabbit(){}
+    Appearance getA() {return A;}
+    ~Rabbit(){}
+};
+
+int main() {
+    Rabbit R;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. Appearance一共被实例化了2次。</p>
+                                                <p>B. R不可以访问数据成员N的Appearance</p>
+                                                <p>C. (1)、(2)分别被执行了1次，且(1)被先执行</p>
+                                                <p>D.
+                                                    如果将(3)改为<code>class Rabbit: public Animal, public Small {</code>，程序仍能通过编译，且输出没有变化
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>【单选】以下说法不正确的是（）</p>
+                                                <p>A. 若对象被定义为常量，则它只能调用以const修饰的成员函数</p>
+                                                <p>B. 所有的常量静态变量都只能在类外进行初始化</p>
+                                                <p>C. 若类A的对象a是类B的静态成员变量，则a在main()函数调用之前被初始化</p>
+                                                <p>D. 静态全局对象、常量全局对象都是在main函数调用之前完成初始化，执行完main函数后被析构</p>
+                                            </li>
+                                            <li>
+                                                <p>【多选】以下说法正确的有（）</p>
+                                                <div style="position: relative;">
+                                                    <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Animal {
+public:
+    void move(){cout &lt;&lt; "Animal::move()" &lt;&lt; endl;} // (1)
+    void move(int i){cout &lt;&lt; "Animal::move(" &lt;&lt; i &lt;&lt; ")" &lt;&lt; endl;} // (2)
+    void move(double i){cout &lt;&lt; "Animal::move(" &lt;&lt; i &lt;&lt; ")" &lt;&lt; endl;} // (3)
+};
+ 
+class Rabbit : public Animal {
+    void move(){cout &lt;&lt; "Rabbit::move()" &lt;&lt; endl;} // (4)
+public:
+    void move(int i){cout &lt;&lt; "Rabbit::move(" &lt;&lt; i &lt;&lt; ")" &lt;&lt; endl;} // (5)
+    using Animal::move;
+};
+
+int main(){
+    Rabbit r;
+    Animal &amp;a = r;
+    return 0;
+}
+</code></pre>
+                                                    <div
+                                                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                                    class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                                    </div>
+                                                </div>
+                                                <p>A. (2)是(1)的重载函数</p>
+                                                <p>B.
+                                                    (5)是对(3)的重写隐藏，若在<code>main</code>函数中执行<code>r.move(1.5)</code>将会警告，执行自动类型转换
+                                                </p>
+                                                <p>C.
+                                                    因为(4)是私有函数，无法在外部调用，若在<code>main</code>函数中执行<code>r.move()</code>将会输出<code>Animal::move()</code>
+                                                </p>
+                                                <p>D.
+                                                    在<code>main</code>函数中执行<code>r.move(1)</code>与<code>a.move(1)</code>输出不同
+                                                </p>
+                                            </li>
+                                        </ol>
+                                        <h3>提交格式</h3>
+                                        <p>请你提交一个文本文件，第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行是一个由A\B\C\D组成的字符串，代表第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题的答案。
+                                        </p>
+                                        <p>若你不想提交第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题，请将第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行留空。
+                                        </p>
+                                        <p>你提交的文本文件至少要有8行，且前10行必须由A\B\C\D组成，否则将被认为是无效提交。</p>
+                                        <p>你可以通过测试点的详细信息，看到评测对你提交文件的解析。若存在问题，请联系助教。</p>
+                                        <p>以下给出一个合法的提交答案的例子：</p>
+                                        <div style="position: relative;">
+                                            <pre>A
+B
+C
+ACD
+B
+CD
+C
+C
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+
+                                        <p>评测器对第一行的解析结果如下：</p>
+                                        <div style="position: relative;">
+                                            <pre>Valid answer: ['A']
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p><strong>注意：作业截止之前本题的评测器只检查提交格式是否正确，不检查具体答案。只要提交格式正确就显示100分。每道题的具体答案会在作业截止之后重新评测，以最后一次提交的答案为准</strong>
+                                        </p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

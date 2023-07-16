@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>简化的加密传输</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h3>题目描述</h3>
+										<p>现有一个用户通讯系统，采用的是明文传输，并且是不稳定的信道。现需要升级系统，希望在不改变原来类的相关代码的情况下，增加以下功能：</p>
+										<ol>
+											<li>加密传输，在消息发送方和接收方增加加密和解密操作；</li>
+											<li>消息验证，消息发送方在发送消息时增加消息验证码，消息接收方在接收到消息后根据消息验证码检验消息是否传输正确。</li>
+										</ol>
+										<p>增加以上功能后，能够使得消息的传输更加安全与可靠。</p>
+										<p>加密方式有以下两种：</p>
+										<ul>
+											<li>
+												<p>插入字符加密：每隔一个字符插入字符 <code>#</code></p>
+											</li>
+											<li>
+												<p>倒序加密：将字符全部倒转</p>
+												<blockquote>
+													<p>加密前：<code>I\_love\_oop.</code></p>
+													<p>插入字符加密：<code>I#\_#l#o#v#e#\_#o#o#p#.#</code></p>
+													<p>倒序加密：<code>.poo\_evol\_I</code></p>
+												</blockquote>
+											</li>
+										</ul>
+										<p>消息验证码生成方式也有以下两种：</p>
+										<ul>
+											<li>
+												<p>前缀验证：验证码为消息的前3个字符（每条消息长度均超过3）</p>
+											</li>
+											<li>
+												<p>间隔验证：验证码为从消息中每隔1个字符抽取1个字符组合而成</p>
+												<blockquote>
+													<p>消息：<code>I_love_oop.</code></p>
+													<p>前缀验证：<code>I_l</code></p>
+													<p>间隔验证：<code>Ilv_o.</code></p>
+												</blockquote>
+											</li>
+										</ul>
+										<p>请你帮助完善这个系统，要求使用策略模式和代理模式。已有的代码可以从<a
+												href="https://oj.cs.tsinghua.edu.cn/download.php?type=problem&amp;id=98">这里</a>下载。
+										</p>
+										<h3>样例输入</h3>
+										<p>第一行为整数 <code>N</code> ，表示接来下将有 <code>N</code> 轮对话</p>
+										<p>接下来 <code>N</code> 行，每行包含四个部分，一个用户名，两个整数 <code>p</code>、
+											<code>q</code>和一个没有空格的语句 <code>s</code>。<code>p</code> 用来表示加密类型，其中
+											<code>1</code> 表示插入字符加密，<code>2</code> 表示倒序加密；<code>q</code> 用来指示验证类型，其中
+											<code>1</code> 表示前缀验证，<code>2</code> 表示间隔验证；<code>s</code>
+											表示该轮对话中发送方应该发送的内容。</p>
+										<div style="position: relative;">
+											<pre class="language-bash" tabindex="0"><code class="language-bash">3
+1 1 uname1 I_love_oop.
+1 2 uname2 Glad_to_meet_you.
+2 1 uname3 Happy_Dragon_Boat_Festival.
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>样例输出</h3>
+										<p>输出为 <code>3N</code> 行，每行为 <code>1</code>
+											个字符串，每三行对应一次发送，每行分别为发送方用户名，发送方加密后的消息、验证码。</p>
+										<div style="position: relative;">
+											<pre class="language-bash" tabindex="0"><code class="language-bash">uname1
+I#_#l#o#v#e#_#o#o#p#.#
+I_l
+uname2
+G#l#a#d#_#t#o#_#m#e#e#t#_#y#o#u#.#
+Ga_ome_o.
+uname3
+.lavitseF_taoB_nogarD_yppaH
+Hap
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>要求</h3>
+										<ul>
+											<li>使用策略模式和代理模式。</li>
+											<li>你需要提交多个文件，包含<code>EncryptStrategy.h</code>，<code>VerificationStrategy.h</code>和<code>UserProxy.h</code>。
+											</li>
+											<li>你应该将你的文件打包成一个<code>zip</code>压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。
+											</li>
+											<li>文件下载：<a
+													href="https://oj.cs.tsinghua.edu.cn/staticdata/1813.MeGyzQrTgLO4qlzx.pub/qvhhA1CUCzXxBxZa.download.zip/download.zip">下载地址</a>
+											</li>
+										</ul>
+										<h3>评分标准</h3>
+										<p>OJ评分 100%</p>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">oop_custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">65536 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div>
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

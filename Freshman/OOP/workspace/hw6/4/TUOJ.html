@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>多重排序</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h2>任务1</h2>
+                    <p>很多时候排序仅仅靠一个关键字是不够的。例如考试排名，首先按总分降序排列；如果总分相同，再按照语文成绩降序排列；如果语文成绩也相同，再按照数学成绩降序排列……</p>
+                    <p>本题希望你能编写一个Compare函数对象，能够结合多个关键字进行排序。</p>
+                    <p>
+                      首先我们来考虑一个具体的问题。给定n个3维点<code>(x,y,z)</code>，按x坐标从小到大排序；如果x坐标相同，则按y坐标从小到大排序；如果仍相同，则按z坐标从小到大排序。例如以下代码：
+                    </p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Point</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>Point<span class="token operator">&gt;</span> v<span class="token punctuation">;</span>
+<span class="token comment">// insert some points into v ...</span>
+<span class="token keyword">auto</span> xcomp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>Point l<span class="token punctuation">,</span> Point r<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> l<span class="token punctuation">.</span>x <span class="token operator">&lt;</span> r<span class="token punctuation">.</span>x<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> ycomp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>Point l<span class="token punctuation">,</span> Point r<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> l<span class="token punctuation">.</span>y <span class="token operator">&lt;</span> r<span class="token punctuation">.</span>y<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> zcomp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>Point l<span class="token punctuation">,</span> Point r<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> l<span class="token punctuation">.</span>z <span class="token operator">&lt;</span> r<span class="token punctuation">.</span>z<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+Compare<span class="token operator">&lt;</span>Point<span class="token operator">&gt;</span> comp <span class="token operator">=</span> <span class="token punctuation">{</span> xcomp<span class="token punctuation">,</span>ycomp<span class="token punctuation">,</span>zcomp <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">sort</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>v<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>comp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>其中xcomp, ycomp, zcomp 是lambda表达式，你可以认为它们就是用来比较point的x、y、z坐标的函数。（如果你想知道lambda表达式的更多内容，请查看<a
+                        href="https://blog.csdn.net/qq_37085158/article/details/124626913">这里</a>。）</p>
+                    <p>
+                      对于<code>Compare&lt;Point&gt; comp = { xcomp,ycomp,zcomp };</code>，这里使用了<code>std::initializer_list</code>作为
+                      <code>Compare&lt;Point&gt;</code> 构造函数的参数类型，可以参考<a
+                        href="https://blog.csdn.net/qq_36546177/article/details/108763448">这里</a>获得更多的相关知识。</p>
+                    <h2>任务2</h2>
+                    <p>在上面的一段代码里，我们完成了一个n行3列的表的一个多重排序：先按第一列升序，再按第二列升序，再按第三列升序。我们能否稍微拓展一些呢？</p>
+                    <p>现在对于一个m行n列的表，你需要按用户指定的顺序进行多重排序（类似于Excel中的自定义排序）</p>
+                    <p><img src="./TUOJ_files/e71a9a22-4fc1-4c49-8acf-ea4524b53678.png" alt="alt"></p>
+                    <p>为了方便排序顺序的指定，定义一个<code>enum</code>和一个<code>struct</code>如下：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">enum</span> <span class="token class-name">order_type</span> <span class="token punctuation">{</span>ASCEND<span class="token punctuation">,</span>DESCEND<span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// ASCEND表示按升序排列，DESCEND表示按降序排列</span>
+<span class="token keyword">struct</span> <span class="token class-name">sort_level</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> column<span class="token punctuation">;</span>      <span class="token comment">// 排序的是第几列（列编号从1开始）</span>
+    order_type order<span class="token punctuation">;</span>     <span class="token comment">// 是升序还是降序</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>其中sort_level的column成员的编号从1开始。</p>
+                    <p>这样我们可以通过一个<code>std::list&lt;sort_level&gt;</code>来指定多重排序的顺序，例如：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span>sort_level<span class="token operator">&gt;</span> sortlevels <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span>DESCEND<span class="token punctuation">}</span><span class="token punctuation">,</span>   <span class="token comment">// 首先按第1列降序排列</span>
+                                     <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span>DESCEND<span class="token punctuation">}</span><span class="token punctuation">,</span>   <span class="token comment">// 然后按第3列降序排列</span>
+                                     <span class="token punctuation">{</span><span class="token number">4</span><span class="token punctuation">,</span>ASCEND<span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// 最后按第4列升序排列</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>
+                      现在，对于一个m行n列的<code>vector&lt;vector&lt;int&gt;&gt;</code>，<strong>你需要编写一个<code>make_comp</code>函数作为<code>std::sort</code>的比较器</strong>，按照指定的顺序进行多重排序，例如下面的代码：
+                    </p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp">vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span> v<span class="token punctuation">;</span>
+<span class="token comment">// 定义一个5行4列的vector</span>
+v<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+   <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+   <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+   <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+   <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+std<span class="token double-colon punctuation">::</span><span class="token function">sort</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">make_comp</span><span class="token punctuation">(</span>sortlevels<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 用上面的sortlevels进行多重排序</span>
+<span class="token comment">/* 此时v的值应该为
+{{1,2,4,4},
+ {1,2,3,3},
+ {1,2,3,4},
+ {1,2,2,5},
+ {0,2,3,4}}
+*/</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>
+                      注意：<strong>你的<code>make_comp</code>函数应该通过前面编写的<code>Compare</code>类来实现</strong>。具体来说，你的make_comp函数应该返回一个<code>Compare&lt;vector&lt;int&gt;&gt;</code>作为<code>std::sort</code>的比较器，
+                      也即，make_comp的声明已经规定为：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp">Compare<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span> <span class="token function">make_comp</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span>sort_level<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>评测信息</h2>
+                    <p>本题分为两个 Subtask，其中 Subtask1 是对 Point 的排序，Subtask2是对表的排序。</p>
+                    <p>总共有10个测试点。前4个为 Subtask1，后6个为 Subtask2。</p>
+                    <h2>下发的文件</h2>
+                    <p>本题所需的文件可以从<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1793.CrhXQVT9vBgtXIkD.pub/eULWBGkzQgKyNvUO.download.zip/download.zip">这里</a>下载
+                    </p>
+                    <h2>Subtask1 评测方式</h2>
+                    <p>通过文件中 main_subtask1.cpp 进行测试。你不应修改 main_subtask1.cpp 的内容；你应该编写 compare.h
+                      完成题目要求。OJ编译时通过命令<code>g++ main_subtask1.cpp -std=c++11 -o main1</code>进行编译</p>
+                    <h3>输入格式</h3>
+                    <p>第一行为一个整数n，表示总共有多少个点。
+                      后n行，每行有3个用空格隔开的数字，分别代表点的x/y/z坐标</p>
+                    <h3>输出格式</h3>
+                    <p>输出n行，为排序后的点</p>
+                    <h3>输入样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+1 1 1
+1 0 1
+1 1 0
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1 0 1
+1 1 0
+1 1 1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>数据范围</h3>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>100</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1 \leq n \leq 100</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">100</span></span></span></span></span>，x、y、z坐标在int范围内</p>
+                    <h2>Subtask2 评测方式</h2>
+                    <p>通过文件中 main_subtask2.cpp 进行测试。你不应修改 main_subtask2.cpp 的内容；你应该编写 sort.cpp
+                      完成题目要求。编译时通过命令<code>g++ main_subtask2.cpp sort.cpp -std=c++11 -o main2</code>进行编译</p>
+                    <h3>输入格式</h3>
+                    <p>第一行为3个数字m,n,d，表示表格有m行n列，多重排序有d条指令
+                      随后m行，每行n个整数，表示这个m行n列的表格
+                      随后d行，每行开头是一个数字k，表示要排序的是第k列（列编号从1开始）；随后是一个字母，如是a，代表这一列升序排列；如是d，代表这一列降序排列。</p>
+                    <h3>输入样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">5 4 3                                // 表5行4列；多重排序有3个指令
+1 2 3 4
+0 2 3 4
+1 2 4 4
+1 2 3 3
+1 2 2 5
+1 d                              // 首先按第1列降序排列
+3 d                            // 然后按第3列降序排列
+4 a                               // 最后按第4列升序排列
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例</h3>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1 2 4 4
+1 2 3 3
+1 2 3 4
+1 2 2 5
+0 2 3 4
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>数据范围</h3>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>m</mi>
+                                  <mo separator="true">,</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>100</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1 \leq m,n \leq 100</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8304em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal">m</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span class="mord mathnormal">n</span><span
+                                class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span
+                                class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">100</span></span></span></span></span>，表格数字在int范围内
+                      <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>d</mi>
+                                  <mo separator="true">,</mo>
+                                  <mi>k</mi>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1 \leq d,k \leq n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8889em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal">d</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>
+                      数据保证<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>k</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">k</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal"
+                                style="margin-right: 0.0315em;">k</span></span></span></span></span>不重复
+                    </p>
+                    <h2>提交方式</h2>
+                    <ul>
+                      <li>你需要提交 compare.h 和 sort.cpp。</li>
+                      <li>你应该将你的文件打包成一个zip压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</li>
+                      <li>Subtask1 只会用到 compare.h，并不会用到 sort.cpp。Subtask2 会同时用到 compare.h 和 sort.cpp。</li>
+                    </ul>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65535 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

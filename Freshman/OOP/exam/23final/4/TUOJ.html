@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>多级字典</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h1>多级字典</h1>
+										<h2>题目背景</h2>
+										<p>小肖的饭店倒闭了，他痛定思痛，决定改行做一名程序员。</p>
+										<p>最近，小肖在学习字典这种数据结构。我们都知道，字典是存储键值对（Key-value Pair）的数据结构，如下左图中的
+											<code>hello</code> <span><span class="katex"><span
+														class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mo>→</mo>
+																</mrow>
+																<annotation encoding="application/x-tex">\rightarrow
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.3669em;"></span><span
+																class="mrel">→</span></span></span></span></span>
+											<code>你好</code> 即是一个键值对，其中 <code>hello</code> 是键（Key），<code>你好</code>
+											是值（Value）。传统的字典允许用户根据键查找对应的值。在 C++ 中，我们可以使用 <code>std::map</code> 来构建一个字典。
+										</p>
+										<p>在学习过程中，小肖突发奇想设计了一种多级字典，在传统字典功能的基础上将字典分为多个层级，并在查询时逐层访问，如下右图所示。具体来说，当我们希望查找一个键值对时，我们会先访问
+											1 级字典，如果找到，则直接返回结果；否则，我们将继续访问下一级字典，直到找到结果或访问至最后一级字典为止。</p>
+										<p><img src="./figure.png" alt="Multi-level Dict"></p>
+										<p>在实际应用中，我们可以精心设置各级字典的容量上限，在不同层级中存储不同的键值对，并使用不同的数据结构维护它们，来达到更高的效率。但在本题中，你无需过度关注效率，而是需要实现一个简易的多级字典的模拟器，来帮助小肖统计真实场景下各级字典的命中率。
+										</p>
+										<p><strong>我们设置了 4
+												个任务来引导你循序渐进地完成本题，我们强烈建议你依次完成它们</strong>，当然，你也可以选择直接完成整道题目的完整要求（即子任务 4）。
+										</p>
+										<p>点击<a
+												href="https://oj.cs.tsinghua.edu.cn/staticdata/1824.h2cmf7RdgZ8wu8R3.pub/WUtpK8NTaw6L1NGC.down.zip/down.zip">此处</a>下载本题下发文件。
+										</p>
+										<h2>子任务 1：支持命中统计的字典（20 分）</h2>
+										<p><strong>子任务 1、2 之间相互独立，你可以跳过子任务 1 先完成子任务 2。</strong></p>
+										<p>请你实现模板类
+											<code>template&lt;class Key, class Value&gt; class MyDict</code>，支持如下接口：</p>
+										<ul>
+											<li>下标运算符 <code>operator[] (key)</code>：根据键 <code>key</code>
+												返回对应的值的引用。该运算符的行为可以分两种情况讨论。<ul>
+													<li>命中（Hit）：如果键 <code>key</code> 存在于字典中，则直接返回对应值的引用。</li>
+													<li>缺失（Miss）：如果键 <code>key</code> 不存在，则使用值类型的默认构造函数进行初始化（即
+														<code>Value()</code>），并返回该引用。</li>
+												</ul>
+											</li>
+											<li><code>hitStats()</code>（常量成员函数）：返回一个 <code>HitStatsResult</code>
+												类型的对象，记录过去所有下标运算符 <code>[]</code> 的访问中，命中 / 缺失的次数。<ul>
+													<li>我们已经为你实现了 <code>HitStatsResult</code> 类，你可以直接使用
+														<code>HitStatsResult(hit, miss)</code> 来构造一个对象，其中
+														<code>hit</code> 和 <code>miss</code> 分别代表命中次数和缺失次数。</li>
+												</ul>
+											</li>
+											<li><code>size()</code>（常量成员函数）：返回字典中存储的键值对数量。</li>
+											<li><code>clear()</code>：清空当前字典存储的所有键值对，同时清空访问命中率的统计数据。</li>
+										</ul>
+										<p>提示：上述大部分接口与 <code>std::map</code> 类似，因此我们建议你借助 <code>std::map</code>
+											来大大简化你的代码，同时达到足以通过本题的速度。</p>
+										<p>样例详见下发文件的 <code>subtask1/</code>
+											子目录（提交时请勿包含该子文件夹，而是与平时作业类似直接打包代码文件。详见《提交要求》）。</p>
+										<h2>子任务 2：弹出策略（30 分）</h2>
+										<p>在多级字典中，我们常常面临一个问题：某级字典存储的内容超过了容量限制，需要选择一个键值对弹出（Pop）当前字典，并插入下一级字典。</p>
+										<p>在这个子任务中，你只需要实现 2 种不同的弹出策略：</p>
+										<ul>
+											<li><code>FIFOStrategy</code>：先进先出（First in First out，FIFO）策略，弹出最早被插入的元素。
+											</li>
+											<li><code>LRUStrategy</code>：最近最少使用（Least Recently
+												Used，LRU）策略，弹出最长时间未被访问的元素。</li>
+										</ul>
+										<p>具体地，这 2 种弹出策略应当继承基类 <code>PopStrategy</code>，并支持如下接口：</p>
+										<ul>
+											<li><code>visit(key)</code>：表示一次对键 <code>key</code> 的访问。</li>
+											<li><code>pop()</code>：按对应规则弹出一个元素，并返回被弹出的键。本题中，我们保证调用 <code>pop</code>
+												操作时至少有 1 个未被弹出的元素。</li>
+										</ul>
+										<p>需要注意的是，所有键只有在首次访问时或移除后首次访问时被视作插入。</p>
+										<p>下面的代码片段是一个例子，展示了插入、访问、弹出的关系，同时说明了 FIFO 策略与 LRU 策略的差异：</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-c++ language-none">FIFOStrategy&lt;char&gt; fifo;
+fifo.visit('a');
+fifo.visit('b');
+fifo.visit('a');
+fifo.visit('c');
+std::cout &lt;&lt; fifo.pop() &lt;&lt; std::endl; // 输出为 a，因为 a 是最早被插入的元素
+fifo.visit('a');
+std::cout &lt;&lt; fifo.pop() &lt;&lt; std::endl; // 输出为 b，因为弹出 a 后再访问视作重新插入，因此 b 是此时最早被插入的元素
+
+LRUStrategy&lt;char&gt; lru;
+lru.visit('a');
+lru.visit('b');
+lru.visit('a');
+lru.visit('c');
+std::cout &lt;&lt; lru.pop() &lt;&lt; std::endl; // 输出为 b，因为 b 是最长时间未被访问的元素
+lru.visit('a');
+std::cout &lt;&lt; lru.pop() &lt;&lt; std::endl; // 输出为 c，因为此时 c 是最长时间未被访问的元素
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>假设 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>N</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">N</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6833em;"></span><span
+																class="mord mathnormal"
+																style="margin-right: 0.109em;">N</span></span></span></span></span>
+											表示某 <code>PopStrategy</code> 某一时刻维护的元素数目，那么在本题中，我们保证 <span><span
+													class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>N</mi>
+																	<mo>≤</mo>
+																	<mn>32</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">N\leq 32
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.8193em; vertical-align: -0.136em;"></span><span
+																class="mord mathnormal"
+																style="margin-right: 0.109em;">N</span><span
+																class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">≤</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">32</span></span></span></span></span>。例如，在上面的代码段中，<span><span
+													class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>N</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">N</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6833em;"></span><span
+																class="mord mathnormal"
+																style="margin-right: 0.109em;">N</span></span></span></span></span>
+											最大时达到 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mn>3</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">3</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">3</span></span></span></span></span>。</p>
+										<p>提示：</p>
+										<ul>
+											<li>在本题中，你无需过度担心时间效率，只需实现 <span><span class="katex"><span
+															class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mi>O</mi>
+																		<mrow>
+																			<mo fence="true">(</mo>
+																			<mi>N</mi>
+																			<mo fence="true">)</mo>
+																		</mrow>
+																	</mrow>
+																	<annotation encoding="application/x-tex">
+																		O\left(N\right)</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 1em; vertical-align: -0.25em;"></span><span
+																	class="mord mathnormal"
+																	style="margin-right: 0.0278em;">O</span><span
+																	class="mspace"
+																	style="margin-right: 0.1667em;"></span><span
+																	class="minner"><span class="mopen delimcenter"
+																		style="top: 0em;">(</span><span
+																		class="mord mathnormal"
+																		style="margin-right: 0.109em;">N</span><span
+																		class="mclose delimcenter"
+																		style="top: 0em;">)</span></span></span></span></span></span>
+												时间复杂度的 <code>visit</code> 和 <code>pop</code> 函数即可。</li>
+										</ul>
+										<p>样例详见下发文件的 <code>subtask2/</code>
+											子目录（提交时请勿包含该子文件夹，而是与平时作业类似直接打包代码文件。详见《提交要求》）。</p>
+										<h2>子任务 3：容量限制（20 分）</h2>
+										<p>基于子任务 1 实现的 <code>MyDict</code> 类，请结合子任务 2 实现的不同弹出策略，实现支持容量限制的
+											<code>MyDict</code>。具体地，你需要在子任务 1 需求的基础上额外支持两个构造函数：</p>
+										<ul>
+											<li><code>MyDict()</code>：默认构造函数，构造一个与子任务 1 要求一致的无容量限制的 <code>MyDict</code>
+												对象。</li>
+											<li><code>MyDict(int capacity, PopStrategy&lt;Key&gt;* popStrategyPtr)</code>：构造一个容量上限为
+												<code>capacity</code> 的 <code>MyDict</code>，在字典超过容量限制时，使用
+												<code>popStrategyPtr</code> 指向的对象选择一个键值对，将其弹出字典。<ul>
+													<li>在本题中，我们保证 <code>capacity</code> 不超过 <span><span
+																class="katex"><span class="katex-mathml"><math
+																		xmlns="http://www.w3.org/1998/Math/MathML">
+																		<semantics>
+																			<mrow>
+																				<mn>32</mn>
+																			</mrow>
+																			<annotation encoding="application/x-tex">32
+																			</annotation>
+																		</semantics>
+																	</math></span><span class="katex-html"
+																	aria-hidden="true"><span class="base"><span
+																			class="strut"
+																			style="height: 0.6444em;"></span><span
+																			class="mord">32</span></span></span></span></span>。
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<p>提示：</p>
+										<ul>
+											<li>在本题中，字典容量超过限制只有可能在调用下标运算符 <code>operator[]</code> 后发生。</li>
+											<li>为了完成这个子任务，你可能需要对子任务 1、2 实现的内容进行修改或补充。</li>
+										</ul>
+										<p>样例详见下发文件的 <code>subtask3/</code>
+											子目录（提交时请勿包含该子文件夹，而是与平时作业类似直接打包代码文件。详见《提交要求》）。</p>
+										<h2>子任务 4：多级字典（30 分）</h2>
+										<p>基于子任务 3 的附带容量限制、弹出策略的 <code>MyDict</code>，我们可以继续开发得到最终版本的多级字典模拟器。具体地，你需要在子任务
+											3 的基础上，额外支持构造函数：</p>
+										<ul>
+											<li><code>MyDict(int capacity, PopStrategy&lt;Key&gt;* popStrategyPtr, MyDict* nextLevelPtr)</code>：构造一个容量上限为
+												<code>capacity</code> 的 <code>MyDict</code>，其下一级子字典为
+												<code>nextLevelPtr</code> 指向的对象。在字典超过容量限制时，使用
+												<code>popStrategyPtr</code> 指向的对象选择一个键值对，将其弹出当前字典，并插入下一级子字典。<ul>
+													<li>在本题中，我们保证 <code>capacity</code> 不超过 <span><span
+																class="katex"><span class="katex-mathml"><math
+																		xmlns="http://www.w3.org/1998/Math/MathML">
+																		<semantics>
+																			<mrow>
+																				<mn>32</mn>
+																			</mrow>
+																			<annotation encoding="application/x-tex">32
+																			</annotation>
+																		</semantics>
+																	</math></span><span class="katex-html"
+																	aria-hidden="true"><span class="base"><span
+																			class="strut"
+																			style="height: 0.6444em;"></span><span
+																			class="mord">32</span></span></span></span></span>。
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<p>对于多级字典，我们对所有接口有如下拓展定义：</p>
+										<ul>
+											<li>下标运算符 <code>operator[] (key)</code>：根据键 <code>key</code> 返回对应的值的引用。与子任务
+												1 类似地，我们分两种情况讨论其行为。<ul>
+													<li>命中（Hit）：如果键 <code>key</code> 存在于当前字典中，则直接返回对应值的引用。</li>
+													<li>缺失（Miss）：如果键 <code>key</code> 不存在于当前字典中，则<strong>在下一级子字典中递归调用
+															operator[] 查找：</strong>
+														<ul>
+															<li>若下一级子字典不存在，则使用值类型的默认构造函数进行初始化（即
+																<code>Value()</code>），将其插入当前字典，并返回该引用。</li>
+															<li>否则，在子字典中 <strong>调用 operator[]</strong> 查找后，此时键
+																<code>key</code>
+																必然存在于子字典中，则将查找到的键值对从子字典中弹出，并插入当前字典后返回其引用。</li>
+															<li>插入之后需要检查当前字典是否超出容量，若超出容量，则使用 <code>popStrategyPtr</code>
+																指向的对象选择一个键值对，将其弹出当前字典，并 <strong>递归调用 operator[]</strong>
+																插入下一级子字典。</li>
+														</ul>
+													</li>
+													<li>例1：共 2 级字典，要查找的键<span><span class="katex"><span
+																	class="katex-mathml"><math
+																		xmlns="http://www.w3.org/1998/Math/MathML">
+																		<semantics>
+																			<mrow>
+																				<msub>
+																					<mi>k</mi>
+																					<mn>1</mn>
+																				</msub>
+																			</mrow>
+																			<annotation encoding="application/x-tex">k_1
+																			</annotation>
+																		</semantics>
+																	</math></span><span class="katex-html"
+																	aria-hidden="true"><span class="base"><span
+																			class="strut"
+																			style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																			class="mord"><span class="mord mathnormal"
+																				style="margin-right: 0.0315em;">k</span><span
+																				class="msupsub"><span
+																					class="vlist-t vlist-t2"><span
+																						class="vlist-r"><span
+																							class="vlist"
+																							style="height: 0.3011em;"><span
+																								class=""
+																								style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																									class="pstrut"
+																									style="height: 2.7em;"></span><span
+																									class="sizing reset-size6 size3 mtight"><span
+																										class="mord mtight">1</span></span></span></span><span
+																							class="vlist-s">​</span></span><span
+																						class="vlist-r"><span
+																							class="vlist"
+																							style="height: 0.15em;"><span
+																								class=""></span></span></span></span></span></span></span></span></span></span>存储于
+														2 级字典，并且 1 级字典已达到容量上限，则整个查找过程如下<ul>
+															<li>1 级字典缺失<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>1</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_1
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">1</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>，此时
+																1 级字典为当前字典， 2 级字典为子字典，故递归至 2 级字典查找</li>
+															<li>当前字典为 2 级字典，在 2 级字典命中<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>1</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_1
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">1</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>，直接返回
+															</li>
+															<li>当前字典为 1 级字典，其子字典为 2 级字典，则将 2 级字典的<span><span
+																		class="katex"><span class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>1</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_1
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">1</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>弹出并插入
+																1 级字典，发现超出 1 级字典容量，弹出键<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>2</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_2
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">2</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>至
+																2 级字典</li>
+															<li>当前字典为 2 级字典，2 级字典缺失<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>2</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_2
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">2</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>，由于没有下一级字典，因此使用默认构造函数初始化键<span><span
+																		class="katex"><span class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>2</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_2
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">2</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>对应的值并插入
+																2 级字典，返回其引用</li>
+															<li>将 1 级字典中保存的<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>2</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_2
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">2</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>的值赋给上一步中返回的引用
+															</li>
+															<li>1 级字典返回<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<msub>
+																							<mi>k</mi>
+																							<mn>1</mn>
+																						</msub>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k_1
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.8444em; vertical-align: -0.15em;"></span><span
+																					class="mord"><span
+																						class="mord mathnormal"
+																						style="margin-right: 0.0315em;">k</span><span
+																						class="msupsub"><span
+																							class="vlist-t vlist-t2"><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.3011em;"><span
+																										class=""
+																										style="top: -2.55em; margin-left: -0.0315em; margin-right: 0.05em;"><span
+																											class="pstrut"
+																											style="height: 2.7em;"></span><span
+																											class="sizing reset-size6 size3 mtight"><span
+																												class="mord mtight">1</span></span></span></span><span
+																									class="vlist-s">​</span></span><span
+																								class="vlist-r"><span
+																									class="vlist"
+																									style="height: 0.15em;"><span
+																										class=""></span></span></span></span></span></span></span></span></span></span>对应的值的引用
+															</li>
+															<li>结束，1 级字典记录一次缺失，2 级字典记录一次缺失和一次命中</li>
+														</ul>
+													</li>
+													<li>例2：共 2 级字典，均未到达容量上限，要查找的键<span><span class="katex"><span
+																	class="katex-mathml"><math
+																		xmlns="http://www.w3.org/1998/Math/MathML">
+																		<semantics>
+																			<mrow>
+																				<mi>k</mi>
+																			</mrow>
+																			<annotation encoding="application/x-tex">k
+																			</annotation>
+																		</semantics>
+																	</math></span><span class="katex-html"
+																	aria-hidden="true"><span class="base"><span
+																			class="strut"
+																			style="height: 0.6944em;"></span><span
+																			class="mord mathnormal"
+																			style="margin-right: 0.0315em;">k</span></span></span></span></span>不在其中，则整个查找过程如下
+														<ul>
+															<li>1 级字典缺失<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<mi>k</mi>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.6944em;"></span><span
+																					class="mord mathnormal"
+																					style="margin-right: 0.0315em;">k</span></span></span></span></span>，递归至
+																2 级字典查找</li>
+															<li>2 级字典缺失<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<mi>k</mi>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.6944em;"></span><span
+																					class="mord mathnormal"
+																					style="margin-right: 0.0315em;">k</span></span></span></span></span>，由于没有下一级字典，因此使用默认构造函数初始化键<span><span
+																		class="katex"><span class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<mi>k</mi>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.6944em;"></span><span
+																					class="mord mathnormal"
+																					style="margin-right: 0.0315em;">k</span></span></span></span></span>对应的值并插入
+																2 级字典，返回其引用</li>
+															<li>将 2 级字典的<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<mi>k</mi>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.6944em;"></span><span
+																					class="mord mathnormal"
+																					style="margin-right: 0.0315em;">k</span></span></span></span></span>弹出并插入
+																1 级字典</li>
+															<li>1 级字典返回<span><span class="katex"><span
+																			class="katex-mathml"><math
+																				xmlns="http://www.w3.org/1998/Math/MathML">
+																				<semantics>
+																					<mrow>
+																						<mi>k</mi>
+																					</mrow>
+																					<annotation
+																						encoding="application/x-tex">k
+																					</annotation>
+																				</semantics>
+																			</math></span><span class="katex-html"
+																			aria-hidden="true"><span class="base"><span
+																					class="strut"
+																					style="height: 0.6944em;"></span><span
+																					class="mord mathnormal"
+																					style="margin-right: 0.0315em;">k</span></span></span></span></span>对应的值的引用
+															</li>
+															<li>结束，1 级字典记录一次缺失， 2 级字典记录一次缺失</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li><code>hitStats()</code>（常量成员函数）：返回一个 <code>HitStatsResult</code>
+												类型的对象，记录过去所有下标运算符 <code>[]</code> 的访问中，<strong>所有层级字典的命中 /
+													缺失次数</strong>。<ul>
+													<li>我们已经为你实现了 <code>HitStatsResult</code> 类，你可以直接使用
+														<code>HitStatsResult(hitArray, missArray)</code> 来构造一个对象，其中
+														<code>hitArray</code> 和 <code>missArray</code>
+														分别代表各级字典的命中数和未命中数，使用 <code>std::vector</code> 表示，其中
+														<code>hitArray[i]</code>，<code>missArray[i]</code> 分别表示第
+														<span><span class="katex"><span class="katex-mathml"><math
+																		xmlns="http://www.w3.org/1998/Math/MathML">
+																		<semantics>
+																			<mrow>
+																				<mi>i</mi>
+																				<mo>+</mo>
+																				<mn>1</mn>
+																			</mrow>
+																			<annotation encoding="application/x-tex">i+1
+																			</annotation>
+																		</semantics>
+																	</math></span><span class="katex-html"
+																	aria-hidden="true"><span class="base"><span
+																			class="strut"
+																			style="height: 0.7429em; vertical-align: -0.0833em;"></span><span
+																			class="mord mathnormal">i</span><span
+																			class="mspace"
+																			style="margin-right: 0.2222em;"></span><span
+																			class="mbin">+</span><span class="mspace"
+																			style="margin-right: 0.2222em;"></span></span><span
+																		class="base"><span class="strut"
+																			style="height: 0.6444em;"></span><span
+																			class="mord">1</span></span></span></span></span>
+														级字典的命中次数、缺失次数。</li>
+													<li>你也可以使用 <code>+</code> 运算符拼接两个 <code>HitStatsResult</code>，如：假设 1
+														级字典的结果为 <code>res_1</code>，2 级字典及其所有子字典的结果为
+														<code>res_2</code>，则你可以使用 <code>res_1 + res_2</code> 来得到完整的结果。
+													</li>
+												</ul>
+											</li>
+											<li><code>size()</code>（常量成员函数）：返回当前字典<strong>及所有子字典</strong>中存储的键值对数量总和。
+											</li>
+											<li><code>clear()</code>：清空当前字典<strong>及所有子字典</strong>存储的所有键值对，同时清空它们的命中率统计数据。
+											</li>
+										</ul>
+										<p>提示：本题实现的多级字典仅供模拟使用，因此你不需要过度关注性能。</p>
+										<p>样例详见下发文件的 <code>subtask4/</code>
+											子目录（提交时请勿包含该子文件夹，而是与平时作业类似直接打包代码文件。详见《提交要求》）。</p>
+										<h2>提交要求</h2>
+										<p>不论你想要提交哪些子任务，你都只需要使用 zip 格式打包 <code>MyDict.hpp</code>（对于子任务 1、3、4）和
+											<code>PopStrategy.hpp</code>（对于子任务
+											2、3、4），并提交这个压缩包。<strong>压缩包中不应包含任何子文件夹，换而言之，解压你提交的压缩包，应直接得到上述两个 hpp
+												文件，而不是包含这两个文件的一个或多个子文件夹。</strong></p>
+										<p>你不能修改、也不必提交
+											<code>main.cpp</code>、<code>Makefile</code>、<code>HitStatsResult.hpp</code>，在评测时，OJ
+											会将提供的文件贴入你的目录下进行编译并执行。</p>
+										<h2>评分规则</h2>
+										<p>本题的子任务<strong>不使用</strong>捆绑测试。具体地，每个子任务都包含 2
+											个样例测试点和若干个隐藏测试点。<strong>样例测试点与下发文件完全一致</strong>，占子任务 <span><span
+													class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mn>40</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">40%
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">40</span></span></span></span></span>
+											的分数；隐藏测试点占子任务剩余 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mn>60</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">60%
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">60</span></span></span></span></span> 的分数。
+										</p>
+										<p>子任务、测试点编号的对应关系如下：</p>
+										<table class="table table-bordered table-striped">
+											<thead>
+												<tr>
+													<th>子任务</th>
+													<th>样例测试点编号</th>
+													<th>每个样例测试点分值</th>
+													<th>隐藏测试点编号</th>
+													<th>每个隐藏测试点分值</th>
+													<th>总分值</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><strong>1</strong></td>
+													<td>1~2</td>
+													<td>4 分</td>
+													<td>3~4</td>
+													<td>6 分</td>
+													<td>20 分</td>
+												</tr>
+												<tr>
+													<td><strong>2</strong></td>
+													<td>5~6</td>
+													<td>6 分</td>
+													<td>7~8</td>
+													<td>9 分</td>
+													<td>30 分</td>
+												</tr>
+												<tr>
+													<td><strong>3</strong></td>
+													<td>9~10</td>
+													<td>4 分</td>
+													<td>11~12</td>
+													<td>6 分</td>
+													<td>20 分</td>
+												</tr>
+												<tr>
+													<td><strong>4</strong></td>
+													<td>13~14</td>
+													<td>6 分</td>
+													<td>15~17</td>
+													<td>6 分</td>
+													<td>30 分</td>
+												</tr>
+											</tbody>
+										</table>
+										<p>本题样例的 Makefile 中定义的宏
+											<code>__SUBTASK1__</code>、<code>__SUBTASK2__</code>、<code>__SUBTASK3__</code>、<code>__SUBTASK4__</code>
+											在隐藏测例中同样存在。事实上，这些宏并不是完成本题所必要的，但你仍可以利用它们帮助你处理不同的子任务。</p>
+										<h2>数据规模及限制</h2>
+										<p>你不需要特别考虑时间、空间效率。具体地，我们保证：</p>
+										<ul>
+											<li>测例中的 <code>MyDict</code> 至多为 5 级字典。</li>
+											<li>对于任一测例，评测代码调用 <code>MyDict</code> 的成员函数（包括构造函数、运算符重载等）的总次数不超过
+												<span><span class="katex"><span class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mn>3</mn>
+																		<mo>×</mo>
+																		<mn>1</mn>
+																		<msup>
+																			<mn>0</mn>
+																			<mn>4</mn>
+																		</msup>
+																	</mrow>
+																	<annotation encoding="application/x-tex">3 \times
+																		10^4</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+																	class="mord">3</span><span class="mspace"
+																	style="margin-right: 0.2222em;"></span><span
+																	class="mbin">×</span><span class="mspace"
+																	style="margin-right: 0.2222em;"></span></span><span
+																class="base"><span class="strut"
+																	style="height: 0.8141em;"></span><span
+																	class="mord">1</span><span class="mord"><span
+																		class="mord">0</span><span class="msupsub"><span
+																			class="vlist-t"><span class="vlist-r"><span
+																					class="vlist"
+																					style="height: 0.8141em;"><span
+																						class=""
+																						style="top: -3.063em; margin-right: 0.05em;"><span
+																							class="pstrut"
+																							style="height: 2.7em;"></span><span
+																							class="sizing reset-size6 size3 mtight"><span
+																								class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span>
+												次。<ul>
+													<li>对于第二个子任务，这一次数限制适用于评测代码显式调用 <code>PopStrategy</code> 及其派生类的成员函数。
+													</li>
+												</ul>
+											</li>
+											<li>对于所有有容量限制的字典，其容量限制均不超过 <span><span class="katex"><span
+															class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mn>32</mn>
+																	</mrow>
+																	<annotation encoding="application/x-tex">32
+																	</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.6444em;"></span><span
+																	class="mord">32</span></span></span></span></span>（即
+												<code>capacity</code> 不超过 32）。这意味着你可以放心大胆地实现单次计算时间复杂度为 <span><span
+														class="katex"><span class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mi>O</mi>
+																		<mrow>
+																			<mo fence="true">(</mo>
+																			<mi>N</mi>
+																			<mo fence="true">)</mo>
+																		</mrow>
+																	</mrow>
+																	<annotation encoding="application/x-tex">
+																		O\left(N\right)</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 1em; vertical-align: -0.25em;"></span><span
+																	class="mord mathnormal"
+																	style="margin-right: 0.0278em;">O</span><span
+																	class="mspace"
+																	style="margin-right: 0.1667em;"></span><span
+																	class="minner"><span class="mopen delimcenter"
+																		style="top: 0em;">(</span><span
+																		class="mord mathnormal"
+																		style="margin-right: 0.109em;">N</span><span
+																		class="mclose delimcenter"
+																		style="top: 0em;">)</span></span></span></span></span></span>
+												的弹出策略。</li>
+											<li>我们预置的评测代码的运行时间不超过时间限制的 <span><span class="katex"><span
+															class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mn>5</mn>
+																	</mrow>
+																	<annotation encoding="application/x-tex">5
+																	</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.6444em;"></span><span
+																	class="mord">5</span></span></span></span></span>%
+												，内存开销不超过空间限制的 <span><span class="katex"><span class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mn>5</mn>
+																	</mrow>
+																	<annotation encoding="application/x-tex">5
+																	</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.6444em;"></span><span
+																	class="mord">5</span></span></span></span></span>%；
+											</li>
+											<li>为避免浮点误差造成的影响，本题所有测试点均不包含任何浮点数类型。</li>
+										</ul>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">oop_custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">65536 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div><!---->
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://oj.cs.tsinghua.edu.cn/course/25/contest/281/problem/1 -->
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>TUOJ</title>
+  <!--<base href="/">-->
+  <base href=".">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="https://oj.cs.tsinghua.edu.cn/assets/images/favicon.png">
+  <style>
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font: 14px Lucida Grande, Helvetica, Arial, sans-serif;
+      tab-size: 4
+    }
+
+    html {
+      font-family: sans-serif;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      margin: 0
+    }
+
+    @media print {
+
+      *,
+      :after,
+      :before {
+        color: #000 !important;
+        text-shadow: none !important;
+        background: 0 0 !important;
+        box-shadow: none !important
+      }
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    :after,
+    :before {
+      box-sizing: border-box
+    }
+
+    html {
+      font-size: 10px;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+
+    body {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #333;
+      background-color: #fff
+    }
+
+    body {
+      counter-reset: katexEqnNo mmlEqnNo
+    }
+  </style>
+  <link rel="stylesheet" href="./TUOJ_files/styles.77636c39ccf00e01.css" media="all" onload="this.media=&#39;all&#39;">
+  <noscript>
+    <link rel="stylesheet" href="styles.77636c39ccf00e01.css">
+  </noscript>
+  <style type="text/css"></style>
+  <style>
+    #app-logo[_ngcontent-yll-c83] {
+      height: 120%
+    }
+  </style>
+</head>
+
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>机械加工厂</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h1>机械加工厂</h1>
+                    <h2>题目描述</h2>
+                    <p>编写一个软件记录一个机械加工厂从部件生产到车辆组装、销售的整体流程。</p>
+                    <p>已有 Wheel 和 Engine 两个类的源文件，需要编写下面几个类的具体程序：</p>
+                    <p>Vehicle：机动车基类。每个机动车包含一个 Wheel 和一个 Engine 对象，通过组合来实现。</p>
+                    <p>Motor：摩托车类，需通过继承 Vehicle 类实现。同时有其自身的功能。</p>
+                    <p>Car：汽车类，需通过继承 Vehicle 类实现。</p>
+                    <p><a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1767.n0ghYlPzaM4plp3S.pub/CFroKJQOqac6HtrZ.download_hw3_p2.zip/download_hw3_p2.zip">文件下载地址</a>
+                    </p>
+                    <h2>输入样例</h2>
+                    <p>第一行包括一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span>，表示订单的个数。</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span> 行，每一行有两个整数 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>a</mi>
+                                  <mo separator="true">,</mo>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a, b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span> 和一个字符串 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>c</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">c</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">c</span></span></span></span></span> 组成。</p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>a</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">a</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">a</span></span></span></span></span> 表示生产的类别，<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>0</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">0</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">0</span></span></span></span></span> 为 Vehicle，<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">1</span></span></span></span></span> 为 Motor，<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>2</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">2</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">2</span></span></span></span></span> 为 Car。</p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>b</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">b</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6944em;"></span><span
+                                class="mord mathnormal">b</span></span></span></span></span> 表示轮胎的个数，<span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>c</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">c</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">c</span></span></span></span></span> 代表引擎的名称。</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+0 3 Magic
+1 2 Diesel
+2 4 Gasoline
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>输出样例</h2>
+                    <p>按照输入顺序，依次输出每个订单的组件生产和装配过程。</p>
+                    <p>第一行输出使用的引擎名称。</p>
+                    <p>第二行输出使用的轮胎个数。</p>
+                    <p>第三行在构造 Vehicle、Motor 和 Car 类时输出使用这些部件组装的过程，注意 <code>vehicle</code>、<code>motor</code> 和
+                      <code>car</code> 名称的区别。</p>
+                    <p>第四行通过 describe 函数输出描述，注意 <code>vehicle</code>、<code>motor</code> 和 <code>car</code> 名称的区别。</p>
+                    <p>对于 Motor 类来说，第五行通过调用 sell 函数输出固定字符串 <code>A motor is sold!</code>。</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">Using Magic engine.
+Building 3 wheels.
+Finish building a vehicle with 3 wheels and a Magic engine.
+A vehicle with 3 wheels and a Magic engine.
+Using Diesel engine.
+Building 2 wheels.
+Finish building a motor with 2 wheels and a Diesel engine.
+A motor with 2 wheels and a Diesel engine.
+A motor is sold!
+Using Gasoline engine.
+Building 4 wheels.
+Finish building a car with 4 wheels and a Gasoline engine.
+A car with 4 wheels and a Gasoline engine.
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>要求</h2>
+                    <ol>
+                      <li>不修改 main.cpp、engine.h/cpp、wheel.h/cpp。</li>
+                      <li>在已有代码基础上编写 Vehicle 类，Motor 类，Car 类。</li>
+                      <li>我们将会使用 <code>g++ main.cpp car.cpp motor.cpp vehicle.cpp wheel.cpp engine.cpp -o main</code>
+                        命令来编译得到可执行文件 main。</li>
+                    </ol>
+                    <h2>限制与约定</h2>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>2</mn>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>100</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">2 \leq n \leq 100</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">2</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">100</span></span></span></span></span></p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>0</mn>
+                                  <mo>≤</mo>
+                                  <mi>a</mi>
+                                  <mo>≤</mo>
+                                  <mn>2</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">0 \leq a \leq 2</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">0</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">a</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span class="mord">2</span></span></span></span></span>
+                    </p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>b</mi>
+                                  <mo>≤</mo>
+                                  <mn>10</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1 \leq b \leq 10</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8304em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">b</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">10</span></span></span></span></span></p>
+                    <p><span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>c</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">c</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">c</span></span></span></span></span> 的长度不超过 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>20</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">20</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6444em;"></span><span
+                                class="mord">20</span></span></span></span></span></p>
+                    <h2>提交格式</h2>
+                    <p>根据提供的文件的内容，编写对应的类的代码（Vehicle 类，Motor 类，Car 类）。</p>
+                    <p><strong>请将你的文件打包成一个 zip 格式的压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到一系列 cpp
+                        文件、h 文件等代码文件，而不是一个包含它们的文件夹。</strong>评测时，OJ会将提供的文件贴入你的目录下进行编译并执行。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

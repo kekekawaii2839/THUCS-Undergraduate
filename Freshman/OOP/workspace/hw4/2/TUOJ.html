@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>简单计算图</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>
+                      计算图描述了一种计算方式：一个计算图可以看做一个有向无环图，其中每个结点要么是一个常数(Constant)，要么是占位符(Placeholder)，要么是一个运算符(OperationNode)。一个常数结点入度为0，其值是一个可设定的常数。一个运算符结点入度为其运算数个数，其值为入结点经过该运算符运算后的值。
+                    </p>
+                    <p>本题中要求你实现一个简单的运算图，支持常数和加法、减法两种运算符。例如：加法运算的结点入度为2，其值为两个运算符的和。</p>
+                    <p>
+                      我们提供了计算图的结点类<code>Node</code>，运算符结点类<code>Operator</code>，计算图类<code>Graph</code>的定义，根据名字查找值的辅助类<code>myMap</code>，以及处理输入的<code>main</code>函数。请你完善其实现，并以其为基础实现加法、减法运算符。
+                      在每次计算前，先要给占位符赋具体值，进而根据计算图得到其他节点的值。</p>
+                    <p>文件下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1773.zAvFZMctLoQxQeSq.pub/aSgiAkRnSgndKQPI.download.zip/download.zip">下载链接</a>
+                    </p>
+                    <h3>输入样例</h3>
+                    <p>第一行是变量数n，节点数m，计算操作数q。</p>
+                    <p>接下来n行是对变量的具体描述，每一行由变量名和变量属性组成。属性有两种: P表示该变量是 Placeholder ; C表示该变量是 Constant ，接下来的数字即为该变量的数值。</p>
+                    <p>接下来m行每一行定义一个新节点，每行包含一个等号，等号左边是节点名称，等号 右边是得到新节点的计算过程。这些节点共同构成了一张计算图，通过输入不同的 x, y，可以反复计算图中的其他节点 a,
+                      b, c ...</p>
+                    <p>接下来q行每一行是一个计算操作。每一行第一个元素是待计算结果的节点名称（<strong>待计算节点指最后一个出现的同名节点</strong>），第二个元素k表示接下来有 个类型为
+                      Placeholder 的变量需要赋值，然后是k个赋值对，每个赋值对包括一个待赋值的 Placeholder
+                      类型的变量和赋值的数值，每一行的计算操作根据给出的赋值输出一个计算结果。测试数据保证所有操作合法。</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3 3 2
+x P
+y P
+z C 3.0
+a = x + y
+b = a + x
+a = x + z
+EVAL a 2 x 2.0 y 1.0
+EVAL b 2 x 2.0 y 1.0
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例</h3>
+                    <p>依次输出q个操作的计算结果，所有的计算结果保留2位小数。</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">5.00
+5.00
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>对上面的样例的解释如下：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">a = x(2.0) + z(3.0) = 5.00
+b = a + x = ( x + y ) + x = ( x(2.0) + y(1.0) )+ x(2.0) = 5.0 
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>要求</h2>
+                    <ol>
+                      <li>不能修改 node.h, graph.h, operation.h, operation.cpp, mymap.h, mymap.cpp, main.cpp</li>
+                      <li>完善 node.cpp, graph.cpp 中的实现</li>
+                      <li>可以增加cpp或h文件，用于编写加法、减法的类，并据此修改Makefile，生成的可执行文件名为main</li>
+                    </ol>
+                    <h3>提交格式</h3>
+                    <p>请将你的文件打包成一个 zip 格式的压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到一系列 cpp
+                        文件、h 文件等代码文件，而不是一个包含它们的文件夹。</strong>评测时，OJ会将提供的文件贴入你的目录下进行编译并执行。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

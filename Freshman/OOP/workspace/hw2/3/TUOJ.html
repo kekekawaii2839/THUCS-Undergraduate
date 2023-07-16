@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-mvb-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>矩阵与运算</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h2>题目描述</h2>
+                    <p>在线性代数中，我们学习了矩阵以及矩阵的一些运算规则。现在你需要完善下面的代码，实现一个整数矩阵类<code>Matrix</code>，并实现矩阵的</p>
+                    <ol>
+                      <li>数乘</li>
+                      <li>加减</li>
+                      <li>乘</li>
+                      <li>下标访问元素</li>
+                      <li>流输入输出</li>
+                      <li>转置</li>
+                    </ol>
+                    <p>6个功能。</p>
+                    <p><code>Matrix.h</code></p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Matrix</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span> elem<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> col<span class="token punctuation">,</span> row<span class="token punctuation">;</span>
+    
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Matrix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Matrix</span><span class="token punctuation">(</span><span class="token keyword">int</span> _row<span class="token punctuation">,</span> <span class="token keyword">int</span> _col<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">Matrix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Matrix <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Matrix <span class="token keyword">operator</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">const</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Matrix <span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Matrix <span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">const</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">friend</span> Matrix <span class="token function">transpose</span><span class="token punctuation">(</span><span class="token keyword">const</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token operator">*</span> <span class="token keyword">operator</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
+    <span class="token keyword">friend</span> ostream<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>ostream<span class="token operator">&amp;</span><span class="token punctuation">,</span> <span class="token keyword">const</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">friend</span> istream<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">(</span>istream<span class="token operator">&amp;</span><span class="token punctuation">,</span> Matrix<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>
+                      <code>Matrix</code>类内有成员<code>elem</code>，指向一个存放了矩阵元素的二维数组，<code>elem[a][b]</code>代表矩阵第a行第b列的元素（<strong>指标从0开始</strong>）；成员<code>col</code>和<code>row</code>记录了矩阵的行数和列数。
+                    </p>
+                    <p>
+                      <code>transpose</code>函数和重载的运算符实现了矩阵的运算和输入输出功能。其中，重载<code>operator[]</code>实现形如<code>matrix[a][b]</code>的下标访问只需要返回指向行数组的指针（即重载了第一个<code>[]</code>）。
+                    </p>
+                    <p>题目已提供main.cpp，请编写相应代码使得程序能编译通过。代码下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1751.uEdoC4i9jb3dsvZS.pub/g250GvB0YGli0O4D.main.cpp/main.cpp">点击下载</a>
+                    </p>
+                    <h2>输入格式</h2>
+                    <p>第一行包含一个正整数<code>n</code>，表示接下来要输入的矩阵个数，矩阵的序号按输入次序从0开始递增。</p>
+                    <p>
+                      对每个矩阵，第一行给出两个正整数<code>r</code>和<code>c</code>，表示这个矩阵的行数和列数，接下来<code>r</code>行，每行<code>c</code>个整数以空格隔开，表示这个矩阵的元素。
+                    </p>
+                    <p>矩阵输入完成后，输入一个正整数<code>m</code>，表示操作个数。</p>
+                    <p>接下来<code>m</code>行，每行包含一个字符串<code>op</code>和若干个参数。</p>
+                    <ul>
+                      <li>
+                        <code>op</code>为<code>+</code>时，参数有2个：<code>opnd1</code>、<code>opnd2</code>，表示将序号为<code>opnd1</code>、<code>opnd2</code>的两个矩阵相加。
+                      </li>
+                      <li>
+                        <code>op</code>为<code>-</code>时，参数有2个：<code>opnd1</code>、<code>opnd2</code>，表示用序号为<code>opnd1</code>矩阵减去序号为<code>opnd2</code>的矩阵。
+                      </li>
+                      <li>
+                        <code>op</code>为<code>*</code>时，参数有2个：<code>opnd1</code>、<code>opnd2</code>，表示用序号为<code>opnd1</code>矩阵左乘序号为<code>opnd2</code>的矩阵（注意：是矩阵乘法，而不是逐元素乘法）。
+                      </li>
+                      <li>
+                        <code>op</code>为<code>.*</code>时，参数有2个：<code>opnd1</code>、<code>opnd2</code>，表示序号为<code>opnd1</code>矩阵数乘<code>opnd2</code>。
+                      </li>
+                      <li><code>op</code>为<code>t</code>时，参数有1个：<code>opnd1</code>，表示求序号为<code>opnd1</code>矩阵的转置。</li>
+                      <li>
+                        <code>op</code>为<code>[]</code>时，参数有3个：<code>opnd1</code>、<code>opnd2</code>、<code>opnd3</code>，表示求序号为<code>opnd1</code>矩阵的第<code>opnd2</code>行、第<code>opnd3</code>列的元素。
+                      </li>
+                      <li><code>op</code>为<code>?</code>时，参数有1个：<code>opnd1</code>，表示求序号为<code>opnd1</code>的矩阵。</li>
+                    </ul>
+                    <p>对于所有要被执行的运算，保证输入是合法的（例如加减法保证矩阵形状相同、乘法保证左矩阵列数等于右矩阵行数）。除了输入操作意外，每次运算只需输出运算结果，不会影响矩阵原本的值。</p>
+                    <h2>输出格式</h2>
+                    <p>对每个运算符，输出得到的矩阵或元素。每个<code>r</code>行<code>c</code>列的的矩阵输出<code>r</code>行，每行<code>c</code>个元素以空格隔开。
+                    </p>
+                    <h2>输入样例</h2>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">3
+3 3
+0 8 1
+8 6 7
+2 3 -1
+3 2
+5 0
+1 -6
+9 -10
+3 3
+1 0 0
+0 1 0
+0 0 1
+7
++ 0 2
+- 2 0
+* 0 1
+.* 2 -6
+t 1
+[] 1 1 1
+? 2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>输出样例</h2>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1 8 1 
+8 7 7 
+2 3 0 
+1 -8 -1 
+-8 -5 -7 
+-2 -3 2 
+17 -58 
+109 -106 
+4 -8 
+-6 0 0 
+0 -6 0 
+0 0 -6 
+5 1 9 
+0 -6 -10 
+-6
+1 0 0 
+0 1 0 
+0 0 1 
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>提交格式</h2>
+                    <ul>
+                      <li>你需要提交Matrix.h和Matrix.cpp。注意main.cpp由题目提供。</li>
+                      <li>你应该将你的文件打包成一个zip压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</strong></li>
+                    </ul>
+                    <h2>数据规模和约定</h2>
+                    <p>对于100%的数据，有<span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>2</mn>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>10</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">2 \leq n \leq 10</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">2</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">10</span></span></span></span></span>，<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>r</mi>
+                                  <mo separator="true">,</mo>
+                                  <mi>c</mi>
+                                  <mo>≤</mo>
+                                  <mn>30</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1\leq r,c \leq 30</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8304em; vertical-align: -0.1944em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0278em;">r</span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mord mathnormal">c</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">30</span></span></span></span></span>，<span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>m</mi>
+                                  <mo>≤</mo>
+                                  <mn>50</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1 \leq m \leq 50 </annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">m</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">50</span></span></span></span></span>，所有元素和运算结果都在<code>int</code>范围内。</p>
+                    <p><strong>时间限制：1s</strong></p>
+                    <p><strong>空间限制：256MB</strong></p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

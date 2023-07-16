@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>优先队列</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h1>优先队列</h1>
+                    <h2>题目描述</h2>
+                    <p>普通的队列（queue）是一种先进先出的数据结构，元素在队列尾追加，从队列头删除。而在优先队列（priority_queue）中，元素被赋予优先级，可以用不超过 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>O</mi>
+                                  <mrow>
+                                    <mo fence="true">(</mo>
+                                    <mi>log</mi>
+                                    <mo>⁡</mo>
+                                    <mi>n</mi>
+                                    <mo fence="true">)</mo>
+                                  </mrow>
+                                </mrow>
+                                <annotation encoding="application/x-tex">O\left( \log n\right)</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="mord mathnormal" style="margin-right: 0.0278em;">O</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span class="minner"><span
+                                  class="mopen delimcenter" style="top: 0em;">(</span><span class="mop">lo<span
+                                    style="margin-right: 0.0139em;">g</span></span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord mathnormal">n</span><span
+                                  class="mclose delimcenter"
+                                  style="top: 0em;">)</span></span></span></span></span></span>
+                      的时间复杂度插入一个元素、访问优先级最高的元素、或删除优先级最高的元素，具有最高级先出（first in, largest out）的行为特征，可以高效地动态维护序列最值。</p>
+                    <p>人们常用堆这种数据结构来实现高效的优先队列。但在这题里，我们<strong>并不需要你去实现高效的算法</strong>，只需要你去模拟优先队列的行为。具体来说，你需要实现一个模板类
+                      <code>PriorityQueue&lt;T&gt;(AbstractCompare&lt;T&gt;*)</code>，其中 <code>T</code>
+                      为任意类型，<code>AbstractCompare&lt;T&gt;</code> 为抽象比较类。规定较小的元素为优先队列中优先级较高的元素。也就是说，每次删除时都是删除队列中最小的元素。
+                    </p>
+                    <p><code>PriorityQueue</code> 需要实现以下几种功能：</p>
+                    <ul>
+                      <li>插入元素</li>
+                      <li>删除队列中的最小值</li>
+                      <li>查询队列中的最小值</li>
+                      <li>查询队列中元素个数</li>
+                      <li>查询队列是否为空</li>
+                    </ul>
+                    <p>同时为了测验你的模板类能够应用于自定义类型，我们给出了 <code>Point</code> 对象。在 <code>T=Point</code> 的情况下，同样需要你完成以上操作。</p>
+                    <p>数据分为四种类型，由输入的 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mtext mathvariant="monospace">type</mtext>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\texttt{type}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7758em; vertical-align: -0.2222em;"></span><span
+                                class="mord text"><span
+                                  class="mord texttt">type</span></span></span></span></span></span> 控制。</p>
+                    <ul>
+                      <li>类型 1：优先队列中存放 <code>int</code> 类型元素，比较方式为按数值比较；</li>
+                      <li>类型 2：优先队列中存放 <code>int</code> 类型元素，比较方式为按数字和比较，如果数字和一样就按数值比较；举例：<span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>98</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">98</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">98</span></span></span></span></span> 的数字和是 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>9</mn>
+                                    <mo>+</mo>
+                                    <mn>8</mn>
+                                    <mo>=</mo>
+                                    <mn>17</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">9+8=17</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                  class="mord">9</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                  class="mbin">+</span><span class="mspace"
+                                  style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span class="mord">8</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">17</span></span></span></span></span>，<span><span class="katex"><span
+                              class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>123</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">123</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6444em;"></span><span
+                                  class="mord">123</span></span></span></span></span> 的数字和是 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mn>1</mn>
+                                    <mo>+</mo>
+                                    <mn>2</mn>
+                                    <mo>+</mo>
+                                    <mn>3</mn>
+                                    <mo>=</mo>
+                                    <mn>6</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">1+2+3=6</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                  class="mord">1</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                  class="mbin">+</span><span class="mspace"
+                                  style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.7278em; vertical-align: -0.0833em;"></span><span
+                                  class="mord">2</span><span class="mspace" style="margin-right: 0.2222em;"></span><span
+                                  class="mbin">+</span><span class="mspace"
+                                  style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span class="mord">3</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">6</span></span></span></span></span>。</li>
+                      <li>类型 3：优先队列中存放 <code>Point</code> 类型元素，比较方式为先比较第一维坐标 <code>x</code> 的大小，如果 <code>x</code> 一样再比较
+                        <code>y</code> 的大小。<strong>请将该比较实现为 Point 类的默认大小关系（即重载<code>operator&lt;</code>）</strong>；</li>
+                      <li>类型 4：优先队列中存放 <code>Point</code> 类型元素，比较方式为按到原点 <span><span class="katex"><span
+                              class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mo fence="true">(</mo>
+                                    <mn>0</mn>
+                                    <mo separator="true">,</mo>
+                                    <mn>0</mn>
+                                    <mo fence="true">)</mo>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\left(0, 0\right)</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                  class="minner"><span class="mopen delimcenter" style="top: 0em;">(</span><span
+                                    class="mord">0</span><span class="mpunct">,</span><span class="mspace"
+                                    style="margin-right: 0.1667em;"></span><span class="mord">0</span><span
+                                    class="mclose delimcenter"
+                                    style="top: 0em;">)</span></span></span></span></span></span>
+                        的欧式距离比较，如果距离一样就按默认大小（即类型 3）关系比较。</li>
+                    </ul>
+                    <p>请阅读代码，并实现 <code>priority_queue.h</code> 和 <code>compare.h</code> 中定义的接口。</p>
+                    <p><strong>本题并不考察插入、删除元素时的时间性能，你只需正确实现对应功能即可。</strong></p>
+                    <p>文件下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1778.9u3ddWvwRWzIMBRA.pub/ELKhy53NQ1E8wKut.download_hw4_p4.zip/download_hw4_p4.zip">下载链接</a>
+                    </p>
+                    <h2>提示</h2>
+                    <p>对于每种数据，你需要继承 <code>AbstractCompare</code> 类实现对应的子类，并在 <code>PriorityQueue</code>
+                      中使用你实现的子类来完成数据的比较。</p>
+                    <h2>输入说明</h2>
+                    <p>输入的第一行包含一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi mathvariant="monospace">t</mi>
+                                  <mi mathvariant="monospace">y</mi>
+                                  <mi mathvariant="monospace">p</mi>
+                                  <mi mathvariant="monospace">e</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{type}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7758em; vertical-align: -0.2222em;"></span><span
+                                class="mord"><span class="mord mathtt">type</span></span></span></span></span></span>
+                      ，表示数据种类，为上文 4 种类型之一；</p>
+                    <p>输入的第二行包含一个正整数 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span> ，表示操作数量；</p>
+                    <p>接下来 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi>n</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">n</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.4306em;"></span><span
+                                class="mord mathnormal">n</span></span></span></span></span> 行，每行先输入一个正整数 <span><span
+                          class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mi mathvariant="monospace">o</mi>
+                                  <mi mathvariant="monospace">p</mi>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{op}</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                class="mord"><span
+                                  class="mord mathtt">op</span></span></span></span></span></span>，表示操作种类，</p>
+                    <ul>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mrow>
+                                      <mi mathvariant="monospace">o</mi>
+                                      <mi mathvariant="monospace">p</mi>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mn>1</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{op}=1</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                  class="mord"><span class="mord mathtt">op</span></span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">1</span></span></span></span></span>：再输入一个与维护类型相同类型的元素 <span><span
+                            class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mi mathvariant="monospace">e</mi>
+                                    <mi mathvariant="monospace">l</mi>
+                                    <mi mathvariant="monospace">e</mi>
+                                    <mi mathvariant="monospace">m</mi>
+                                    <mi mathvariant="monospace">e</mi>
+                                    <mi mathvariant="monospace">n</mi>
+                                    <mi mathvariant="monospace">t</mi>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{element}</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6111em;"></span><span class="mord"><span
+                                    class="mord mathtt">element</span></span></span></span></span></span>，并插入到队列中；</li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mrow>
+                                      <mi mathvariant="monospace">o</mi>
+                                      <mi mathvariant="monospace">p</mi>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mn>2</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{op}=2</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                  class="mord"><span class="mord mathtt">op</span></span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">2</span></span></span></span></span>：若队列非空则删除队列中最小值；</li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mrow>
+                                      <mi mathvariant="monospace">o</mi>
+                                      <mi mathvariant="monospace">p</mi>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mn>3</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{op}=3</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                  class="mord"><span class="mord mathtt">op</span></span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">3</span></span></span></span></span>：若队列非空则输出队列中最小值，否则输出
+                        <code>invalid operation</code>；</li>
+                      <li><span><span class="katex"><span class="katex-mathml"><math
+                                xmlns="http://www.w3.org/1998/Math/MathML">
+                                <semantics>
+                                  <mrow>
+                                    <mrow>
+                                      <mi mathvariant="monospace">o</mi>
+                                      <mi mathvariant="monospace">p</mi>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mn>4</mn>
+                                  </mrow>
+                                  <annotation encoding="application/x-tex">\mathtt{op}=4</annotation>
+                                </semantics>
+                              </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                  class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                  class="mord"><span class="mord mathtt">op</span></span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                  style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                  style="height: 0.6444em;"></span><span
+                                  class="mord">4</span></span></span></span></span>：输出队列中元素个数。</li>
+                    </ul>
+                    <p>输入数据保证任意两个元素不“相等”，也就是一定存在大小关系。</p>
+                    <h2>输出说明</h2>
+                    <p>对每个 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mrow>
+                                    <mi mathvariant="monospace">o</mi>
+                                    <mi mathvariant="monospace">p</mi>
+                                  </mrow>
+                                  <mo>=</mo>
+                                  <mn>3</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>4</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{op} = 3, 4</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.6528em; vertical-align: -0.2222em;"></span><span
+                                class="mord"><span class="mord mathtt">op</span></span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8389em; vertical-align: -0.1944em;"></span><span
+                                class="mord">3</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span
+                                class="mord">4</span></span></span></span></span> 的操作输出一行，为对应的输出。</p>
+                    <p>在所有操作结束后，依次输出并删除队列中所有元素（从小到大）。</p>
+                    <p>对输入操作的实现都已包含在 <code>main.cpp</code> 中，如果你正确地实现了功能接口即可得到正确的输出。</p>
+                    <h2>样例</h2>
+                    <h3>输入样例 1</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">1
+12
+1 5
+4
+1 12
+3
+2
+3
+2
+3
+2
+1 6
+1 24
+4
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例 1</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">1
+5
+12
+invalid operation
+2
+------------input finished------------
+6
+24
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>解释：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">1                       // type=1
+12                      // 共12个操作
+1 5                     // 插入5，队列中元素为：5
+4                       // 查询大小，输出1
+1 12                    // 插入12，队列中元素为(从小到大)：5,12
+3                       // 查询最小值，输出5
+2                       // 删除最小值，队列中元素为：12
+3                       // 查询最小值，输出12
+2                       // 删除最小值，队列为空
+3                       // 队列为空，输出"invalid operation"
+2                       // 队列为空，不删除
+1 6                     // 插入6，队列中元素为：6
+1 24                    // 插入24，队列中元素为：6,24
+4                       // 查询大小，输出2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输入样例 2</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">2
+12
+1 5
+4
+1 12
+3
+2
+3
+2
+3
+2
+1 6
+1 24
+4
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例 2</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">1
+12
+5
+invalid operation
+2
+------------input finished------------
+6
+24
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p>解释：注意大小关系的变化</p>
+                    <h3>输入样例 3</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">3
+9
+1 0 0
+1 1 0
+1 1 1
+1 0 1
+1 -1 1
+1 -1 0
+1 -1 -1
+1 0 -1
+1 1 -1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例 3</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">------------input finished------------
+-1 -1
+-1 0
+-1 1
+0 -1
+0 0
+0 1
+1 -1
+1 0
+1 1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输入样例 4</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">4
+9
+1 0 0
+1 1 0
+1 1 1
+1 0 1
+1 -1 1
+1 -1 0
+1 -1 -1
+1 0 -1
+1 1 -1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>输出样例 4</h3>
+                    <div style="position: relative;">
+                      <pre class="language-text" tabindex="0"><code class="language-text">------------input finished------------
+0 0
+-1 0
+0 -1
+0 1
+1 0
+-1 -1
+-1 1
+1 -1
+1 1
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>数据规模和约定</h3>
+                    <p>本题共设置 4 个子任务，各占 25 分，分别对应 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mrow>
+                                    <mi mathvariant="monospace">t</mi>
+                                    <mi mathvariant="monospace">y</mi>
+                                    <mi mathvariant="monospace">p</mi>
+                                    <mi mathvariant="monospace">e</mi>
+                                  </mrow>
+                                  <mo>=</mo>
+                                  <mn>1</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>2</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>3</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>4</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\mathtt{type} = 1, 2, 3, 4</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7758em; vertical-align: -0.2222em;"></span><span
+                                class="mord"><span class="mord mathtt">type</span></span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.8389em; vertical-align: -0.1944em;"></span><span
+                                class="mord">1</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span class="mord">2</span><span
+                                class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span
+                                class="mord">3</span><span class="mpunct">,</span><span class="mspace"
+                                style="margin-right: 0.1667em;"></span><span
+                                class="mord">4</span></span></span></span></span>。</p>
+                    <p>对于所有测试点，保证 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mn>1</mn>
+                                  <mo>≤</mo>
+                                  <mi>n</mi>
+                                  <mo>≤</mo>
+                                  <mn>100</mn>
+                                </mrow>
+                                <annotation encoding="application/x-tex">1\leq n \leq 100</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+                                class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span
+                                class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+                                class="mord mathnormal">n</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span><span class="mrel">≤</span><span class="mspace"
+                                style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut"
+                                style="height: 0.6444em;"></span><span
+                                class="mord">100</span></span></span></span></span>。</p>
+                    <p>优先队列中存放 <code>int</code> 类型元素时，保证元素在 <span><span class="katex"><span class="katex-mathml"><math
+                              xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mo fence="true">[</mo>
+                                  <mn>0</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>100</mn>
+                                  <mo fence="true">]</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\left[0,100\right]</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="minner"><span class="mopen delimcenter" style="top: 0em;">[</span><span
+                                  class="mord">0</span><span class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord">100</span><span
+                                  class="mclose delimcenter"
+                                  style="top: 0em;">]</span></span></span></span></span></span> 范围内；</p>
+                    <p>优先队列中存放 <code>Point</code> 类型元素时，保证两维坐标的绝对值在 <span><span class="katex"><span
+                            class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <semantics>
+                                <mrow>
+                                  <mo fence="true">[</mo>
+                                  <mn>0</mn>
+                                  <mo separator="true">,</mo>
+                                  <mn>100</mn>
+                                  <mo fence="true">]</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">\left[0,100\right]</annotation>
+                              </semantics>
+                            </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span
+                                class="minner"><span class="mopen delimcenter" style="top: 0em;">[</span><span
+                                  class="mord">0</span><span class="mpunct">,</span><span class="mspace"
+                                  style="margin-right: 0.1667em;"></span><span class="mord">100</span><span
+                                  class="mclose delimcenter"
+                                  style="top: 0em;">]</span></span></span></span></span></span> 范围内；</p>
+                    <p>保证输入的所有元素在对应的大小比较规则下不“相等”。</p>
+                    <h3>提交格式</h3>
+                    <p>请不要修改 <code>main.cpp</code>, <code>abstract_compare.h</code>, <code>point.h</code>,
+                      <code>point.cpp</code> 和 <code>Makefile</code>。</p>
+                    <p>我们会将你提交的文件和我们预先设置好的 <code>main.cpp</code>,
+                      <code>abstract_compare.h</code>,<code>point.h</code>,<code>point.cpp</code>,<code>Makefile</code>
+                      一起编译运行。</p>
+                    <p>请将你的文件打包成一个 zip 压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到你提交的 cpp
+                      文件（或其他代码文件），而不是一个包含它们的文件夹。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

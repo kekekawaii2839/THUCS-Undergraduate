@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>智能指针</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h3>题目描述</h3>
+                    <p>指针是C语言的重要概念，也是很容易造成bug的功能，同学们在日常编写程序的过程中应该都遇到过内存泄露、访问非法内存等错误。</p>
+                    <p>事实上，在C++的标准模板库中提供了一些智能指针类，例如你今天要模仿的<code>unique_ptr</code>。它实际上是一个封装好的指针，可以帮助你管理内存，并且不需要你操心内存的释放。
+                    </p>
+                    <p>
+                      具体而言，<code>unique_ptr</code>指向一块内存，这块内存应当是由这个<code>unique_ptr</code>来唯一管理的。一方面，不允许通过拷贝构造、拷贝赋值等方式让两个<code>unique_ptr</code>指向同一块内存；另一方面，当<code>unique_ptr</code>被析构时，它需要释放掉它指向的内存。可以通过移动赋值和移动构造在两个<code>unique_ptr</code>间交接一块内存的管理权。
+                    </p>
+                    <p>你需要编写一个<code>my_ptr</code>模板类，来实现<code>unique_ptr</code>的基本功能，具体包括：</p>
+                    <ol>
+                      <li>
+                        内存管理。你的<code>my_ptr</code>应该可以管理一块内存，并在析构时释放内存；通过修改拷贝构造函数和赋值运算符来禁止其他的<code>my_ptr</code>管理同一块内存；通过修改移动构造函数和赋值运算符来允许在两个<code>my_ptr</code>之间交接内存管理权。<strong>为了通过编译，不应该通过<code>delete</code>来禁止拷贝，如果试图拷贝构造，应当输出提示信息（见输出样例）并构造出一个空的<code>my_ptr</code>；如果试图拷贝赋值，应当输出提示信息（见输出样例）并保持被赋值的<code>my_ptr</code>不变。</strong>
+                      </li>
+                      <li>重载运算符。你的<code>my_ptr</code>需要支持指针的<code>*</code>和<code>-&gt;</code>两种运算符。</li>
+                    </ol>
+                    <p>此外，你的<code>my_ptr</code>还需要有一些新的功能来防止一些常见的bug，包括：</p>
+                    <ol>
+                      <li>
+                        保护空指针。当试图利用<code>*</code>或<code>-&gt;</code>运算符访问一个空的<code>my_ptr</code>时，你应该进行一些修改来防止<code>Segmentation fault</code>的发生。具体而言，你可以使用一个静态指针来指向一块内存区域，作为访问空<code>my_ptr</code>时返回的“垃圾桶”。这块区域不需要被释放，可以让它在程序结束时被自动释放，检测内存泄漏时不会考虑它。
+                      </li>
+                    </ol>
+                    <p><code>main.cpp</code>已经写好，你不应该修改它。你需要自己完成<code>my_ptr.h</code>来实现题目要求你实现的功能。</p>
+                    <p>下载地址：<a
+                        href="https://oj.cs.tsinghua.edu.cn/staticdata/1774.uEEWuFkn29K2IgF7.pub/1ZN0lHrweKBe0Iu1.download.zip/download.zip">点此下载</a>
+                    </p>
+                    <p>测试点分为4个子任务：</p>
+                    <ol>
+                      <li>测试内存管理</li>
+                      <li>测试移动构造和赋值，以及拷贝构造和拷贝赋值是否被禁用</li>
+                      <li>测试运算符重载以及空指针保护</li>
+                      <li>综合测试</li>
+                    </ol>
+                    <p>你可以分别实现以获得不同分数。</p>
+                    <h3>输入格式</h3>
+                    <p>无输入，请参考下载文件的main.cpp</p>
+                    <h3>输出格式</h3>
+                    <p>
+                      当<code>my_ptr</code>构造或析构时，你需要输出一行形式为<code>my_ptr constructed.</code>或<code>my_ptr destructed.</code>的信息。
+                    </p>
+                    <p>当调用赋值运算符时，你需要输出一行形式为<code>my_ptr updated.</code>的信息。</p>
+                    <p>当调用应当被禁止的拷贝构造函数/赋值运算符时，你需要输出一行<code>Copying of my_ptr is forbidden!</code>的提示信息，在上面两条基础信息之前。</p>
+                    <p>当尝试访问空指针时，你需要输出一行<code>Do not attempt to read a nullptr!</code>的提示语句。</p>
+                    <p>例如子任务2的输出：</p>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">my_ptr constructed.
+Copying of my_ptr is forbidden!
+my_ptr constructed.
+my_ptr constructed.
+Copying of my_ptr is forbidden!
+my_ptr constructed.
+my_ptr constructed.
+my_ptr destructed.
+my_ptr destructed.
+my_ptr destructed.
+my_ptr destructed.
+my_ptr destructed.
+Accepted!
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>提示</h3>
+                    <p>本题分为了4个 subtask，每个 subtask
+                      各占25分。你可以分别实现来得到部分分数，除了提供的<code>main.cpp</code>里的测试点，每个子任务还各有一个隐藏测试点，你需要都通过才能获得这个子任务的分数。四个 subtask
+                      对应的测试点编号分别为：(1,5)，(2,6)，(3,7)，(4,8)。</p>
+                    <h2>要求</h2>
+                    <ol>
+                      <li>不能修改<code>main.cpp</code></li>
+                      <li>增加<code>myptr.h</code>，编写一个<code>my_ptr</code>模板类来实现题目要求的功能</li>
+                    </ol>
+                    <h3>提交格式</h3>
+                    <p>请将你的文件打包成一个 zip 格式的压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下，换而言之，解压你提交的压缩包后，应该直接得到一系列 cpp
+                        文件、h 文件等代码文件，而不是一个包含它们的文件夹。</strong>评测时，OJ会将提供的文件贴入你的目录下进行编译并执行。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

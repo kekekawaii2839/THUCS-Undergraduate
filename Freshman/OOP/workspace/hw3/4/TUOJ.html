@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+  <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+    </app-nav>
+    <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+          <div class="page-header">
+            <h1>难缠的店长</h1>
+          </div>
+          <div class="row">
+            <div class="col-md-40 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                      class="glyphicon glyphicon-refresh"></i></button>
+                  <markdown katex="" clipboard="">
+                    <h2>题目描述</h2>
+                    <p>小陈暑假实习遇到了一个难缠的店长，店长为了将新到的货物进行排序，写了一段代码，但出现了多达12处的语法错误，自诩熟练掌握C++的店长不愿意修改他的代码，请你完善
+                      <code>Rack</code> 类，使得程序可以正常编译运行，提示：合理使用操作符重载和友元函数。首先店长声明了一个 <code>Rack</code>
+                      类代表货架，货架上按顺序储存带有标号的商品，货物的标号为正整数，同一标号的商品可以有多个，初始货架为空。</p>
+                    <h3>Subtask1</h3>
+                    <p><code>Rack</code> 类支持通过 <code>+=</code> 符号进行货物添加，同时 <code>+=</code> 符号也支持添加货架。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp">Rack A<span class="token punctuation">;</span> <span class="token comment">// 此时货架为空，A：</span>
+A <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 给A货架上添加一个标号为1的货物，A：1</span>
+A <span class="token operator">+=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">// 给A货架上添加一个标号为1的货物，A：1 3</span>
+A <span class="token operator">+=</span> <span class="token number">7</span><span class="token punctuation">;</span> <span class="token comment">// 给A货架上添加一个标号为1的货物，A：1 3 7</span>
+A <span class="token operator">+=</span> A<span class="token punctuation">;</span> <span class="token comment">// 给A货架上添加A货架上同样的货物，A：1 3 7 1 3 7</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><code>Rack</code> 类支持将货架上的货物按顺序打印出来，以供员工按顺序将实际货物排列在货架上。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若A：1 3 7 1 3 7   </span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A:"</span> <span class="token operator">&lt;&lt;</span> A <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment">// 输出为：A: 1 3 7 1 3 7\n</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>Subtask2</h3>
+                    <p><code>Rack</code> 类支持通过 <code>(, , ,)</code>
+                      进行货架和货物的组装。（测例中不会出现相邻的货物，例如：<code>(A, 1, A, 2, A)</code> 是合理的，<code>(1, A, 2, 3, 4, A)</code> 和
+                      <code>(A, 1, 2, 3)</code> 是不合理的）</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若A：1 3 7</span>
+Rack B<span class="token punctuation">;</span> <span class="token comment">// 此时货架为空，B：</span>
+B <span class="token operator">=</span> <span class="token punctuation">(</span>A<span class="token punctuation">,</span> A<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将两个A货架拼起来。B：1 3 7 1 3 7</span>
+B <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2023</span><span class="token punctuation">,</span> A<span class="token punctuation">,</span> <span class="token number">2023</span><span class="token punctuation">,</span> A<span class="token punctuation">,</span> <span class="token number">2023</span><span class="token punctuation">,</span> A<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将三个A货架拼起来，并插入三个编号为2023的货物，此时B：2023 1 3 7 2023 1 3 7 2023 1 3 7</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><code>Rack</code> 类支持货架上货物数量的比较，例如A的货物数量比B少，则
+                      <code>(A &lt; B) = 1</code>，<code>(A == B) = 0</code>，<code>(A &gt; B) = 0</code>；</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若A：1 3 7     B：2023 1 3 7 2023 1 3 7 2023 1 3 7    C:4 6 8</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>A <span class="token operator">&lt;</span> B<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>C <span class="token operator">&gt;</span> B<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>A <span class="token operator">==</span> C<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment">// 输出为：1 0 1\n</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><code>Rack</code> 类支持采用 <code>&amp;</code> 按顺序挑选出多个货架中相同的货物。我们规定：对于
+                      <code>F &amp; G</code>，输出货物的顺序和货物在 <code>F</code> 货架上的顺序相同。重复的货物只输出一次。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若F：1 2 2 3 4 5   G：2 2 4 3 5 6    H: 7 4 5 6 3 8</span>
+Rack D <span class="token operator">=</span> F <span class="token operator">&amp;</span> G<span class="token punctuation">;</span> <span class="token comment">// D：2 3 4 5</span>
+Rack E <span class="token operator">=</span> F <span class="token operator">&amp;</span> G <span class="token operator">&amp;</span> H<span class="token punctuation">;</span> <span class="token comment">// E：3 4 5</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>Subtask3</h3>
+                    <p><code>Rack</code> 类支持采用 <code>(int a)</code> 返回货架上标号为 <code>a</code> 的货物的个数。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若A：1 2 2 3 3 3   </span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">A</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment">// 输出为：3</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><code>Rack</code> 类支持采用 <code>~</code> 将货架上的货物进行倒转顺序。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若B：1 2 3 4 5   </span>
+<span class="token operator">~</span>B<span class="token punctuation">;</span> <span class="token comment">// 则B：5 4 3 2 1</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <p><code>Rack</code> 类支持采用 <code>--A</code> 和 <code>A--</code>，两者分别负责将货架上最前面的货物和最后的货物卸下来。</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 若 B：5 4 3 2 1   </span>
+B<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// B：5 4 3 2</span>
+<span class="token operator">--</span>B<span class="token punctuation">;</span> <span class="token comment">// B：4 3 2</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h3>Subtask4</h3>
+                    <p>为了综合应用以上所有的运算，店长写了如下的代码 <code>main.cpp</code>：</p>
+                    <div style="position: relative;">
+                      <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"Rack.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Rack A<span class="token punctuation">,</span> B<span class="token punctuation">,</span> C<span class="token punctuation">,</span> D<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span> <span class="token comment">// 读入要添加的货物的个数</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">// 初始给A和B货架添加货物</span>
+        cin <span class="token operator">&gt;&gt;</span> temp<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>A <span class="token operator">&lt;</span> B<span class="token punctuation">)</span> A <span class="token operator">+=</span> temp<span class="token punctuation">;</span> <span class="token comment">// 如果A上的货物数量比B少就给A上添加货物</span>
+        <span class="token keyword">else</span> B <span class="token operator">+=</span> temp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token comment">// 经过上述添加货物后，货架A上为第奇数个货物：1 2 4 6 8 9 ，B上为第奇数个货物：1 2 3 5 7 9</span>
+    C <span class="token operator">=</span> <span class="token punctuation">(</span>A<span class="token punctuation">,</span> <span class="token number">2023</span><span class="token punctuation">,</span> B<span class="token punctuation">,</span> <span class="token number">2023</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// C货架上按照 {A上的货物, 标号为2023的货物, B上的货物, 标号为2023的货物} 的顺序排列，即货架C为：1 2 4 6 8 9 2023 1 2 3 5 7 9 2023</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C:"</span> <span class="token operator">&lt;&lt;</span> C <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 将C货架上的元素按照加入的顺序打印出来，然后让店员摆放</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">": "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">C</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 打印出C货架上标号号为i的货物的个数,若i=1，则此处C[i]=2</span>
+    <span class="token punctuation">}</span>
+    D <span class="token operator">=</span> A <span class="token operator">&amp;</span> B<span class="token punctuation">;</span> <span class="token comment">// D由A和B中共有的元素组成,即货架D为：1 2 9</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"D:"</span> <span class="token operator">&lt;&lt;</span> D <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token operator">~</span>D<span class="token punctuation">;</span> <span class="token comment">// 将C货架上的货物倒序，即货架D为：9 2 1</span>
+    D<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// 将D货架上最后一个货物卸掉（直接删掉），即货架D为：9 2 </span>
+    <span class="token operator">--</span>D<span class="token punctuation">;</span> <span class="token comment">// 将D货架上最前面一个货物卸掉（直接删掉），即货架D为：2 </span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"D:"</span> <span class="token operator">&lt;&lt;</span> D <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>下发的文件</h2>
+                    <ul>
+                      <li>包含以上四个任务的 <code>main.cpp</code> 文件（<a
+                          href="https://oj.cs.tsinghua.edu.cn/staticdata/1763.KXQvxymIOR7ILEcG.pub/kL9dAuGgHVOMLjlC.main.cpp/main.cpp">下载链接</a>）。
+                      </li>
+                      <li>参考 Makefile 文件（<a
+                          href="https://oj.cs.tsinghua.edu.cn/staticdata/1763.KXQvxymIOR7ILEcG.pub/0NfUDYKLkSkwcGDx.Makefile/Makefile">下载链接</a>）。可以使用
+                        <code>make exe_i</code> 命令编译出 subtask i 对应的 exe_i 文件。 注：Makefile 中的 -D 参数的含义可以参考<a
+                          href="https://blog.csdn.net/y396397735/article/details/53736416">此链接</a>。</li>
+                    </ul>
+                    <h2>输入格式：</h2>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">12
+1 1 2 2 3 4 5 6 7 8 9 9
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>输出格式：</h2>
+                    <div style="position: relative;">
+                      <pre class="language-none" tabindex="0"><code class="language-none">C: 1 2 4 6 8 9 2023 1 2 3 5 7 9 2023
+1: 2
+2: 2
+3: 1
+4: 1
+D: 1 2 9
+D: 2
+</code></pre>
+                      <div
+                        style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                        <app-copy-button><button class="btn btn-default btn-sm"><i
+                              class="glyphicon glyphicon-copy"></i></button></app-copy-button></div>
+                    </div>
+                    <h2>提交格式</h2>
+                    <ul>
+                      <li>你只能提交 <code>Rack.cpp</code> 与 <code>Rack.h</code>，我们会将你提交的文件和我们预先设置好的 <code>main.cpp</code>
+                        一起编译运行。</li>
+                      <li>你应该将你的文件打包成一个zip压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</strong></li>
+                    </ul>
+                    <h2>评分标准</h2>
+                    <p>
+                      我们会有1个样例测试点，即下发的<code>main.cpp</code>。另外有1个隐藏测试点，会相应的更改<code>main.cpp</code>中内容进行测试。一般来说，如果你能正确实现通过样例测试点，也应该能够通过隐藏测试点。
+                    </p>
+                    <p>测试时分为为了4个 task，每个 task 各占25分。只有你通过了样例测试点和隐藏测试点的同一个 task，你才能获得该 subtask 的分数。四个 subtask
+                      对应的测试点编号分别为：(1,5)，(2,6)，(3,7)，(4,8)</p>
+                    <p><strong>注意你不用同时通过4个task再提交</strong>，仅仅实现部分 task 的代码也能得到部分分（但是后一个 task 可能会依赖于前一个 task）。同时请保证提交的
+                      <code>Rack.cpp</code> 与 <code>Rack.h</code> 和下发的 <code>main.cpp</code> 能够一起编译成功。</p>
+                    <p>考试100%为OJ评分。</p>
+                  </markdown><!---->
+                </div>
+              </div><!---->
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">语言和编译选项</div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">名称</th>
+                      <th class="text-center">编译器</th>
+                      <th class="text-center">额外参数</th>
+                      <th class="text-center">代码长度限制</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">0</td>
+                      <td class="text-center">oop_custom</td>
+                      <td><code>make</code></td>
+                      <td><!----></td>
+                      <td class="text-center">65536 B</td>
+                    </tr><!---->
+                  </tbody>
+                </table>
+              </div><!----><!---->
+            </div>
+          </div><!---->
+        </app-contest-problem><!---->
+      </app-contest-nav><!----></div>
+  </app-root>
+</body>
+
+</html>

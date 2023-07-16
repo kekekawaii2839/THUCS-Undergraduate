@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+			
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav>
+				<router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>单选题</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h1>单选题</h1>
+										<p><strong>说明:</strong></p>
+										<ul>
+											<li>每小题分值相同</li>
+											<li>考试期间的该题的任意提交都被判定为100分，考试结束后将进行重测。</li>
+										</ul>
+										<ol>
+											<li>
+												<p>下面说法错误的是：</p>
+												<p>A. C++11中，类内的非静态成员变量可以在类的构造函数外指明初始化参数。</p>
+												<p>B. 常量对象可以成为非常量成员函数的参数</p>
+												<p>C. 静态成员函数可以访问 this 指针。</p>
+												<p>D. 对于自定义类型的静态数据成员，如果在.h文件中同时完成声明和定义，则链接可能会失败</p>
+												<p>E. 创建和删除对象时，new[]和delete同时使用可能会导致内存泄漏</p>
+											</li>
+											<li>
+												<p>下面关于函数重载，说法正确的是：</p>
+												<p>A. 函数名、参数类型与返回值都会被作为重载函数调用的依据。</p>
+												<p>B. C语言和C++都可进行函数重载</p>
+												<p>C. C++底层对于函数重载的处理为，将重载函数根据参数的个数，参数的类型，返回值的类型做重新命名。</p>
+												<p>D.</p>
+												<div style="position: relative;">
+													<pre class="language-cpp" tabindex="0"><code class="language-cpp">    
+ <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+ <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+ <span class="token keyword">int</span> <span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">short</span> left<span class="token punctuation">,</span> <span class="token keyword">short</span> right<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> left <span class="token operator">+</span> right<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">short</span> <span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">short</span> left<span class="token punctuation">,</span> <span class="token keyword">short</span> right<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> left <span class="token operator">+</span> right<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+													<div
+														style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+														<app-copy-button><button class="btn btn-default btn-sm"><i
+																	class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+													</div>
+												</div>
+												<p> 在上述代码中，两个函数实现了函数重载</p>
+											</li>
+											<li>
+												<p>关于以下代码，说法正确的是</p>
+												<div style="position: relative;">
+													<pre class="language-cpp" tabindex="0"><code class="language-cpp"> <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+ <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+ <span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">{</span>
+ <span class="token keyword">public</span><span class="token operator">:</span>
+     <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base::f1 "</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">void</span> <span class="token function">f2</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base::f2 "</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span> <span class="token punctuation">{</span>
+ <span class="token keyword">public</span><span class="token operator">:</span>
+     <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived::f1 "</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">void</span> <span class="token function">f2</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>									<span class="token comment">// (1)</span>
+         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived::f2 "</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     Base x<span class="token punctuation">;</span>
+     Derived y<span class="token punctuation">;</span>        
+     Base<span class="token operator">*</span> pb1 <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span class="token punctuation">;</span> 
+     Base<span class="token operator">*</span> pb2 <span class="token operator">=</span> <span class="token operator">&amp;</span>y<span class="token punctuation">;</span>
+     Derived<span class="token operator">*</span> pd <span class="token operator">=</span> <span class="token operator">&amp;</span>y<span class="token punctuation">;</span> 
+
+     pd<span class="token operator">-&gt;</span><span class="token function">f2</span><span class="token punctuation">(</span><span class="token number">3.14f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment">// (2)</span>
+
+     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+													<div
+														style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+														<app-copy-button><button class="btn btn-default btn-sm"><i
+																	class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+													</div>
+												</div>
+												<p>A. <code>Derived</code> 类不仅继承了 <code>Base::f2(float x)</code>
+													，而且额外定义了函数名相同，函数参数不同的 <code>Derived::f2(int x)</code>，从而实现了函数重载。</p>
+												<p>B. <code>Derived::f1()</code> 实现了对 <code>Base::f1() </code> 的重写覆盖。
+												</p>
+												<p>C. (1) 处发生了重写隐藏。如果在此处加入 <code>override</code> 关键字变为
+													<code>void f2() override (int x)</code>，则可以实现重写覆盖。</p>
+												<p>D. 由于 (1) 处发生了重写隐藏，因此 (2) 处将输出 <code>Derived::f2 3.14</code>。</p>
+											</li>
+											<li>
+												<p>下面关于构造函数和析构函数，下列说法错误的是：</p>
+												<p>A. 在一个类中可以有多个构造函数，它们构成了函数的重载；析构函数没有参数，所以不能重载，一个类仅有一个析构函数。</p>
+												<p>B. </p>
+												<div style="position: relative;">
+													<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">P</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">P</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"调用构造函数"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">~</span><span class="token function">P</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"析构函数的调用"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>P p<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    P p1<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+													<div
+														style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+														<app-copy-button><button class="btn btn-default btn-sm"><i
+																	class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+													</div>
+												</div>
+												<p> 运行上述代码，输出为</p>
+												<div style="position: relative;">
+													<pre class="language-none" tabindex="0"><code class="language-none">调用构造函数
+调用构造函数
+析构函数的调用
+析构函数的调用
+</code></pre>
+													<div
+														style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+														<app-copy-button><button class="btn btn-default btn-sm"><i
+																	class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+													</div>
+												</div>
+												<p>C. 通常，拷贝构造函数的形参被设定为本类对象的常量引用</p>
+												<p>D. 构造函数没有返回值类型，函数名与类名相同</p>
+											</li>
+											<li>
+												<p>下面关于设计模式，错误的是：</p>
+												<p>A. 结构型模式关注对象之间结构关系上的抽象，从而提升对象结构的可维护性、代码的健壮性，能在结构层面上尽可能的解耦合</p>
+												<p>B. 如果在一个系统里面有许多类，它们仅仅在行为上有区别，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为</p>
+												<p>C.
+													模板方法在接口的一个方法中定义算法的骨架，将一些步骤的实现延迟到子类中，使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤
+												</p>
+												<p>D. 开闭原则的含义是一个软件实体应当对继承开放，对实现关闭</p>
+											</li>
+											<li>
+												<p>下列说法中错误的是</p>
+												<p>A. std::string 和 std::vector 均可以直接通过下标访问元素。</p>
+												<p>B. 对于 std::string 定义的字符串 str ，可以分别通过 str.begin() 和 str.end() 获取迭代器，指向
+													str 的第一个和最后一个字符。</p>
+												<p>C. 当 std::vector 的 size 达到 capacity，仍然可以继续调用 push_back() 函数添加元素。</p>
+												<p>D. std::vector 在大小发生改变时，可能致使所有迭代器失效。</p>
+											</li>
+											<li>
+												<p>阅读代码，下列说法正确的是</p>
+												<div style="position: relative;">
+													<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+ <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+ <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     x <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">int</span><span class="token operator">&amp;</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span>             <span class="token comment">// (1)</span>
+     <span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> z <span class="token operator">=</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>   <span class="token comment">// (2)</span>
+     <span class="token function">f</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>                   <span class="token comment">// (3)</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// (4)</span>
+     <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// (5)</span>
+     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+</code></pre>
+													<div
+														style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+														<app-copy-button><button class="btn btn-default btn-sm"><i
+																	class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+													</div>
+												</div>
+												<p>A. 这段代码实现了对函数 f 的重载。</p>
+												<p>B. 左值引用无法绑定右值，但是常量左值引用可以绑定右值。因此 (1) 的写法有误，(2) 的写法正确。</p>
+												<p>C. (3) (4) 处为右值引用，调用函数 <code>void f(int&amp; x)</code>；(5)
+													处为左值引用，调用函数 <code>void f(int&amp;&amp; x)</code>。</p>
+												<p>D. 执行 (4) 的函数调用不会影响主函数中变量 a 的取值，即执行完 (4) 后，主函数中 a 的值仍然为 1。</p>
+											</li>
+											<li>
+												<p>下列说法错误的是</p>
+												<p>A. 编译器隐式合成默认构造函数的条件是，用户没有为类显式定义默认构造函数</p>
+												<p>B. 全局对象在main()函数调用之前构造，在main()函数执行完之前不会被析构</p>
+												<p>C. 使用全局对象可能会使得代码之间的耦合性增大，因此尽量少用全局变量</p>
+												<p>D. 假设类A的对象a是类B的数据成员，则类B的对象b执行析构时，会先调用类A的析构函数来析构a，再调用类B的析构函数。</p>
+											</li>
+										</ol>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">answer</td>
+											<td><code>cp</code></td>
+											<td><!----></td>
+											<td class="text-center">1048576 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div><!---->
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

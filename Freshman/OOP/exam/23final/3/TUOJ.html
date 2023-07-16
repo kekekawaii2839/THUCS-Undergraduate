@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav>
+				<router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>图形界面</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h2>题目内容</h2>
+										<p>我们来尝试模拟一个图形界面：在一个窗口(window)内，包含若干控件(widget)，例如按钮(button)、文本框等等。所有的控件都由Widget基类派生得到。
+										</p>
+										<p>每一个控件都属于一个窗口，因此 Widget 有一个 <code>Window*</code>
+											成员<code>_parent</code>用来记录其所属的窗口（当控件暂不属于任何窗口时<code>_parent</code>为<code>nullptr</code>）。
+										</p>
+										<p>为方便定位，同一窗口内的每一个控件都有一个独一无二的名字。我们可以这样定义Widget基类：</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Widget</span> <span class="token punctuation">{</span>
+    string _name<span class="token punctuation">;</span>
+    Window<span class="token operator">*</span> _parent<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Widget</span><span class="token punctuation">(</span>string name<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">_name</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_parent</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    string <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _name<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    Window<span class="token operator">*</span> <span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _parent<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">setParent</span><span class="token punctuation">(</span>Window<span class="token operator">*</span> parent<span class="token punctuation">)</span> <span class="token punctuation">{</span> _parent <span class="token operator">=</span> parent<span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token comment">// 将 Widget对象 与 Window对象 绑定</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Widget</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>定义好了Widget基类，我们就可以定义Window类了。一个窗口包含若干个控件，可以用<code>list&lt;shared_ptr&lt;Widget&gt;&gt;</code>保存；我们还希望能够通过控件的名字获取指向控件的指针和引用，Window类有<code>getPointerByName</code>和<code>getElementByName</code>两个成员函数，通过一个name字符串获取对应的widget；最后，Window类还可以动态添加控件，通过<code>addElement</code>方法，可以将widget添加到Window中。
+										</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Window</span> <span class="token punctuation">{</span>
+    list<span class="token operator">&lt;</span>shared_ptr<span class="token operator">&lt;</span>Widget<span class="token operator">&gt;&gt;</span> Widgets<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// 返回一个指向名称为name的控件的指针</span>
+    shared_ptr<span class="token operator">&lt;</span>Widget<span class="token operator">&gt;</span> <span class="token function">getPointerByName</span><span class="token punctuation">(</span>string name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token comment">// 返回一个指向名称为name的控件的引用</span>
+    Widget<span class="token operator">&amp;</span> <span class="token function">getElementByName</span><span class="token punctuation">(</span>string name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 将控件w添加到窗口中。如果w的名字已经存在，则不添加w，返回false；否则返回true。</span>
+    <span class="token keyword">bool</span> <span class="token function">addElement</span><span class="token punctuation">(</span>shared_ptr<span class="token operator">&lt;</span>Widget<span class="token operator">&gt;</span> w<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token comment">// 使用Window类的例子</span>
+<span class="token comment">// 这里假设Button（按钮）类是Widget的派生类</span>
+Window win<span class="token punctuation">;</span> <span class="token comment">// 创建一个空窗口，没有控件</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 向窗口win中添加一个按钮控件，名为btn1，返回true</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这条语句会返回false，不会添加任何控件</span>
+cout <span class="token operator">&lt;&lt;</span> win<span class="token punctuation">.</span><span class="token function">getPointerByName</span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 输出 btn1</span>
+cout <span class="token operator">&lt;&lt;</span> win<span class="token punctuation">.</span><span class="token function">getElementByName</span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 输出 btn1</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>1</h3>
+										<p>我们希望，对于一个具体的控件，例如按钮，可以动态设置其被单击或双击后的反应。
+											你需要实现两个基类：Click类和DoubleClick类，使得派生自这两个类的控件分别能够响应单击和双击事件。例如，按钮可以响应单击和双击，通过下面的代码就可以实现：
+										</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Button</span> <span class="token operator">:</span><span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Widget</span><span class="token punctuation">,</span> <span class="token keyword">public</span> <span class="token class-name">Click</span><span class="token punctuation">,</span> <span class="token keyword">public</span> <span class="token class-name">DoubleClick</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Button</span><span class="token punctuation">(</span>string name<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">Widget</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+Button <span class="token function">b</span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b<span class="token punctuation">.</span><span class="token function">setClickCommand</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"btn1 was clicked!"</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 此处展示的 `[]{ cout &lt;&lt; "btn1 was clicked!"; }` 是lambda表达式，是一个void()的可调用对象的示例，实际并不需要大家编写lambda表达式</span>
+b<span class="token punctuation">.</span><span class="token function">setDoubleClickCommand</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"btn1 was double-clicked!"</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出 btn1 was clicked!</span>
+b<span class="token punctuation">.</span><span class="token function">doubleClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出 btn1 was double-clicked!</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p><code>setClickCommand</code>接受一个void()的可调用对象，设置单击时执行的代码（每次覆盖掉之前的设置）；<code>click()</code>则运行之前设置的代码（如果控件之前从未执行<code>setClickCommand</code>，则<code>click()</code>什么也不做）。<code>setDoubleClickCommand</code>和<code>doubleClick()</code>同理。
+										</p>
+										<h3>2</h3>
+										<p>考虑另一种控件——多选框(checkbox)。一个多选框有两种状态：选中和未选中，默认是未选中状态。多选框可以响应单击：单击时，默认改变多选框的选中状态（选中改为未选中，未选中改为选中）
+										</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Checkbox</span><span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Widget</span><span class="token punctuation">,</span> <span class="token keyword">public</span> <span class="token class-name">Click</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO ...</span>
+<span class="token punctuation">}</span>
+Checkbox <span class="token function">c1</span><span class="token punctuation">(</span><span class="token string">"c1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1未选中</span>
+c1<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1选中</span>
+c1<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1未选中</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>3</h3>
+										<p>我们来尝试为按钮增加一些功能。
+											首先是多选框的全选和清空功能。你需要编写<code>SelectAll</code>类和<code>ClearAll</code>类，实现下面的效果：
+										</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp">Window win<span class="token punctuation">;</span>
+<span class="token comment">// 向窗口中添加1个按钮和2个多选框</span>
+<span class="token keyword">auto</span> btn1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c2<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>btn1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加按钮</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c1</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c2</span>
+
+list<span class="token operator">&lt;</span>shared_ptr<span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;&gt;</span> l <span class="token operator">=</span> <span class="token punctuation">{</span>c1<span class="token punctuation">,</span>c2<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// 设置全选/清空的是哪几个多选框</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">setClickCommand</span><span class="token punctuation">(</span><span class="token function">SelectAll</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将btn1的单击指令设置为将c1、c2全选</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1、c2均选中</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">setClickCommand</span><span class="token punctuation">(</span><span class="token function">ClearAll</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将btn1的单击指令设置为将c1、c2清空</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1、c2均未选中</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>你还需要编写<code>Submit</code>类，<code>Submit</code>类将多选框的选择情况输出：</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp">Window win<span class="token punctuation">;</span>
+<span class="token comment">// 向窗口中添加1个按钮和2个多选框</span>
+<span class="token keyword">auto</span> btn1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c2<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>btn1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加按钮</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c1</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c2</span>
+
+list<span class="token operator">&lt;</span>shared_ptr<span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;&gt;</span> l <span class="token operator">=</span> <span class="token punctuation">{</span>c1<span class="token punctuation">,</span>c2<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// 设置输出的是哪几个多选框</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">setClickCommand</span><span class="token punctuation">(</span><span class="token function">Submit</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将btn1的单击指令设置为将c1、c2选择情况输出</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：c1 is not selected\nc2 is not selected\n</span>
+c1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 单击c1</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：c1 is selected\nc2 is not selected\n</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>4</h3>
+										<p>最后，我们为窗口添加撤销功能。</p>
+										<p>以下几个操作会改变多选框选中情况：</p>
+										<ul>
+											<li>单击多选框，即 多选框的 <code>click</code> 操作</li>
+											<li>全选多选框，即 <code>SelectAll</code></li>
+											<li>清空多选框，即 <code>ClearAll</code></li>
+										</ul>
+										<p>你需要在Window类中添加一个成员函数<code>bool undo()</code>实现撤销功能，即，每次执行 <code>undo()</code>
+											成员函数，撤回前一次对该窗口中的多选框选择情况的修改。注意：无论全选/清空多选框是否实际上修改多选框的选中情况，都算作一次撤销操作。</p>
+										<p>如果没有可供撤销的指令，返回false；否则撤销并返回true。</p>
+										<p>例1：</p>
+										<div style="position: relative;">
+											<pre class="language-cpp" tabindex="0"><code class="language-cpp">Window win<span class="token punctuation">;</span>
+<span class="token comment">// 向窗口中添加1个按钮和2个多选框</span>
+<span class="token keyword">auto</span> btn1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"btn1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c1<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> c2<span class="token operator">=</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">"c2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>btn1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加按钮</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c1</span>
+win<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加多选框c2</span>
+list<span class="token operator">&lt;</span>shared_ptr<span class="token operator">&lt;</span>Checkbox<span class="token operator">&gt;&gt;</span> l <span class="token operator">=</span> <span class="token punctuation">{</span>c1<span class="token punctuation">,</span>c2<span class="token punctuation">}</span><span class="token punctuation">;</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">setClickCommand</span><span class="token punctuation">(</span><span class="token function">ClearAll</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+c1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1选中，c2未选中</span>
+win<span class="token punctuation">.</span><span class="token function">undo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1未选中，c2未选中，返回true</span>
+win<span class="token punctuation">.</span><span class="token function">undo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回false，因为已经到头了，无法继续撤销</span>
+btn1<span class="token operator">-&gt;</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1未选中，c2未选中</span>
+win<span class="token punctuation">.</span><span class="token function">undo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// c1未选中，c2未选中，返回true（即使清空没有改变c1,c2的选中情况，也可以撤销，此时撤销相当于什么都没做）</span>
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>我们将提供<code>Makefile</code>,
+											<code>main.cpp</code>，<code>command.h</code>，<code>event.h</code>，和<code>window.h</code>，下载地址：<a
+												href="https://oj.cs.tsinghua.edu.cn/staticdata/1812.yweD4BGoULF64KUv.pub/CVKAZcXdwvV2xsK8.download.zip/download.zip">点此下载</a>
+										</p>
+										<h3>输入格式</h3>
+										<p>第一行是一个整数 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>n</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">n</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.4306em;"></span><span
+																class="mord mathnormal">n</span></span></span></span></span>
+											后 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>n</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">n</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.4306em;"></span><span
+																class="mord mathnormal">n</span></span></span></span></span>
+											行，每一行是一条指令。指令总共有4种：</p>
+										<ul>
+											<li><code>create button/checkbox AA</code>，指在窗口中添加一个名称为AA的按钮/多选框。如果名称与前面创建的控件重复，输出<code>AA already exists.</code>；否则输出<code>AA has been created successfully.</code>;
+												<strong>其他指令只会在<code>create</code>指令之后出现</strong></li>
+											<li><code>setclick/setdoubleclick AA clear/select/submit m A B C ...</code>，将名称为AA的按钮单击/双击时的操作设置为清空/全选/提交，数字
+												<span><span class="katex"><span class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mi>m</mi>
+																	</mrow>
+																	<annotation encoding="application/x-tex">m
+																	</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.4306em;"></span><span
+																	class="mord mathnormal">m</span></span></span></span></span>
+												表示与按钮关联的多选框个数，后面紧接着 <span><span class="katex"><span
+															class="katex-mathml"><math
+																xmlns="http://www.w3.org/1998/Math/MathML">
+																<semantics>
+																	<mrow>
+																		<mi>m</mi>
+																	</mrow>
+																	<annotation encoding="application/x-tex">m
+																	</annotation>
+																</semantics>
+															</math></span><span class="katex-html"
+															aria-hidden="true"><span class="base"><span class="strut"
+																	style="height: 0.4306em;"></span><span
+																	class="mord mathnormal">m</span></span></span></span></span>
+												个多选框名称；<strong>输入数据保证 按钮和多选框 均已通过<code>create</code>指令创建</strong></li>
+											<li><code>click/doubleclick XX</code>，单击/双击XX；<strong>输入数据保证 按钮
+													已通过<code>create</code>指令创建</strong></li>
+											<li><code>undo</code>，撤销一次。如果不能撤销，输出<code>can't undo.</code></li>
+										</ul>
+										<h3>输入样例</h3>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">18
+create button b1
+create button b1
+create button b2
+create checkbox c1
+create checkbox c2
+create checkbox c3
+setclick b1 clear 2 c1 c2
+setdoubleclick b1 select 2 c2 c3
+setclick b2 submit 3 c1 c2 c3
+undo
+doubleclick b1
+click b2
+click c1
+click b2
+click b1
+click b2
+undo
+click b2
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<p>样例输出：</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">b1 has been created successfully.
+b1 already exists.
+b2 has been created successfully.
+c1 has been created successfully.
+c2 has been created successfully.
+c3 has been created successfully.
+can't undo
+c1 is not selected
+c2 is selected
+c3 is selected
+c1 is selected
+c2 is selected
+c3 is selected
+c1 is not selected
+c2 is not selected
+c3 is selected
+c1 is selected
+c2 is selected
+c3 is selected
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>数据范围</h3>
+										<p><span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mn>1</mn>
+																	<mo>&lt;</mo>
+																	<mi>n</mi>
+																	<mo>≤</mo>
+																	<mn>200</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">1&lt;n≤200
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.6835em; vertical-align: -0.0391em;"></span><span
+																class="mord">1</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">&lt;</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+																class="mord mathnormal">n</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">≤</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">200</span></span></span></span></span></p>
+										<p><span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>m</mi>
+																	<mo>≥</mo>
+																	<mn>1</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">m \ge 1
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+																class="mord mathnormal">m</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">≥</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">1</span></span></span></span></span></p>
+										<p>共10个测试点，第1个点为输入样例，测试点 2-6 保证不含有 undo 操作。</p>
+										<h3>评分规则</h3>
+										<p>每个测试点都为10分，即1-3小问共60分，第4小问40分。</p>
+										<h3>提交格式</h3>
+										<p>你需要提交多个文件，包含<code>window.h</code>、<code>command.h</code>、<code>event.h</code>，可以不包括提供的
+											<code>main.cpp</code>。</p>
+										<p>你应该将你的文件打包成一个zip压缩包并上传。注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。评测时，OJ会将
+											<code>main.cpp</code> 贴入你的目录下进行编译并执行。</p>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">65536 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div><!---->
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

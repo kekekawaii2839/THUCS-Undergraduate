@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题（第四次）</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h5>1.【单选】关于以下代码，说法正确的是</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Instrument{
+public:
+    int price;
+    void tune() { cout &lt;&lt; "Instrument::tune()" &lt;&lt; endl; }
+    virtual void play() { cout &lt;&lt; "Instrument::play()" &lt;&lt; endl; }
+};
+
+class Violin : public Instrument{
+public:
+    void tune() { cout &lt;&lt; "Violin::tune()" &lt;&lt; endl; } // (1)
+};
+
+void tune(Instrument* p){
+    p-&gt;tune();
+}
+
+int main(){
+    Violin obj;
+    tune(&amp;obj); // (2)
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1) 处是重写隐藏，在 (1) 处加上<code>override</code>关键字变成
+                                            <code>void tune() override {}</code> 后可以实现重写覆盖</p>
+                                        <p>B. <code>Instrument</code>类的<code>tune</code>函数继承给了<code>Violin</code>类，(1)
+                                            处又一次定义了<code>tune</code>函数，这是函数重载</p>
+                                        <p>C. (2) 处函数调用将输出 <code>Instrument::tune()</code></p>
+                                        <p>D. 一个<code>Instrument</code>对象包含一个<code>int</code>成员，因此占用4个字节</p>
+                                        <h5>2.【单选】下列说法正确的是</h5>
+                                        <p>A. 让基类指针指向派生类对象，如果析构函数均为虚函数，则可以用该指针析构指向的对象</p>
+                                        <p>B. 在基类中所有的纯虚函数都不必定义函数体</p>
+                                        <p>C.
+                                            如下代码中所示，<code>Derive1</code>中所有虚函数均使用<code>final</code>关键字修饰了，因此<code>Derive2</code>类对象没有虚函数表指针
+                                        </p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Base{
+public:
+    virtual void func() {}
+};
+class Derived1: public Base{
+public:
+    void func() final {cout &lt;&lt; "Derive1::func" &lt;&lt; endl;}
+};
+class Derived2: public Derived1{};
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>D. 在以下代码中，<code>p</code> 指向的对象被析构的过程中，<code>(*)</code>处实际调用的是
+                                            <code>Derived::func</code></p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+class Base{
+public:
+    virtual void func() { cout &lt;&lt; "Base::func" &lt;&lt; endl; }
+    virtual ~Base() {
+        func(); // (*)
+    }
+};
+class Derived: public Base{
+public:
+    virtual void func() { cout &lt;&lt; "Derived::func" &lt;&lt; endl; }
+    virtual ~Derived() { func(); }
+};
+
+int main(){
+    Base * p = new Derived();
+    delete p;
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <h5>3.【多选】对下面类定义，说法错误的是</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Instrument{
+public:
+    void play() { cout &lt;&lt; "Instrument::play()" &lt;&lt; endl; }
+    virtual void tune() { cout &lt;&lt; "Instrument::tune()" &lt;&lt; endl; }
+    virtual void tune(string component) { cout &lt;&lt; "Instrument::tune(string)" &lt;&lt; endl; }
+};
+
+class StringInstrument : public Instrument{
+public:
+    void play() { cout &lt;&lt; "StringInstrument::play()" &lt;&lt; endl; }
+    void tune(string component) { cout &lt;&lt; "StringInstrument::tune(string)" &lt;&lt; endl; }
+};
+
+class Violin : public StringInstrument{
+public:
+    void tune() { cout &lt;&lt; "Violin::tune()" &lt;&lt; endl; }
+};
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. <code>StringInstrument::tune(string)</code> 重载
+                                            <code>Instrument::tune()</code></p>
+                                        <p>B. <code>StringInstrument::play</code> 可以添加 <code>final</code> 关键字</p>
+                                        <p>C. <code>StringInstrument * obj = new Violin(); obj-&gt;tune();</code> 将会正常调用
+                                            <code>Violin::tune</code></p>
+                                        <p>D. <code>Violin::tune</code> 重写隐藏 <code>StringInstrument::tune(string)</code>
+                                        </p>
+                                        <h5>4.【单选】下列说法正确的有</h5>
+                                        <p>A. 抽象类中一定有某个成员函数没有函数体</p>
+                                        <p>B. 抽象类的派生类就不是抽象类了</p>
+                                        <p>C. 只有当一个抽象类的派生类中将该抽象基类的所有纯虚函数都重写覆盖，该派生类才不再是抽象类</p>
+                                        <p>D. 抽象类不允许被实例化为对象</p>
+                                        <h5>5.【单选】关于类型转换，说法正确的有</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">class Instrument{
+public:
+    void play() { cout &lt;&lt; "Instrument::play()" &lt;&lt; endl; }
+};
+
+class StringInstrument : public Instrument{
+public:
+    void play() { cout &lt;&lt; "StringInstrument::play()" &lt;&lt; endl; }
+    virtual void tune(string component) { cout &lt;&lt; "StringInstrument::tune(string)" &lt;&lt; endl; }
+};
+
+class Violin{
+public:
+    void tune() { cout &lt;&lt; "Violin::tune()" &lt;&lt; endl; }
+};
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. <code>Instrument * p = new StringInstrument();</code>，则
+                                            <code>dynamic_cast&lt;StringInstrument*&gt;(p)</code> 可以正常返回
+                                            <code>StringInstrument</code> 的指针</p>
+                                        <p>B. <code>Instrument * p = new StringInstrument();</code>，则
+                                            <code>static_cast&lt;StringInstrument*&gt;(p)</code> 可以正常返回
+                                            <code>StringInstrument</code> 的指针</p>
+                                        <p>C. <code>static_cast</code> 与 <code>dynamic_cast</code>只能用于基类转换成派生类</p>
+                                        <p>D. <code>Violin v;</code>，则 <code>static&lt;StringInstrument&gt;(v)</code>
+                                            可以实现从 <code>Violin</code> 到 <code>StringInstrument</code> 的类型转换</p>
+                                        <h5>6.【多选】关于多态，下面说法正确的是</h5>
+                                        <p>A. 函数重载与模板体现了C++的静态多态</p>
+                                        <p>B. 多态可以帮助提高代码的复用率</p>
+                                        <p>C. 指针、引用对虚函数的调用总是晚绑定，即运行时绑定</p>
+                                        <p>D. 函数模板在编译期间被处理，类模板在运行期间被处理</p>
+                                        <h5>7.【多选】关于下面代码，说法正确的是</h5>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+using namespace std;
+
+template&lt;typename T&gt;
+T add(T a, T b){
+    T c = a + b;
+    return c;
+}
+
+template&lt;typename T&gt;
+T subtract(T a, T b){
+    T c = a - b;
+    return c;
+}
+
+int main(){
+    int a = add(1.2, 1.3); // (1)
+    int b = subtract(add(1, 2), add(2.1, 3.2)); //(2)
+    int c = add(1, (int)add(1.2, 2.3)); // (3)
+    int d = add&lt;int&gt;(1, 1.2); // (4)
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1) 处将出现编译错误，因为 <code>add</code> 函数在(1)处的返回值类型为浮点数</p>
+                                        <p>B. (2) 处将出现编译错误，因为编译时无法确定 <code>subtract</code> 中 <code>T</code> 的具体类型</p>
+                                        <p>C. (3) 处调用了模板函数 <code>add</code> 的两个实例化版本，<code>T</code> 分别为整数和浮点数</p>
+                                        <p>D. (4) 处的返回值为2，第二个参数1.2被强制类型转换成了 <code>int</code> 类型</p>
+                                        <h5>8.【单选】下列说法正确的是</h5>
+                                        <p>A. 多重继承中只能继承一个非抽象类</p>
+                                        <p>B. 构造函数也可以是虚函数</p>
+                                        <p>C. 抽象类不允许有数据成员</p>
+                                        <p>D. 基类的析构函数被声明为虚函数后，派生类的析构函数默认也为虚函数</p>
+                                        <h3>提交格式</h3>
+                                        <p>请你提交一个文本文件，第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行是一个由A\B\C\D组成的字符串，代表第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题的答案。
+                                        </p>
+                                        <p>若你不想提交第<span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>题，请将第<span><span
+                                                    class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mi>i</mi>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">i</annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6595em;"></span><span
+                                                                class="mord mathnormal">i</span></span></span></span></span>行留空。
+                                        </p>
+                                        <p>你提交的文本文件至少要有8行，且前10行必须由A\B\C\D组成，否则将被认为是无效提交。</p>
+                                        <p>你可以通过测试点的详细信息，看到评测对你提交文件的解析。若存在问题，请联系助教。</p>
+                                        <p>以下给出一个合法的提交答案的例子：</p>
+                                        <div style="position: relative;">
+                                            <pre>A
+B
+C
+ACD
+B
+CD
+C
+C
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+
+
+                                        <p>评测器对第一行的解析结果如下：</p>
+                                        <div style="position: relative;">
+                                            <pre>Valid answer: ['A']
+</pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p><strong>注意：作业截止之前本题的评测器只检查提交格式是否正确，不检查具体答案。只要提交格式正确就显示100分。每道题的具体答案会在作业截止之后重新评测，以最后一次提交的答案为准</strong>
+                                        </p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题（第六次）</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h4>1（多选）对于 std::string 和 std::vector定义的字符串 str，以下选项正确的是</h4>
+                                        <p>A. 都可以直接使用字符串常量进行初始化，即 <code>string str("abc")</code>; 和
+                                            <code>vector&lt;char&gt; str("abc")</code>; 都可以正确编译</p>
+                                        <p>B. 都可以使用 <code>push_back()</code> 方法在尾部添加新字符 </p>
+                                        <p>C. 都可以使用 <code>std::cout &lt;&lt; str</code>; 的方式输出字符串内容</p>
+                                        <p>D. 都可以使用索引方式修改字符串内容，例如 <code>str[0] = 'a'</code>;</p>
+                                        <h4>2（多选）使用如下代码片段定义四个字符串（假设头文件已正确定义）：</h4>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">string str1 = "abc";
+string str2 = str1;
+char str3[] = "abc";
+char* str4 = str3;
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>以下说法正确的是：</p>
+                                        <p>A. 对于四个字符串，都可以使用 <code>std::cout</code> 输出其中的内容（例如
+                                            <code>cout &lt;&lt; str3</code>;)</p>
+                                        <p>B. 可以通过 <code>char* str1_copy = str1.c_str()</code>; 的方式获取字符指针，并基于 str1_copy
+                                            修改 str1 中的内容</p>
+                                        <p>C. 由于 str2 由 str1 直接赋值得到，因此二者指向同一块内存，即修改str1的内容后str2的内容也会随之改变</p>
+                                        <p>D. 由于 str4 由 str3 直接赋值得到，因此二者指向同一块内存，即修改str3的内容后str4的内容也会随之改变</p>
+                                        <h4>3（多选）以下说法正确的是：</h4>
+                                        <p>A. 由于 scanf 的参数中包含不用的标识符指明元素类型，因此在编译时即可完成对格式字符串的解析</p>
+                                        <p>B. <code>stringstream</code> 既可以作为输入流，也可以作为输出流，且能够使用 str() 方法观察其中的未读取内容</p>
+                                        <p>C. <code>std::endl</code> 是流操纵算子，使用后会导致缓冲区被清空</p>
+                                        <p>D. <code>std::cout</code> 不允许复制，因此在重载该流运算符时要返回引用</p>
+                                        <h4>4（多选）针对下述代码片段，正确的说法是</h4>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+
+using namespace std;
+
+void func1(int n) {
+    cout &lt;&lt; "func1" &lt;&lt; " " &lt;&lt; n;
+}
+
+
+class func2 {
+public: 
+    void operator()(int n) const {	// (6)
+        cout &lt;&lt; "func2" &lt;&lt; " " &lt;&lt; n;
+    }
+};
+
+template&lt;class T&gt;
+void func3(int n, T f) { 
+    f(n);
+}
+
+int main() {
+    void (*F1) (int);   // (1)
+    F1 = func1;         // (2)
+    auto F2 = func2();  // (3)
+    F2(4);              // (4)
+    func3(5, F1);       // (5)
+    
+    return 0;
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1)处的F1为函数指针，(3)处的F2为函数对象</p>
+                                        <p>B. 如果想在(5)处输出 “func2 5"，一种可行的方式是将代码修改为 <code>func3(5, func2)</code>;</p>
+                                        <p>C. (5)处func3的第二个参数只能是函数指针，因此 <code>func3(5, F2)</code>; 的写法不能正确编译</p>
+                                        <p>D. (6)处的operator()函数必须具有public访问权限</p>
+                                        <h4>5（多选）如果想实现一个函数 my_sort() 完成对输入整数数组的从大到小排序，那么以下实现方法中正确的是（假设头文件已正确定义）</h4>
+                                        <p>A. </p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">bool comp(int a, int b) { return a &gt; b; }
+
+void my_sort(vector&lt;int&gt;&amp; arr) {
+    sort(arr.begin(), arr.end(), greater&lt;int&gt;());
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>B. </p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">bool comp(int a, int b) { return a &gt; b; }
+
+void my_sort(vector&lt;int&gt;&amp; arr) {
+    sort(arr.begin(), arr.end(), comp());
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>C. </p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">template&lt;class T&gt;
+class Greater {
+public:
+    bool operator()(T&amp; a, T&amp; b) const { return a &gt; b; }
+};
+
+void my_sort(vector&lt;int&gt;&amp; arr) {
+    sort(arr.begin(), arr.end(), Greater&lt;int&gt;());
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>D. </p>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-none">class IntNum {
+public:
+    int value;
+    IntNum(int _value) : value(_value) {}
+    bool operator&lt;(const IntNum&amp; b) const { 
+        return value &gt; b.value;
+    };
+};
+
+void my_sort(vector&lt;int&gt;&amp; arr) {
+    vector&lt;IntNum&gt; nums;
+    for (int i : arr) nums.push_back(IntNum(i));
+    sort(nums.begin(), nums.end());
+    for (int i = 0; i &lt; arr.size(); i++) {
+        arr[i] = nums[i].value;
+    }
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <h4>6（多选） 下列有关智能指针的说法，正确的是</h4>
+                                        <p>A. shared_ptr 通过维护引用计数，确保不发生内存泄漏问题</p>
+                                        <p>B. 不能使用同一裸指针初始化多个 shared_ptr </p>
+                                        <p>C. unique_ptr 确保一个对象只被一个指针引用，因此不能复制 unique_ptr 指针</p>
+                                        <p>D. weak_ptr 常常搭配 shared_ptr 使用。由于 weak_ptr 指向对象但不计数，因此它无法获取引用计数</p>
+                                        <h4>7（单选）以下关于模板方法和策略模式的说法不正确的是:</h4>
+                                        <p>A. 模板方法和策略模式分别对应继承和组合两种设计思路。</p>
+                                        <p>B. 模板方法适用于业务场景相对稳定的场景，策略模式适用于业务场景相对多样灵活的场景。</p>
+                                        <p>C. 当算法的每一个步骤都有多种解决方案时，模板方法优势较大。</p>
+                                        <p>D. 策略模式会对外暴露策略组合，封装性相对较差。</p>
+                                        <h4>8（单选）以下关于设计模式不正确的是</h4>
+                                        <p>A.设计模式遵循了面向对象的设计原则</p>
+                                        <p>B.创建型模式关注对象行为功能上的抽象，提高对象在行为功能上的的可扩展性</p>
+                                        <p>C.设计模式优先使用对象组合而不是继承，降低模型复杂度</p>
+                                        <p>D.模板方法使用于业务场景相对复杂且稳定的情况，策略模式使用于算法相对多样灵活的场景</p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

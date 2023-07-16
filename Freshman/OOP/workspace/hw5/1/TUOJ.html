@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<body>
+    <app-root ng-version="14.1.2"><app-nav _nghost-yll-c83="">
+        </app-nav>
+        <div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+                    <div class="page-header">
+                        <h1>选择题（第五次）</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-40 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+                                            class="glyphicon glyphicon-refresh"></i></button>
+                                    <markdown katex="" clipboard="">
+                                        <h4>1 【单选】下列关于命名空间的说法<strong>错误</strong>的是：</h4>
+                                        <p>A. 命名空间可以嵌套, 例如 <code>namespace A{namespace B{int i;}}</code>。</p>
+                                        <p>B. 命名空间是开放的，可以随时添加新的成员。</p>
+                                        <p>C. 命名空间只可以在全局定义。</p>
+                                        <p>D. 命名空间中可以存放变量和函数。</p>
+                                        <p>E. 如果程序中使用了 <code>using</code> 命令同时引用了多个命名空间，并且命名空间中存在相同的函数，会出现程序运行错误。</p>
+                                        <h4>2 【单选】下列关于简单容器类型及其函数说法<strong>错误</strong>的是：</h4>
+                                        <p>A. <code>std::make_pair</code> 和 <code>std::make_tuple</code> 中，
+                                            参数的变量类型可以不相同。</p>
+                                        <p>B. <code>std::tie</code> 的形参和返回值均为左值引用。</p>
+                                        <p>C. 通过 <code>std::get&lt;i&gt;(tup)</code> 获取元组 <code>tup</code> 中的第
+                                            <code>i</code> 个元素，会导致编译错误（其中 <code>i</code> 为变量）。</p>
+                                        <p>D. <code>tuple</code> 对象的长度在运行时才能确定。</p>
+                                        <p>E. <code>std::tie</code> 即可用来生成 <code>tuple</code> 对象，亦可用来解包
+                                            <code>tuple</code> 对象。</p>
+                                        <h4>3 【多选】以下代码展示了一些 vector 类型上的操作, 说法<strong>错误</strong>的是:</h4>
+                                        <div style="position: relative;">
+                                            <pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> vec <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> begin <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> end <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>begin <span class="token operator">&lt;&lt;</span> <span class="token char">' '</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>end<span class="token punctuation">;</span> <span class="token comment">// (1)</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    vec<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>b <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// (2)</span>
+    vec<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// (3)</span>
+
+    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>end<span class="token punctuation">;</span> <span class="token comment">// (4)</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. (1) 处的输出为 <code>1 4</code>。</p>
+                                        <p>B. 由于在 <code>vec</code> 删除数据需要把删除位置之后的元素前移，(2) 处比 (3) 处执行更多的前移操作。</p>
+                                        <p>C. (4) 处会出现运行错误，因为 <code>erase</code> 操作使得迭代器 <code>end</code> 失效。</p>
+                                        <p>D. 将程序中的 <code>vector</code> 改为 <code>list</code> 后，程序可以正常运行。</p>
+                                        <p>E. 对于 <code>vector&lt;int&gt;</code> 对象 <code>vec</code>，可以通过
+                                            <code>cout &lt;&lt; vec;</code> 输出 <code>vec</code> 中的所有元素。</p>
+                                        <h4>4 【多选】以下代码展示了一些 map 类型上的操作, 说法<strong>正确</strong>的是:</h4>
+                                        <div style="position: relative;">
+                                            <pre class="language-none" tabindex="0"><code class="language-c++ language-none">#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+
+void choiceA(map&lt;string, int, greater&lt;string&gt;&gt; age)
+{
+    age["Dave"] = age["Carol"] + 1;
+    cout &lt;&lt; age.size() &lt;&lt; endl; // (1)
+}
+
+void choiceB(map&lt;string, int, greater&lt;string&gt;&gt; age)
+{
+    age.insert(make_pair("Alex", 5));
+    cout &lt;&lt; age["Alex"] &lt;&lt; endl; // (2)
+}
+
+void choiceC(map&lt;string, int, greater&lt;string&gt;&gt; age)
+{
+    age["Alex"] = 5;
+    cout &lt;&lt; age["Alex"] &lt;&lt; endl; // (3)
+}
+
+void choiceD(map&lt;string, int, greater&lt;string&gt;&gt; age)
+{
+    for (auto it = age.begin(); it != age.end(); it++)
+    {
+        cout &lt;&lt; it-&gt;second &lt;&lt; ' '; // (4a)
+    }
+    cout &lt;&lt; endl; // (4b)
+}
+
+void choiceE(map&lt;string, int, greater&lt;string&gt;&gt; age)
+{
+    age.insert(make_pair("Carol", 5));
+    age.erase(age.begin(), --age.end());
+    cout &lt;&lt; age.size() &lt;&lt; endl;
+}
+
+int main()
+{
+    map&lt;string, int, greater&lt;string&gt;&gt; age;
+
+    age["Alex"] = 2;
+    age["Bob"] = 1;
+
+    choiceA(age);
+    choiceB(age);
+    choiceC(age);
+    choiceD(age);
+    choiceE(age);
+}
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. <code>choiceA()</code> 中 (1) 的输出为 <code>4</code>。</p>
+                                        <p>B. <code>choiceB()</code> 中 (2) 的输出为 <code>5</code>。</p>
+                                        <p>C. <code>choiceC()</code> 中 (3) 的输出为 <code>5</code>。</p>
+                                        <p>D.<code> choiceD()</code> 中 (4a)、(4b) 的输出为 <code>2 1</code>。</p>
+                                        <p>E. <code>choiceE()</code> 中 (5) 的输出为 <code>1</code>。</p>
+                                        <h4>5 【多选】若在 vector、list、set、map 中选择，下列关于说法<strong>合适</strong>的有：</h4>
+                                        <p>A. 小明想维护一个排队购票系统，记录每个排队者的信息的同时，需要频繁从队尾加入新的排队者或从队头删去排队者的信息。针对这个需求，list
+                                            是最高效的选择。</p>
+                                        <p>B. 小明想计算一篇文章中每个词出现的次数。针对这个需求，可以选用 map 实现。</p>
+                                        <p>C. 小明想将若干篇文章中所有出现的词整理成词表。针对这个需求，可以选用 set 实现。</p>
+                                        <p>D. 小明想建立一个排名 <span><span class="katex"><span class="katex-mathml"><math
+                                                            xmlns="http://www.w3.org/1998/Math/MathML">
+                                                            <semantics>
+                                                                <mrow>
+                                                                    <mn>1</mn>
+                                                                    <mo>∼</mo>
+                                                                    <mn>100</mn>
+                                                                </mrow>
+                                                                <annotation encoding="application/x-tex">1\sim 100
+                                                                </annotation>
+                                                            </semantics>
+                                                        </math></span><span class="katex-html" aria-hidden="true"><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6444em;"></span><span
+                                                                class="mord">1</span><span class="mspace"
+                                                                style="margin-right: 0.2778em;"></span><span
+                                                                class="mrel">∼</span><span class="mspace"
+                                                                style="margin-right: 0.2778em;"></span></span><span
+                                                            class="base"><span class="strut"
+                                                                style="height: 0.6444em;"></span><span
+                                                                class="mord">100</span></span></span></span></span>
+                                            到学生姓名的映射。针对这个需求，可以选用 map 实现，也可以选用 vector 更高效地实现。</p>
+                                        <p>E. 小明需要维护一款游戏中所有玩家的积分表，玩家的昵称五花八门，且积分变动十分频繁。针对这个需求，vector 是最高效的选择。</p>
+                                        <h4>6 【多选】以下为在 <code>linux</code> 环境下的
+                                            <code>script.sh</code>，说法<strong>错误</strong>的是：</h4>
+                                        <div style="position: relative;">
+                                            <pre class="language-bash" tabindex="0"><code class="language-bash">#!/bin/bash
+filename=test
+for par in $@;
+do
+mkdir output-$par || echo test$par &gt; output-$par/test.txt
+done
+
+arr=(1 2 3)
+arr[5]=10 # (1)
+</code></pre>
+                                            <div
+                                                style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+                                                <app-copy-button><button class="btn btn-default btn-sm"><i
+                                                            class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+                                            </div>
+                                        </div>
+                                        <p>A. 为了美观可以在 <code>filename=test</code> 的等号边加上空格，即修改为
+                                            <code>filename = test</code> ，bash 脚本仍能运行，功能不变。</p>
+                                        <p>B. 如果该目录下没有 <code>output-0</code> 子目录，使用 <code>bash ./script.sh 0</code>
+                                            执行该脚本，将运行后续的 <code>echo</code> 语句。</p>
+                                        <p>C. 使用<code>bash ./script.sh 0 1 2</code>执行脚本，脚本中的 <code>$@</code> 为
+                                            <code>0 1 2</code>，<code>$#</code> 为 <code>3</code>。</p>
+                                        <p>D. 使用<code>bash ./script.sh 0 1.5</code>执行脚本，<code>$0</code>
+                                            为整数类型，<code>$1</code> 为浮点类型。</p>
+                                        <p>E. 由于数组<code>arr</code>的长度是 3，(1) 处的赋值操作造成数组越界，导致程序报错。</p>
+                                        <h4>7 【多选】下列关于 C++ 中迭代器的说法，<strong>正确</strong>的有：</h4>
+                                        <p>A. vector 中使用 <code>erase</code> 删除元素，被删除元素之后的元素的迭代器不会失效</p>
+                                        <p>B. vector 中使用 <code>push_back</code> 增加元素，原有迭代器肯定都不会失效</p>
+                                        <p>C. list 迭代器可以和整数进行加减操作</p>
+                                        <p>D. vector 迭代器之间可以进行减法操作</p>
+                                        <p>E. 可以通过自定义迭代器，实现用同样操作符（例如自增操作符）执行不一样的元素访问顺序。</p>
+                                        <h4>8 【单选】以下说法<strong>正确</strong>的是：</h4>
+                                        <p>A. 如果在本地仓库中添加 <code>.gitignore</code> 文件，并且写入 <code>*.bin</code>，随后新建文件
+                                            <code>a.bin</code>。此时将无法通过 <code>git add a.bin</code> 将该文件添加到仓库中。</p>
+                                        <p>B. <code>git branch test</code> 会创建名为 <code>test</code> 的分支并且切换到
+                                            <code>test</code> 中；<code>git branch -d test</code> 会删除名为 <code>test</code>
+                                            的分支</p>
+                                        <p>C. 小明使用 <code>git clone</code> 命令克隆了一个远端项目仓库后，他在本地对仓库内多个文件进行了修改，但还没通过
+                                            <code>git add</code> 将文件加入 <code>git</code> 暂存区，也没有提交新的
+                                            <code>commit</code>。此时他觉得这些修改不妥，希望放弃所有的修改内容。那么他只能重新使用 <code>git clone</code>
+                                            再克隆一次该远端项目仓库，没有其他方法可以满足他的需求。</p>
+                                        <p>D. Markdown 中要实现 <del><strong>加粗文本和删除线</strong></del> 的效果，可以用
+                                            <code>~**加粗文本和删除线**~</code> 来实现。</p>
+                                        <p>E. 小明在 <code>resume.md</code> 中使用 <code>![](/home/xiaoming/selfie.png)</code>
+                                            插入了一张照片，他将该 <code>resume.md</code> 通过邮件发送给了老师，老师在接收文件后就能看到小明的照片。</p>
+                                    </markdown><!---->
+                                </div>
+                            </div><!---->
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">语言和编译选项</div>
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center">编译器</th>
+                                            <th class="text-center">额外参数</th>
+                                            <th class="text-center">代码长度限制</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">answer</td>
+                                            <td><code>cp</code></td>
+                                            <td><!----></td>
+                                            <td class="text-center">1048576 B</td>
+                                        </tr><!---->
+                                    </tbody>
+                                </table>
+                            </div><!----><!---->
+                        </div>
+                    </div><!---->
+                </app-contest-problem><!---->
+            </app-contest-nav><!----></div>
+    </app-root>
+</body>
+
+</html>

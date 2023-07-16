@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>动物模拟</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h2>题目描述</h2>
+										<p>本题需要用类模拟鸟类（Bird）和鱼类（Fish）两种动物，实现歌唱（sing）和游泳（swim）两个方法。两种动物都有红色（Red）和蓝色（Blue）两种。鸟类会歌唱但不会游泳，鱼类会游泳但不会歌唱。对某种动物调用方法时，需要输出对应的动物、方法以及颜色信息。例如，对红色的鸟类调用
+											sing 方法时，输出 <code>Red bird is singing.</code>，对任何颜色的鸟类调用 swim
+											方法时，输出<code>Bird can not swim.</code>。同理，对蓝色的鱼类调用 swim 方法时，输出
+											<code>Blue fish is swimming.</code>，对任何颜色的鱼类调用 swim
+											方法时，输出<code>Fish can not sing.</code>。当动物类被析构时，也需要输出相关信息，例如蓝色的鸟类被析构，输出
+											<code>Blue bird is gone.</code>。</p>
+										<p>要求：</p>
+										<ul>
+											<li>使用抽象类
+												<code>Animal</code>表示动物，<code>Bird</code>和<code>Fish</code>两个类继承自<code>Animal</code>。你需要实现虚函数以便通过指向<code>Animal</code>的指针访问<code>Bird</code>和<code>Fish</code>的实例。
+											</li>
+											<li>根据题目提供的 main.cpp 文件（从<a
+													href="https://oj.cs.tsinghua.edu.cn/staticdata/1808.PCcYwumlqJf03tDc.pub/GF07iSGvrkewUmj7.%E5%BD%92%E6%A1%A3.zip/%E5%BD%92%E6%A1%A3.zip">这里</a>下载）进行数据的输入输出。你需要实现<code>Animal.h</code>，<code>Bird.h</code>和<code>Fish.h</code>三个文件。
+											</li>
+										</ul>
+										<h2>输入说明</h2>
+										<p>输入第一行时是 <span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>n</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">n</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.4306em;"></span><span
+																class="mord mathnormal">n</span></span></span></span></span>（<span><span
+													class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mn>5</mn>
+																	<mo>≤</mo>
+																	<mi>n</mi>
+																	<mo>≤</mo>
+																	<mn>10000</mn>
+																</mrow>
+																<annotation encoding="application/x-tex">5\le n\le10000
+																</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.7804em; vertical-align: -0.136em;"></span><span
+																class="mord">5</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">≤</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.7719em; vertical-align: -0.136em;"></span><span
+																class="mord mathnormal">n</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span><span
+																class="mrel">≤</span><span class="mspace"
+																style="margin-right: 0.2778em;"></span></span><span
+															class="base"><span class="strut"
+																style="height: 0.6444em;"></span><span
+																class="mord">10000</span></span></span></span></span>），代表模拟的次数。
+										</p>
+										<p>接下来<span><span class="katex"><span class="katex-mathml"><math
+															xmlns="http://www.w3.org/1998/Math/MathML">
+															<semantics>
+																<mrow>
+																	<mi>n</mi>
+																</mrow>
+																<annotation encoding="application/x-tex">n</annotation>
+															</semantics>
+														</math></span><span class="katex-html" aria-hidden="true"><span
+															class="base"><span class="strut"
+																style="height: 0.4306em;"></span><span
+																class="mord mathnormal">n</span></span></span></span></span>行，每行有两个0或1的整数<code>op</code>和<code>color</code>，<code>op</code>为0代表构造鸟类，<code>op</code>为1代表构造鱼类。<code>color</code>为0代表构造的动物为红色，<code>color</code>为1代表构造的动物为蓝色。
+										</p>
+										<h2>输出说明</h2>
+										<p>输出若干行，为每次模拟得到的信息。</p>
+										<h2>输入样例</h2>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">8
+0 0
+1 0
+0 0
+1 0
+0 1
+1 1
+0 1
+1 1
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h2>输出样例</h2>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">Red bird is singing.
+Bird can not swim.
+Red bird is gone.
+Fish can not sing.
+Red fish is swimming.
+Red fish is gone.
+Red bird is singing.
+Bird can not swim.
+Red bird is gone.
+Fish can not sing.
+Red fish is swimming.
+Red fish is gone.
+Blue bird is singing.
+Bird can not swim.
+Blue bird is gone.
+Fish can not sing.
+Blue fish is swimming.
+Blue fish is gone.
+Blue bird is singing.
+Bird can not swim.
+Blue bird is gone.
+Fish can not sing.
+Blue fish is swimming.
+Blue fish is gone.
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h2>提交格式</h2>
+										<p>你需要提交<code>Animal.h</code>，<code>Bird.h</code>和<code>Fish.h</code>三个文件。我们会将你提交的文件和我们预先设置好的<code>main.cpp</code>、<code>makefile</code>一起编译运行。
+										</p>
+										<h2>评分标准</h2>
+										<p>考试100%为OJ评分。</p>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">10000 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div>
+				</div>
+						<!----><!----><!---->
+					</div><!----><!---->
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>

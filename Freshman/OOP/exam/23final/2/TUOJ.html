@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<body>
+	<app-root ng-version="14.1.2"><app-nav _nghost-jyw-c83="">
+		</app-nav>
+		<div class="container"><router-outlet></router-outlet><app-contest-nav><router-outlet></router-outlet><app-contest-problem>
+					<div class="page-header">
+						<h1>直线相交</h1>
+					</div>
+					<div class="row">
+						<div class="col-md-40 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-body"><button class="btn btn-default pull-right"> 刷新 <i
+											class="glyphicon glyphicon-refresh"></i></button>
+									<markdown katex="" clipboard="">
+										<h1>直线相交</h1>
+										<h2>题目说明</h2>
+										<p>在二维坐标系中，每一个点可以用（x，y）表示，其中x表示横坐标，y表示纵坐标。</p>
+										<p>每一条直线可以使用 y = kx + b 的形式表示，其中 k 为斜率，b 为截距。</p>
+										<p>请设计一个点类Point和一个直线类Line，要求：</p>
+										<p>需要使用类模板的方式。使得既能够创建 x，y为整数的Point对象，k, b 为整数的 Line 对象；也能创建x，y为实数的Point对象，k, b
+											为实数的 Line 对象。</p>
+										<p>Point通过传入x，y进行初始化；Line 可以通过同时传入 k, b 进行初始化，也可以仅传入 k 进行初始化（此时 b 默认为 0）。</p>
+										<p>两个 Line 对象间应该能够比较大小。我们定义：两条直线的大小完全取决于二者的斜率大小。</p>
+										<p>Point具有如下三个接口：</p>
+										<p><code>void move(T dx, T dy)</code>：让该点的横坐标移动dx距离，纵坐标移动dy距离。</p>
+										<p><code>void show()</code>：输出点的横坐标x和纵坐标y，格式为(x,y)，且最后添加一个换行符。</p>
+										<p><code>bool check(Line&lt;T&gt; const&amp; l)</code>：传入一个Line对象，判断点是否在这条直线上。
+										</p>
+										<p>Line 具有如下两个接口：</p>
+										<p><code>bool intersect(const Line&amp;)</code>：传入另一个 Line
+											对象，判断两条直线是否存在交点。如果两条直线重合，也认为存在交点。</p>
+										<p><code>void show()</code>：输出直线的 k 和 b。其中 k 和 b 之间使用逗号隔开，且最后添加一个换行符。</p>
+										<p>此外，两个 Line 对象间应该能够比较大小，<em><strong>这意味着你需要在Line类中重载'&lt;'运算符</strong></em>
+										</p>
+										<p>在本题中，我们假设x，y，k ，b
+											，dx，dy的数据类型相同。对于实数类型的数据，当两个数差的绝对值小于1e-6时，我们认为两个数相等。我们对输出格式的有效数字位数不做特殊要求。</p>
+										<p>一种使用 Line 类的示例为：</p>
+										<div style="position: relative;">
+											<pre class="language-none" tabindex="0"><code class="language-none">#include&lt;iostream&gt;
+#include"Line.cpp"
+#include"Point.cpp"
+using namespace std;
+
+int main() {
+    
+    Point&lt;int&gt; p1(2,4);
+    p1.move(3,2);
+    p1.show();
+    // 此处应该输出(5,6) 
+     
+    Line&lt;int&gt; line1(2);
+    Line&lt;int&gt; line2(2, 4);
+    cout &lt;&lt; line1.intersect(line2) &lt;&lt; endl;
+    // 此处应输出 0
+
+    Line&lt;int&gt; line3(3);
+    Line&lt;int&gt; line4(2, 6);
+    if (line3 &lt; line4) line3.show();
+    else line4.show();
+    // 此处应输出 2,6
+    
+    Point&lt;int&gt; p2(4,12);
+    cout&lt;&lt;p2.check(line2)&lt;&lt;endl;
+    //此处应该输出1
+    return 0;
+}
+</code></pre>
+											<div
+												style="position: absolute; top: 0.5em; right: 0.5em; opacity: 0; transition: opacity 250ms ease-out 0s;">
+												<app-copy-button><button class="btn btn-default btn-sm"><i
+															class="glyphicon glyphicon-copy"></i></button></app-copy-button>
+											</div>
+										</div>
+										<h3>提交格式</h3>
+										<ul>
+											<li>
+												<p>你需要提交多个文件，包含Line.h,Line.cpp,Point.h以及Point.cpp文件；不需要上传main.cpp和Makefile文件。
+												</p>
+											</li>
+											<li>
+												<p>你应该将你的文件打包成一个zip压缩包并上传。<strong>注意：你的文件应该在压缩包的根目录下，而不是压缩包的一个子文件夹下。</strong>评测时，OJ会将提供的main.cpp贴入你的目录下进行编译并执行。
+												</p>
+											</li>
+										</ul>
+									</markdown><!---->
+								</div>
+							</div><!---->
+						</div>
+						<div class="col-md-8 col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">语言和编译选项</div>
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">名称</th>
+											<th class="text-center">编译器</th>
+											<th class="text-center">额外参数</th>
+											<th class="text-center">代码长度限制</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">0</td>
+											<td class="text-center">oop_custom</td>
+											<td><code>make</code></td>
+											<td><!----></td>
+											<td class="text-center">1048576 B</td>
+										</tr><!---->
+									</tbody>
+								</table>
+							</div><!----><!---->
+						</div>
+					</div>
+				</app-contest-problem><!---->
+			</app-contest-nav><!----></div>
+	</app-root>
+</body>
+
+</html>
