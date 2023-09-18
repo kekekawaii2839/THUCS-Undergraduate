@@ -26,4 +26,4 @@
 |  -  | 30240532 |[面向对象程序设计基础](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/OOP)|黄民烈| √ |
 |  -  | 30240604 |[面向计算机科学的离散数学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/discrete%20math)|黄民烈| √ |
 |2023夏|10680092 |思政实践|何建宇| × |
-|  -  | 30240522 |程序设计训练|东昱晓| × |
+|  -  | 30240522 |[程序设计训练](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/ProgramAndTraining)|东昱晓| √ |
