@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ news.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a class="nav-item" href="/">Homepage</a>
+            <a class="nav-item" href="/list">List</a>
+            <a class="nav-item" href="/categories">Category</a>
+        </div>
+        <div class="news-container">
+            <h1 class="news-title">{{ news.title }}</h1>
+            <p class="news-author">Author: {{ news.author }}</p>
+            <p class="news-published">Published on: {{ news.time }}</p>
+            <p class="news-content">{{ news.content|safe }}</p>
+        </div>
+        <p class="news-tags">
+            {% if tags %}
+                Tags:
+            {% endif %}
+            {% for tag in tags %}
+                <span class="tag">{{ tag.text }}</span>
+            {% endfor %}
+        </p>
+        <p class="news-url">
+            <span>source: {{news.source}}</span>
+            <a href="{{ news.url }}" target="_blank">{{ news.url }}</a>
+        </p>
+        <p class="news-category">Category: {{ category }}</p>
+        <div class="likes-counter">
+            <button id="likeButton">
+                <i class="fa-regular fa-heart" style="color: #ffffff;" id="likeIcon"></i>
+            </button>
+            <p class="likes-num" id="likesCount">{{ news.likes_num }}</p>
+        </div>
+        <h2 class="add-comment-title">Add a Comment</h2>
+        <form class="comment-form" method="post" action="/news/{{ news.id }}/comment">
+            {% csrf_token %}
+            <label for="username" class="comment-label">Username:</label>
+            <input type="text" id="username" name="username" class="comment-input"><br>
+            <label for="content" class="comment-label">Comment:</label>
+            <textarea id="content" name="content" class="comment-textarea"></textarea><br>
+            <button type="submit" class="submit-button">Submit Comment</button>
+        </form>
+        <h2 class="comments-title">Comments ({{ news.comments_num }})</h2>
+        <ul class="comment-list">
+            {% for comment in comments %}
+                <li class="comment">
+                    <p class="comment-user"><strong>{{ comment.user }}</strong> - {{ comment.time }}</p>
+                    <p class="comment-content">{{ comment.content }}</p>
+                    <form method="post" action="/news/comment/delete/{{ comment.id }}">
+                        {% csrf_token %}
+                        <button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </form>
+                </li>
+            {% empty %}
+                <li class="no-comments">No comments yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+<script>
+    var likeIcon = document.getElementById("likeIcon");
+    var likesCount = parseInt(document.getElementById("likesCount").innerText);
+    var isLiked = false;
+
+    likeIcon.addEventListener("click", function() {
+        if (isLiked) {
+            likesCount--;
+        } else {
+            likesCount++;
+        }
+        isLiked = !isLiked;
+        document.getElementById("likesCount").innerText = likesCount;
+
+        var csrfToken = "{{ csrf_token }}";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/news/{{ news.id }}/like");
+        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("isLiked=" + isLiked);
+    });
+</script>
+</html>

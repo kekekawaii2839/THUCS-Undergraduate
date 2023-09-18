@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News List</title>
+    <link rel="stylesheet" href="{% static 'news_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1 class="page-title">News List</h1>
+            <a class="nav-item" href="/">Homepage</a>
+            <a class="nav-item" href="/categories">Category</a>
+        </div>
+
+        <ul class="news-list">
+            {% for news in page_obj %}
+                <li class="news-item">
+                    <a href="/news/{{ news.id }}" class="news-title">{{ news.title }}</a>
+                    <p class="news-author">Author: {{ news.author }}</p>
+                    <p class="news-content">{{ news.content|striptags|truncatechars:100 }}</p>
+                    <p class="news-time">Created on: {{ news.time }}</p>
+                    <p class="news-likes">Likes: {{ news.likes_num }}</p>
+                    <p class="news-comments">Comments: {{ news.comments_num }}</p>
+                </li>
+            {% empty %}
+                <li class="no-news">No news available.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <form class="page-form" method="get">
+                    <label for="page-number">Go to page:</label>
+                    <input type="number" id="page-number" name="page" min="1" max="{{ page_obj.paginator.num_pages }}">
+                    <button type="submit" class="go-button">Go</button>
+                </form>         
+
+                <span class="current-page">{{ page_obj.number }}</span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "batch_size": 32,
+    "block_size": 512,
+    "n_layer": 8,
+    "n_head": 8,
+    "n_embd": 512,
+    "dropout": 0.1,
+    "learning_rate": 0.0006,
+    "max_iters": 60000,
+    "lr_decay_iters": 600000,
+    "min_lr": 6e-05,
+    "beta2": 0.99,
+    "warmup_iters": 100
+}

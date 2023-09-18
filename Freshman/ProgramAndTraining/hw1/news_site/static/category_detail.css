@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.page-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+
+.news-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.news-item {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.news-title {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.news-title:hover {
+    color: #0056b3;
+}
+
+.news-author,
+.news-time,
+.news-likes,
+.news-comments {
+    color: #777;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.news-content {
+    color: #555;
+    font-size: 15px;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.step-links {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.step-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.step-links a:hover {
+    color: #0056b3;
+}
+
+.current-page {
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.page-form {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.page-form label {
+    margin-right: 5px;
+}
+
+.page-form input[type="number"] {
+    width: 50px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.page-form button.go-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.page-form button.go-button:hover {
+    background-color: #0056b3;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}

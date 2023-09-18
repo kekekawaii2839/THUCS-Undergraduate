@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1 class="page-title">Home Page</h1>
+            <a class="nav-item" href="/list">List</a>
+            <a class="nav-item" href="/categories">Category</a>
+        </div>
+        <form class="form-container" action="/search/" method="GET">
+            <div class="form-row">
+                <label class="form-label" for="keyword">Keyword:</label>
+                <input class="form-input" type="text" id="keyword" name="keyword">
+            </div>
+            <div class="form-row">
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Sort By:</legend>
+                    <label class="form-radio-label">
+                        <input class="form-radio" type="radio" id="sortByTime" name="sort" value="time" checked>
+                        <span class="form-radio-text">Time</span>
+                    </label>
+                    <label class="form-radio-label">
+                        <input class="form-radio" type="radio" id="sortByPopularity" name="sort" value="popularity">
+                        <span class="form-radio-text">Popularity</span>
+                    </label>
+                </fieldset>
+                <div class="category-container">
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend">Category:</legend>
+                        {% for category in categories %}
+                            <label class="form-checkbox-label">
+                                <input class="form-checkbox" type="checkbox" id="category{{ category }}" name="category" value="{{ category }}">
+                                <span class="form-checkbox-text">{{ category }}</span>
+                            </label>
+                        {% endfor %}
+                    </fieldset>
+                </div>
+        
+                <button class="form-button" type="submit">Search</button>
+            </div>
+        </form>
+
+        <h2 class="section-title" id="random-new-title">
+            Random News
+            <button class="update-button" id="update-button">Update</button>
+        </h2>
+        <ul class="list">
+            {% for news in random_news %}
+                <li class="list-item">
+                    <a class="link" href="/news/{{ news.id }}">{{ news.title }}</a>
+                    <p class="author">Author: {{ news.author }}</p>
+                    <p class="preview">{{ news.content|striptags|truncatechars:100 }}</p>
+                    <p class="created">Created on: {{ news.time }}</p>
+                    <p class="likes">Likes: {{ news.likes_num }}</p>
+                    <p class="comments">Comments: {{ news.comments_num }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        const updateButton = document.getElementById('update-button');
+        updateButton.addEventListener('click', () => {
+            window.location.reload();
+        });
+    </script>
+    
+</body>
+</html>

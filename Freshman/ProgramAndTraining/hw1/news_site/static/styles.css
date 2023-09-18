@@ -1,0 +1,260 @@
+body {
+    font-family: 'PingFang SC';
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.news-author {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.news-published {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.news-content {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.news-tags {
+    margin-bottom: 15px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 4px 8px;
+    margin-right: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.news-url {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.news-url a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-url a:hover {
+    color: #0056b3;
+}
+
+.news-category {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.likes-counter {
+    position: fixed;
+    bottom: 20%;
+    left: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#likeButton {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 24px;
+}
+
+.likes-num {
+    font-size: 15px;
+    margin-bottom: 5%;
+}
+
+.add-comment-title {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.comment-input,
+.comment-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.comments-title {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comment {
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.comment-user {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: #cc0000;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s ease;
+}
+
+.delete-button:hover {
+    color: #990000;
+}
+
+.no-comments {
+    color: #777;
+    font-size: 14px;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    transition: color 0.3s ease;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.news-container {
+    color: #333;
+    margin: 0 auto;
+    line-height: 30px;
+    letter-spacing: .5px;
+    word-wrap: break-word;
+    font-size: 16px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.index_cententWrap__Jv8jK img {
+    padding: 0;
+    max-width: 100%!important;
+    height: auto!important;
+    display: block;
+    margin: 0 auto;
+}
+
+.index_cententWrap__Jv8jK .image_desc {
+    color: grey;
+    font-size: 12px!important;
+    padding: 6px 0 0;
+    line-height: 20px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.index_cententWrap__Jv8jK p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 16px 0;
+}
+
+.index_poster__DnkYd {
+    display: none!important;
+}
+
+.index_cententWrap__Jv8jK video {
+    padding: 0;
+    max-width: 100%!important;
+    height: auto!important;
+    display: block;
+    margin: 0 auto;
+}
+
+.index_cententWrap__Jv8jK .news_video_name {
+    color: grey;
+    line-height: 1;
+    padding-top: 8px;
+    margin-bottom: 20px;
+    font-size: 12px!important;
+}

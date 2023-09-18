@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category List</title>
+    <link rel="stylesheet" href="{% static 'category_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1 class="page-title">Category List (month)</h1>
+            <a class="nav-item" href="/">Homepage</a>
+            <a class="nav-item" href="/list">List</a>
+        </div>
+        <div class="card-columns">
+            {% for year_month, count in year_month_counts %}
+                <div class="category-card">
+                    <a class="category-link" href="/categories/{{ year_month }}">
+                        <div class="card-content">
+                            <span class="category-text">{{ year_month }}</span>
+                            <span class="category-count">({{ count }})</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
