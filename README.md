@@ -12,6 +12,7 @@
 |  -  | 02070012 |党的知识概论|张岱渭| × |
 |  -  | 10421334 |[线性代数（英）](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Linear%20Algebra)|杨一龙| √ |
 |  -  | 10421414 |[微积分T(1)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/calculus)|王晓峰| √ |
+|  -  | 10510072 |中文写作|高静| × |
 |  -  | 10680053 |[思想道德与法治](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Ideology%2CMorality%20and%20Rule%20of%20Law)|戴木才| √ |
 |  -  | 10680061 |形势与政策（1）|李蕉| × |
 |  -  | 14201092 |英语听说交流（A）|吴炜| × |
