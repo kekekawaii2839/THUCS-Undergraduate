@@ -29,10 +29,10 @@
 |2023夏|10680092 |思政实践|何建宇| × |
 |  -  | 30240522 |[程序设计训练](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/ProgramAndTraining)|东昱晓| √ |
 |2023秋|10420803 |概率论与数理统计|唐宏岩| × |
-|  -  | 10421432 |微积分T(3)|艾颖华| × |
-|  -  | 10430494 |大学物理B(2)|张卫华| × |
+|  -  | 10421432 |[微积分T(3)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/calculus)|艾颖华| √ |
+|  -  | 10430494 |[大学物理B(2)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Physics/2023F)|张卫华| √ |
 |  -  | 10680073 |马克思主义基本原理|王代月| × |
 |  -  | 30240184 |数据结构|邓俊辉| × |
-|  -  | 30240593 |计算机系统概论|张悠慧| × |
+|  -  | 30240593 |[计算机系统概论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/ICS)|张悠慧| √ |
 |  -  | 30510123 |会计学原理|张海燕| × |
-|  -  | 30510743 |中级微观经济学|吴星晔| × |
+|  -  | 30510743 |[中级微观经济学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Intermediate%20Microeconomics)|吴星晔| √ |
