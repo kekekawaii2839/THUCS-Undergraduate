@@ -1,0 +1,217 @@
+\documentclass{article}
+\usepackage[heading=true]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\title{HW3}
+\author{李昊伦\ 经22-计28\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{proof}
+        设 \begin{equation}
+            f(r)=\int_{0}^{\pi}\ln(1-2r\cos x+r^2)\mathrm{d}x
+            \nonumber
+        \end{equation} \par
+        于是有 \begin{equation}
+            \begin{aligned}
+                f^{'}(r)
+                &=\int_{0}^{\pi}\frac{2r-2\cos x}{1-2r\cos x+r^2}\mathrm{d}x \\
+                &=\frac{1}{r}\int_{0}^{\pi}\left(\frac{r^2-1}{1+r^2-2r\cos x}+1\right)\mathrm{d}x
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        先证明引理: \begin{equation}
+            \int_{0}^{\pi}\frac{\mathrm{d}x}{a+b\cos x}=\frac{\pi}{\sqrt{a^2-b^2}}
+            \nonumber
+        \end{equation}
+        证: \begin{equation}
+            \begin{aligned}
+                \int_{0}^{\pi}\frac{\mathrm{d}x}{a+b\cos x} \\
+                &\text{令} t=\tan\frac{x}{2} \\
+                &=\int_{0}^{+\infty}\frac{\mathrm{d}2\arctan t}{a-b+\frac{2b}{1+t^2}} \\
+                &=2\int_{0}^{+\infty}\frac{1}{(a-b)(1+t^2)+2b}\mathrm{d}t \\
+                &=\frac{2}{a-b}\int_{0}^{+\infty}\frac{1}{t^2+\frac{a+b}{a-b}}\mathrm{d}t \\
+                &=\frac{2}{\sqrt{a^2-b^2}}\int_{0}^{+\infty}\frac{1}{\left(\sqrt{\frac{a-b}{a+b}t}\right)^2+1}\mathrm{d}\sqrt{\frac{a-b}{a+b}}t \\
+                &=\frac{2}{\sqrt{a^2-b^2}}\arctan\left(\sqrt{\frac{a-b}{a+b}}t\right)\bigg|_{0}^{+\infty} \\
+                &=\frac{\pi}{\sqrt{a^2-b^2}}
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        因此由引理可以推出 \begin{equation}
+            \begin{aligned}
+                f^{'}(r)
+                &=\frac{1}{r}\int_{0}^{\pi}\left(\frac{r^2-1}{1+r^2-2r\cos x}+1\right)\mathrm{d}x \\
+                &=\frac{1}{r}\left(\frac{\pi(r^2-1)}{\sqrt{(1+r^2)^2-4r^2}}+\pi\right) \\
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        当 $|r|<1$ 时, $f^{'}(r)=0$ , 即 $f(r)$ 在 $(-1,1)$ 内为常数, 由 $f(0)=0$ 可知 $f(r)\equiv 0$ , 即 \begin{equation}
+            \int_{0}^{\pi}\ln(1-2r\cos x+r^2)\mathrm{d}x=0
+            \nonumber
+        \end{equation} \par
+        得证.
+    \end{proof}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}
+            首先, 证明 \begin{equation}
+                \int_{0}^{+\infty}x^{\alpha}y^{\alpha+\beta+1}e^{-y}\mathrm{d}y
+                \nonumber
+            \end{equation}
+            在 $x\in[0,+\infty)$ 上一致收敛: $\int_{0}^{+\infty}x^{\alpha}y^{\alpha+\beta+1}e^{-y}\mathrm{d}y=x^{\alpha}\Gamma(a+b+2)$ . \par
+            因此得证. \par
+            并且易知 $e^{-xy}$ 在 $y\in[0,+\infty)$ 单调并且在 $[0,+\infty)\times[0,+\infty)$ 上一致有界, \par
+            根据 Abel 判别法可知, 该含参积分在 $x\in[0,+\infty)$ 上一致收敛.
+        \end{proof}
+        \item[(2)] \begin{proof}
+            首先, 证明 \begin{equation}
+                \int_{0}^{+\infty}x^{\alpha}y^{\alpha+\beta+1}e^{-xy}\mathrm{d}x
+                \nonumber
+            \end{equation}
+            在 $y\in[0,+\infty)$ 上一致收敛: $\int_{0}^{+\infty}x^{\alpha}y^{\alpha+\beta+1}e^{-xy}\mathrm{d}x=y^{\alpha+\beta+1}y^{-\alpha-1}\Gamma(\alpha+1)=y^{\beta}\Gamma(\alpha+1)$ . \par
+            并且易知 $e^{-y}$ 在 $x\in[0,+\infty)$ 单调并且在 $[0,+\infty)\times[0,+\infty)$ 上一致有界, \par
+            根据 Abel 判别法可知, 该含参积分在 $y\in[0,+\infty)$ 上一致收敛.
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}[解]
+            当 $x=0$ 时: \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{+\infty}\frac{1}{x^2+y^2}\mathrm{d}y
+                    &=\int_{0}^{+\infty}\frac{1}{y^2}\mathrm{d}y
+                    &=\infty
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            该积分不收敛. \par
+            当 $x\neq0$ 时: \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{+\infty}\frac{1}{x^2+y^2}\mathrm{d}y
+                    &=\frac{1}{|x|}\arctan\left(\frac{y}{|x|}\right)\bigg|_{0}^{+\infty} \\
+                    &=\frac{\pi}{2|x|}
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item[(2)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    I(n)
+                    &=\int_{0}^{+\infty}\frac{1}{(x^2+y^2)^n}\mathrm{d}y \\
+                    &=\frac{y}{(x^2+y^2)^n}\bigg|_{0}^{+\infty}-\int_{0}^{+\infty}\frac{-2ny^2}{(x^2+y^2)^{n+1}}\mathrm{d}y \\
+                    &=2n\int_{0}^{+\infty}\frac{y^2}{(x^2+y^2)^{n+1}}\mathrm{d}y \\
+                    &=2n\int_{0}^{+\infty}\left[\frac{1}{(x^2+y^2)^{n}}-x^2\frac{1}{(x^2+y^2)^{n+1}}\right]\mathrm{d}y \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            因此有 $2nx^2I(n+1)=(2n-1)I(n)$ , 即 $\frac{I(n+1)}{I(n)}=\frac{2n-1}{2nx^2}$ . \par
+            由(1)又有 $I(1)=\frac{\pi}{2|x|}$ , 因此得 \begin{equation}
+                I(n)=\frac{\pi}{2}\frac{(2n-3)!!}{(2n-2)!!}\frac{1}{|x|^{2n-1}}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item[(3)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{+\infty}\frac{1}{\left(1+\frac{y^2}{n}\right)^n}\mathrm{d}y
+                    &=\sqrt{n}\int_{0}^{+\infty}\frac{1}{\left(1+\left(\frac{y}{\sqrt{n}}\right)^2\right)^n}\mathrm{d}\frac{y}{\sqrt{n}} \\
+                    &=\sqrt{n}\frac{\pi}{2}\frac{(2n-3)!!}{(2n-2)!!}\frac{1}{|1|^{2n-1}} \\
+                    &=\frac{\pi}{2}\frac{(2n-3)!!}{(2n-2)!!}\sqrt{n}
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item[(4)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{n\rightarrow+\infty}\ln\left(\left(1+\frac{y^2}{n}\right)^{-n}\right)
+                    &=\lim_{n\rightarrow+\infty}-n\ln\left(1+\frac{y^2}{n}\right) \\
+                    &=\lim_{n\rightarrow+\infty}-n\left(\frac{y^2}{n}+o\left(\frac{1}{n}\right)\right) \\
+                    &=-y^2
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            因此得证.
+        \end{proof}
+        \item[(5)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{n\rightarrow+\infty}\left(\frac{(2n-3)!!}{(2n-2)!!}\sqrt{n}\right)
+                    &=\lim_{n\rightarrow+\infty}\frac{2}{\pi}\int_{0}^{+\infty}\frac{1}{\left(1+\frac{y^2}{n}\right)^n}\mathrm{d}y \\
+                    &=\frac{2}{\pi}\int_{0}^{+\infty}e^{-y^2}\mathrm{d}y \\
+                    &=\frac{2}{\pi}\frac{\sqrt{\pi}}{2} \\
+                    &=\frac{1}{\sqrt{\pi}}
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+    \end{enumerate}
+    \item \begin{proof}
+        \begin{enumerate}
+            \item[(1)] 
+                \begin{equation}
+                    \begin{aligned}
+                        F^{'}(y)
+                        &=\int_{0}^{+\infty}e^{-x^2}(-\sin(2xy))2x\mathrm{d}x \\
+                        &=\int_{0}^{+\infty}\sin(2xy)\mathrm{d}e^{-x^2} \\
+                        &=\sin(2xy)e^{-x^2}\bigg|_{0}^{+\infty}-\int_{0}^{+\infty}e^{-x^2}\cos(2xy)2y\mathrm{d}x \\
+                        &=-2yF(y)
+                    \end{aligned}
+                    \nonumber
+                \end{equation}
+                又根据 Guass 积分知, $F(0)=\frac{\sqrt{\pi}}{2}$ . \par
+                因此解微分方程得 \begin{equation}
+                    F(y)=\frac{1}{2}\sqrt{\pi}e^{-y^2}
+                    \nonumber
+                \end{equation}
+            \item[(2)] 设 \begin{equation}
+                G(y)=\int_{0}^{+\infty}e^{-x^2}\sin(2xy)\mathrm{d}x
+                \nonumber
+            \end{equation}
+            则有 \begin{equation}
+                \begin{aligned}
+                    G^{'}(y)
+                    &=\int_{0}^{+\infty}e^{-x^2}\cos(2xy)2x\mathrm{d}x \\
+                    &=\int_{0}^{+\infty}-\cos(2xy)\mathrm{d}e^{-x^2} \\
+                    &=-\cos(2xy)e^{-x^2}\bigg|_{0}^{+\infty}-\int_{0}^{+\infty}e^{-x^2}\sin(2xy)2y\mathrm{d}x \\
+                    &=1-2yG(y)
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            又有 $G(0)=0$ , 解微分方程得 \begin{equation}
+                G(y)=e^{-y^2}\int_{0}^{y}e^{-t^2}\mathrm{d}t
+                \nonumber
+            \end{equation}
+        \end{enumerate}
+    \end{proof}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{+\infty}\frac{e^{-ax}-e^{-bx}}{x}\mathrm{d}x
+                    &=\int_{0}^{+\infty}\mathrm{d}x\int_{a}^{b}e^{-xy}\mathrm{d}y \\
+                    &=\int_{a}^{b}\mathrm{d}y\int_{0}^{+\infty}e^{-xy}\mathrm{d}x \\
+                    &=\int_{a}^{b}\frac{1}{y}\mathrm{d}y \\
+                    &=\ln\frac{b}{a}
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item[(2)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{+\infty}\frac{\cos ax-\cos bx}{x^2}\mathrm{d}xy
+                    &=\int_{0}^{+\infty}\frac{\mathrm{d}x}{x}\int_{a}^{b}\sin(xy)\mathrm{d}y \\
+                    &=\int_{a}^{b}\mathrm{d}y\int_{0}^{+\infty}\frac{\sin(xy)}{xy}\mathrm{d}(xy) \\
+                    &=\int_{a}^{b}\frac{\pi}{2}\mathrm{d}y \\
+                    &=\frac{\pi}{2}(b-a)
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage[heading=true]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\title{HW2}
+\author{李昊伦\ 经22-计28\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}[解]
+            $a=1$ 时: 
+            \begin{equation}
+                \begin{aligned}
+                    \int_{1}^{+\infty}\frac{x^{a-1}}{1+x}dx
+                    &=\ln(1+x)\left|_{x=1}^{+\infty}\right. \\
+                    &=+\infty
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时发散; \par
+            $a<1$ 时: 取 $0<\epsilon<1-a$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow+\infty}\frac{\frac{x^{a-1}}{1+x}}{\frac{1}{x^{1+\epsilon}}}
+                    &=\lim_{x\rightarrow+\infty}x^{a+\epsilon-1} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时收敛; \par
+            $a>1$ 时: 取 $0<\epsilon<a-1$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow+\infty}\frac{\frac{x^{a-1}}{1+x}}{\frac{1}{x^{1-\epsilon}}}
+                    &=\lim_{x\rightarrow+\infty}x^{a-\epsilon-1} \\
+                    &=+\infty
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时发散. \par
+        \end{proof}
+        \item[(2)] \begin{proof}[解]
+            $a=1$ 时: 
+            \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{1}\frac{x^{a-1}}{1+x}dx
+                    &=\ln(1+x)\left|_{x=0}^{1}\right. \\
+                    &=+\infty
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时发散; \par
+            $a<0$ 时: 取 $1<p<1-a$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow0^+}\frac{\frac{x^{a-1}}{1+x}}{\frac{1}{x^p}}
+                    &=\lim_{x\rightarrow0^+}x^{a+p-1} \\
+                    &=+\infty
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时发散; \par
+            $a>0$ 且 $a\neq1$ 时: 取 $1-a<p<1$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow0^+}\frac{\frac{x^{a-1}}{1+x}}{\frac{1}{x^p}}
+                    &=\lim_{x\rightarrow0^+}x^{a+p-1} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            此时收敛. \par
+        \end{proof}
+        \item[(3)] \begin{proof}[证明]
+            由(1)(2)知, 等号两侧的积分均收敛.
+            \begin{equation}
+                \begin{aligned}
+                    \int_{0}^{1}\frac{x^{-a}}{1+x}dx \\
+                    \text{令} t=&x^{-1} \\
+                    &=\int_{+\infty}^{1}\frac{t^a}{1+t^{-1}}d(t^{-1}) \\
+                    &=\int_{1}^{+\infty}\frac{t^{a-1}}{1+t}dt \\
+                    &=\int_{1}^{+\infty}\frac{x^{a-1}}{1+x}dx
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}
+            取 $0<\epsilon<1$ : 
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow\pm\infty}\frac{\exp(-ax^2-bx-c)}{\frac{1}{x^{1+\epsilon}}}
+                    &=\lim_{x\rightarrow\pm\infty}\frac{x^{1+\epsilon}}{\exp(ax^2+bx+c)} \\
+                    &=\lim_{x\rightarrow\pm\infty}\frac{(1+\epsilon)x^{\epsilon}}{(2ax+b)\exp(ax^2+bx+c)} \\
+                    &=\lim_{x\rightarrow\pm\infty}\frac{(1+\epsilon)\epsilon x^{\epsilon-1}}{(4a^2x+4abx+2a+b^2)\exp(ax^2+bx+c)} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            得证.
+        \end{proof}
+        \item[(2)] \begin{proof}[解]
+            $\lambda=0$ 时: 
+            \begin{equation}
+                \begin{aligned}
+                    \int_{-\infty}^{+\infty}e^{-x^2}dx=\sqrt{\pi}
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            此时收敛; \par
+            $\lambda>0$ 时: 取 $0<\epsilon<1$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow\pm\infty}\frac{\exp(-x^2-\lambda x^4)}{\frac{1}{x^{1+\epsilon}}}
+                    &=\lim_{x\rightarrow\pm\infty}\frac{x^{1+\epsilon}}{\exp(x^2+\lambda x^4)} \\
+                    &=\lim_{x\rightarrow\pm\infty}\frac{(1+\epsilon)x^{\epsilon}}{(2x+4\lambda x^3)\exp(x^2+\lambda x^4)} \\
+                    &=\lim_{x\rightarrow\pm\infty}\frac{(1+\epsilon)\epsilon x^{\epsilon}}{(2+4x^2+12\lambda x^2+16\lambda x^4+16\lambda^2x^6)\exp(x^2+\lambda x^4)} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            此时收敛; \par
+            $\lambda<0$ 时: 取 $0<\epsilon<1$
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow\pm\infty}\frac{\exp(-x^2-\lambda x^4)}{\frac{1}{x^{1-\epsilon}}}
+                    &=\lim_{x\rightarrow\pm\infty}\exp(-x^2-\lambda x^4)x^{1-\epsilon} \\
+                    &=+\infty
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            此时收敛. \par
+        \end{proof}
+        \item[(3)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    \int_{-\infty}^{+\infty}\exp(-ax^2-bx-c)dx
+                    &=\int_{-\infty}^{+\infty}\exp(-ax^2-bx-c)dx \\
+                    &=\exp\left(\frac{b^2}{4a}-c\right)\frac{1}{\sqrt{a}}\int_{-\infty}^{+\infty}\exp(-\left(\sqrt{a}x+\frac{b}{2\sqrt{a}}\right)^2)d\left(\sqrt{a}x+\frac{b}{2\sqrt{a}}\right) \\
+                    &=\exp\left(\frac{b^2}{4a}-c\right)\frac{1}{\sqrt{a}}I \\
+                    &=\frac{I}{\sqrt{a}}\exp\left(\frac{b^2}{4a}-c\right) \\
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}
+            $\forall x=0,1,2,\dots,n$ , 有:
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{x\rightarrow\pm\infty}\frac{a_ix^i\exp(-x^2)}{\frac{1}{x^2}}
+                    &=a_i\lim_{x\rightarrow\pm\infty}\frac{x^{1+i+\epsilon}}{\exp(x^2)} \\
+                    &=\frac{a_i(1+i+\epsilon)}{2}\lim_{x\rightarrow\pm\infty}\frac{x^{i+\epsilon-1}}{\exp(x^2)} \\
+                    &=\dots \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            再根据积分的可加性可知 $f(x)$ 的每一项按照题干中的式子积分后均收敛, \par
+            因此 $\int_{-\infty}^{+\infty}f(x)\exp(-x^2)dx$ 收敛.
+        \end{proof}
+        \item[(2)] \begin{proof}
+            如果能够证明 $\int_{-\infty}^{+\infty}ia_ix^{i-1}\exp(-x^2)dx=\int_{-\infty}^{+\infty}2a_ix^{i+1}\exp(-x^2)dx$ , \par
+            那么就能使得命题等号两侧的每一项都相等, 自然得证. \par
+            接下来证明 $\int_{-\infty}^{+\infty}ia_ix^{i-1}\exp(-x^2)dx=\int_{-\infty}^{+\infty}2a_ix^{i+1}\exp(-x^2)dx$ : \par
+            等价于证明 $i\int_{-\infty}^{+\infty}x^{i-1}\exp(-x^2)dx=2\int_{-\infty}^{+\infty}x^{i+1}\exp(-x^2)dx$ , $i=1,2,\dots,n$ . \par
+            当 $i$ 是偶数时, 因为被积函数是奇函数, 等号两侧均为 $0$ ; \par
+            当 $i$ 是奇数时, 对等号左侧式子进行分部积分: 
+            \begin{equation}
+                \begin{aligned}
+                    i\int_{-\infty}^{+\infty}x^{i-1}\exp(-x^2)dx
+                    &=\int_{-\infty}^{+\infty}\exp(-x^2)d(x^i) \\
+                    &=\exp(-x^2)x^i\left|_{-\infty}^{+\infty}\right.-\int_{-\infty}^{+\infty}x^id\exp(-x^2) \\
+                    &=-\int_{-\infty}^{+\infty}x^i\exp(-x^2)(-2x)dx \\
+                    &=2\int_{-\infty}^{+\infty}x^{i+1}\exp(-x^2)dx
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            综上, 得证.
+        \end{proof}
+        \item[(3)] \begin{proof}[解]
+            $m$ 是奇数时, 被积函数是奇函数, 值为 $0$ ; \par
+            $m$ 是偶数时, 使用(2)中的结论:
+            \begin{equation}
+                \begin{aligned}
+                    \int_{-\infty}^{+\infty}x^m\exp(-x^2)dx
+                    &=\frac{m-1}{2}\int_{-\infty}^{+\infty}x^{m-2}\exp(-x^2)dx \\
+                    &=\frac{(m-1)(m-3)}{4}\int_{-\infty}^{+\infty}x^{m-4}\exp(-x^2)dx \\
+                    &=\dots \\
+                    &=\frac{(m-1)!!}{2^{\frac{m}{2}}}\int_{-\infty}^{+\infty}\exp(-x^2)dx \\
+                    &=\frac{(m-1)!!}{2^{\frac{m}{2}}}\sqrt{\pi}
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] 当 $x\geq1$ 时, 上述反常积分收敛. \par
+        \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \Gamma(x)
+                    &=\int_{0}^{+\infty}t^{x-1}\exp(-t)dt \\
+                    &=\int_{0}^{1}t^{x-1}\exp(-t)dt+\int_{1}^{+\infty}t^{x-1}\exp(-t)dt \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            因此需要对 $0$ 和 $+\infty$ 两处进行检验: \par
+            取 $0<p<1$ :
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{t\rightarrow0^+}\frac{t^{x-1}e^{-t}}{\frac{1}{t^p}}
+                    &=\lim_{t\rightarrow0^+}t^{x+p-1} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            取 $\epsilon>0$ :
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{t\rightarrow+\infty}\frac{t^{x-1}e^{-t}}{\frac{1}{t^{1+\epsilon}}}
+                    &=\lim_{t\rightarrow+\infty}\frac{t^{x+\epsilon}}{e^t} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            综上, 得证.
+        \end{proof}
+        \item[(2)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    x\Gamma(x)
+                    &=x\int_{0}^{+\infty}t^{x-1}\exp(-t)dt \\
+                    &=\int_{0}^{+\infty}\exp(-t)d(t^x) \\
+                    &=\exp(-t)t^x\left|_{0}^{+\infty}\right.-\int_{0}^{+\infty}t^xd\exp(-t) \\
+                    &=\int_{0}^{+\infty}t^x\exp(-t)dt \\
+                    &=\Gamma(x+1)
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+        \item[(3)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \Gamma(x)
+                    &=\int_{0}^{+\infty}t^{x-1}\exp(-t)dt \\
+                    \text{令} s^2=&t \\
+                    &=\int_{0}^{+\infty}s^{2x-2}\exp(-s^2)d(s^2) \\
+                    &=\int_{0}^{+\infty}s^{2x-2}\exp(-s^2)2sds \\
+                    &=2\int_{0}^{+\infty}s^{2x-1}\exp(-s^2)ds \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    B(\alpha,\beta)
+                    &=\int_{0}^{+\infty}\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}dy \\
+                    &=\int_{0}^{1}\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}dy+\int_{1}^{+\infty}\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}dy \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            因此需要对 $0$ 和 $+\infty$ 两处进行检验: \par
+            取 $0<p<1$ :
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{y\rightarrow0^+}\frac{\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}}{\frac{1}{y^p}}
+                    &=\lim_{y\rightarrow0^+}\frac{y^{\alpha+p-1}}{(1+y)^{\alpha+\beta}} \\
+                    &=\lim_{y\rightarrow0^+}y^{\alpha+p-1} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            解得 $\alpha\geq1$; \par
+            取 $\epsilon>0$ :
+            \begin{equation}
+                \begin{aligned}
+                    \lim_{y\rightarrow+\infty}\frac{\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}}{\frac{1}{y^{1+\epsilon}}}
+                    &=\lim_{y\rightarrow+\infty}\frac{y^{\alpha+\epsilon}}{(1+y)^{\alpha+\beta}} \\
+                    &=\lim_{y\rightarrow+\infty}\frac{y^{\alpha+\epsilon}}{y^{\alpha+\beta}} \\
+                    &=\lim_{y\rightarrow+\infty}y^{\epsilon-\beta} \\
+                    &=0
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            解得 $\beta>0$.
+        \end{proof}
+        \item[(2)] \begin{proof}
+            对等式右侧式子进行分部积分:
+            \begin{equation}
+                \begin{aligned}
+                    \frac{\alpha}{\alpha+\beta}B(\alpha,\beta)
+                    &=\frac{\alpha}{\alpha+\beta}\int_{0}^{+\infty}\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}dy \\
+                    &=\frac{1}{\alpha+\beta}\int_{0}^{+\infty}\frac{1}{(1+y)^{\alpha+\beta}}d(y^{\alpha}) \\
+                    &=\frac{1}{\alpha+\beta}\left(\frac{y^{\alpha}}{(1+y)^{\alpha+\beta}}\left|_{0}^{+\infty}\right.-\int_{0}^{+\infty}\frac{y^{\alpha}}{(1+y)^{\alpha+\beta+1}}y^{\alpha-1}(-\alpha-\beta)dy\right) \\
+                    &=\frac{1}{\alpha+\beta}\left(0+(\alpha+\beta)\int_{0}^{+\infty}\frac{y^{\alpha}}{(1+y)^{\alpha+\beta+1}}dy\right) \\
+                    &=\int_{0}^{+\infty}\frac{y^{\alpha}}{(1+y)^{\alpha+\beta+1}}dy \\
+                    &=B(\alpha+1,\beta)
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item[(3)] \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    B(\alpha,\beta)
+                    &=\int_{0}^{+\infty}\frac{y^{\alpha-1}}{(1+y)^{\alpha+\beta}}dy \\
+                    \text{令} x=&1-\frac{1}{y+1} \\
+                    &=\int_{0}^{1}\frac{(\frac{1}{1-x}-1)^{\alpha-1}}{(\frac{1}{1-x})^{\alpha+\beta}}d(\frac{1}{1-x}-1) \\
+                    &=\int_{0}^{1}(\frac{1}{1-x}-1)^{\alpha-1}(1-x)^{\alpha+\beta}\frac{1}{(1-x)^2}dx \\
+                    &=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1}dx
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

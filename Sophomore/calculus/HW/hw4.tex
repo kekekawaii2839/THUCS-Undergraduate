@@ -1,0 +1,240 @@
+\documentclass{article}
+\usepackage[heading=true]{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\title{HW4}
+\author{李昊伦\ 经22-计28\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item[(1)] \begin{proof}
+            由于 $\ln x$ 上凸, 有: \begin{equation}
+                \frac{b-t}{b-a}\ln a+\frac{t-a}{b-a}\ln b\leq\ln t \quad (a\leq t\leq b)
+                \nonumber
+            \end{equation} \par
+            令 $a=m$ , $b=m+1$ , $t=x$ , 得: \begin{equation}
+                (m+1-x)\ln m+(x-m)\ln(m+1)=f(x)\leq\ln x \quad (m\leq x\leq m+1)
+                \nonumber
+            \end{equation} \par
+            接下来再证 $g(x)\geq\ln x$ : 易知 \begin{equation}
+                t-1\geq\ln t \quad (t>0)
+                \nonumber
+            \end{equation} \par
+            令 $t=\frac{x}{m}\in[1-\frac{1}{2m},1+\frac{1}{2m})$ , 则有: \begin{equation}
+                \frac{x}{m}-1\geq\ln\frac{x}{m}
+                \nonumber
+            \end{equation} \par
+            化简后有: \begin{equation}
+                \frac{x-m}{m}+\ln m=g(x)\geq\ln x \quad (m-\frac{1}{2}\leq x<m+\frac{1}{2})
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+        \item[(2)] \begin{proof}[解]
+            \begin{equation}
+                \begin{aligned}
+                    \int_{1}^{n}f(x)\mathrm{d}x
+                    &=\sum_{m=1}^{n-1}\int_{m}^{m+1}\left[(m+1-x)\ln m+(x-m)\ln(m+1)\right]\mathrm{d}x \\
+                    &=\sum_{m=1}^{n-1}\ln m +\frac{1}{2}\ln\frac{m+1}{m} \\
+                    &=\ln(n-1)!+\frac{1}{2}\ln n \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            \begin{equation}
+                \begin{aligned}
+                    \int_{1}^{n}g(x)\mathrm{d}x
+                    &=\sum_{m=2}^{n-1}\int_{m-\frac{1}{2}}^{m+\frac{1}{2}}\left(\frac{x}{m}+\ln m-1\right)\mathrm{d}x+\int_{1}^{\frac{3}{2}}\left(\frac{x-1}{1}+\ln 1\right)\mathrm{d}x+\int_{n-\frac{1}{2}}^{n}\left(\frac{x-n}{n}+\ln n\right)\mathrm{d}x \\
+                    &=\sum_{m=2}^{n-1}\ln m +\frac{1}{2}\ln n+\frac{n-1}{8n} \\
+                    &=\ln(n-1)!+\frac{1}{2}\ln n+\frac{n-1}{8n} \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+        \end{proof}
+        \item[(3)] \begin{proof}
+            \begin{equation}
+                \int_{1}^{n}\ln x\mathrm{d}x=n\ln n-n+1
+                \nonumber
+            \end{equation} \par
+            \begin{equation}
+                \begin{aligned}
+                    \int_{1}^{n}\ln x\mathrm{d}x\geq\int_{1}^{n}f(x)\mathrm{d}x
+                    &\Rightarrow n\ln n-n+1\geq\ln(n-1)!+\frac{1}{2}\ln n \\
+                    &\Rightarrow \left(n+\frac{1}{2}\right)\ln n-n+1\geq\ln(n-1)!+\ln n \\
+                    &\Rightarrow 1\geq\ln (n!)-\left(n+\frac{1}{2}\right)\ln n+n \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            \begin{equation}
+                \begin{aligned}
+                    \int_{1}^{n}\ln x\mathrm{d}x\leq\int_{1}^{n}g(x)\mathrm{d}x
+                    &\Rightarrow n\ln n-n+1\leq\ln(n-1)!+\frac{1}{2}\ln n+\frac{n-1}{8n} \\
+                    &\Rightarrow \left(n+\frac{1}{2}\right)\ln n-n+1\leq\ln(n!)+\frac{n-1}{8n} \\
+                    &\Rightarrow 1-\frac{n-1}{8n}\leq\ln(n!)-\left(n+\frac{1}{2}\right)\ln n+n \\
+                    &\Rightarrow \frac{7}{8}\leq\frac{7n+1}{8n}\leq\ln(n!)-\left(n+\frac{1}{2}\right)\ln n+n \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+        \item[(4)] \begin{proof}
+            由于 $e^x$ 单增, 可以对(3)的结论取指数, 得: \begin{equation}
+                \exp\left(\frac{7}{8}\right)\leq\exp\left(\ln(n!)-\left(n+\frac{1}{2}\right)\ln n+n\right)\leq e
+                \nonumber
+            \end{equation} \par
+            而
+            \begin{equation}
+                \begin{aligned}
+                    \exp\left(\ln(n!)-\left(n+\frac{1}{2}\right)\ln n+n\right)
+                    &=\frac{\exp(\ln(n!)+n)}{\exp\left(\left(n+\frac{1}{2}\right)\ln n\right)} \\
+                    &=\frac{n!e^n}{n^n\cdot\sqrt{n}} \\
+                    &=\frac{n!}{(n/e)^n\cdot\sqrt{n}} \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            得证.
+        \end{proof}
+    \end{enumerate}
+    \item \begin{proof}
+        \begin{equation}
+            (1-x)^{-\alpha}=1+\sum_{n=1}^{\infty}\frac{(-\alpha)(-\alpha-1)\dots(-\alpha-n+1)}{n!}(-x)^n
+            \nonumber
+        \end{equation} \par
+        又易验证, $n=0$ 时, $\frac{\Gamma(n+\alpha)}{n!\Gamma(\alpha)}x^n=1$ ,
+        接下来只需证: \begin{equation}
+            \begin{aligned}
+                \frac{\Gamma(n+\alpha)}{\Gamma(\alpha)}
+                &=(-\alpha)(-\alpha-1)\dots(-\alpha-n+1)(-1)^n \\
+                &=\alpha(\alpha+1)\dots(\alpha+n-1) \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        考虑 $\Gamma$ 函数的性质: $\Gamma(x+1)=x\Gamma(x)$ , 有: \begin{equation}
+            \begin{aligned}
+                \frac{\Gamma(n+\alpha)}{\Gamma(\alpha)}
+                &=\frac{(n-1+\alpha)\Gamma(n-1+\alpha)}{\Gamma(\alpha)} \\
+                &=\dots \\
+                &=\frac{(n-1+\alpha)(n-2+\alpha)\dots\alpha\Gamma(\alpha)}{\Gamma(\alpha)} \\
+                &=(n-1+\alpha)(n-2+\alpha)\dots\alpha \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        得证.
+    \end{proof}
+    \item \begin{proof}
+        令 \begin{equation}
+            f(x)=\frac{2^{x-1}}{\sqrt{\pi}}\Gamma\left(\frac{x}{2}\right)\Gamma\left(\frac{x+1}{2}\right)
+            \nonumber
+        \end{equation} \par
+        要证明结论, 只需要验证 $f$ 是 $\Gamma$ 函数即可. 根据 Bohr–Mollerup theorem 分条验证: \par
+        \begin{enumerate}
+            \item \begin{equation}
+                \begin{aligned}
+                    f(x+1)
+                    &=\frac{2^x}{\sqrt{\pi}}\Gamma\left(\frac{x+1}{2}\right)\Gamma\left(\frac{x+2}{2}\right) \\
+                    &=\frac{2^x}{\sqrt{\pi}}\Gamma\left(\frac{x+1}{2}\right)\frac{x}{2}\Gamma\left(\frac{x}{2}\right) \\
+                    &=xf(x) \\
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            \item \begin{equation}
+                f(1)=\frac{1}{\sqrt{\pi}}\Gamma\left(\frac{1}{2}\right)\Gamma(1)=1
+                \nonumber
+            \end{equation}
+            \item 要想验证 $\ln f$ 的下凸性, 只要证: $f(\alpha x+\beta y)\leq f^{\alpha}(x)f^{\beta}(y)$ , 即:
+            \begin{equation}
+                \begin{aligned}
+                    \frac{2^{\alpha x+\beta y-1}}{\sqrt{\pi}}\Gamma\left(\frac{\alpha x+\beta y}{2}\right)\Gamma\left(\frac{\alpha x+\beta y+1}{2}\right)
+                    &\leq\frac{2^{\alpha x-\alpha}}{\pi^{\frac{\alpha}{2}}}\Gamma^{\alpha}\left(\frac{x}{2}\right)\Gamma^{\alpha}\left(\frac{x+1}{2}\right)\frac{2^{\beta y-\beta}}{\pi^{\frac{\beta}{2}}}\Gamma^{\beta}\left(\frac{y}{2}\right)\Gamma^{\beta}\left(\frac{y+1}{2}\right) \\
+                    &=\frac{2^{\alpha x+\beta y-(\alpha+\beta)}}{\pi^{\frac{\alpha+\beta}{2}}}\Gamma^{\alpha}\left(\frac{x}{2}\right)\Gamma^{\beta}\left(\frac{y}{2}\right)\Gamma^{\alpha}\left(\frac{x+1}{2}\right)\Gamma^{\beta}\left(\frac{y+1}{2}\right) \\
+                    &(\alpha+\beta=1) \\
+                    &=\frac{2^{\alpha x+\beta y-1}}{\pi^{\frac{1}{2}}}\Gamma^{\alpha}\left(\frac{x}{2}\right)\Gamma^{\beta}\left(\frac{y}{2}\right)\Gamma^{\alpha}\left(\frac{x+1}{2}\right)\Gamma^{\beta}\left(\frac{y+1}{2}\right) \\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            而由于 $\Gamma$ 函数本身满足 $\ln\Gamma$ 的下凸性, 因此有 $$\Gamma^{\alpha}\left(\frac{x}{2}\right)\Gamma^{\beta}\left(\frac{y}{2}\right)\Gamma^{\alpha}\left(\frac{x+1}{2}\right)\Gamma^{\beta}\left(\frac{y+1}{2}\right)\geq\Gamma^{\alpha}\left(\frac{\alpha x+\beta y}{2}\right)\Gamma^{\beta}\left(\frac{\alpha x+\beta y+1}{2}\right)$$ \par
+            从而得证.
+        \end{enumerate}
+    \end{proof}
+    \item \begin{proof}
+        当 $\xi\neq0$ 时:
+        \begin{equation}
+            \begin{aligned}
+                \hat{f}(\xi)
+                &=\int_{-\infty}^{\infty}f(x)e^{-2\pi ix\xi}\mathrm{d}x \\
+                &=\int_{-1}^{1}1\cdot e^{-2\pi ix\xi}\mathrm{d}x \\
+                &=\frac{1}{-2\pi i\xi}\left(e^{-2\pi i\xi}-e^{2\pi i\xi}\right) \\
+                &=\frac{\sin(2\pi\xi)}{\pi\xi} \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        \begin{equation}
+            \begin{aligned}
+                \hat{g}(\xi)
+                &=\int_{-\infty}^{\infty}g(x)e^{-2\pi ix\xi}\mathrm{d}x \\
+                &=\int_{-1}^{1}1\cdot e^{-2\pi ix\xi}\mathrm{d}x+\int_{-1}^{0}x\cdot e^{-2\pi ix\xi}\mathrm{d}x+\int_{0}^{1}(-x)\cdot e^{-2\pi ix\xi}\mathrm{d}x \\
+                &=\frac{1}{4\pi^2\xi^2}\left(2-e^{-2\pi i\xi}-e^{2\pi i\xi}\right) \\
+                &=\frac{1}{4\pi^2\xi^2}\left(2-2\cos(2\pi\xi)\right) \\
+                &=\frac{\sin^2(\pi\xi)}{\pi^2\xi^2} \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        当 $\xi=0$ 时:
+        \begin{equation}
+            \begin{aligned}
+                \hat{f}(0)
+                &=\int_{-\infty}^{\infty}f(x)\mathrm{d}x \\
+                &=\int_{-1}^{1}1\mathrm{d}x \\
+                &=2 \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        \begin{equation}
+            \begin{aligned}
+                \hat{g}(0)
+                &=\int_{-\infty}^{\infty}g(x)\mathrm{d}x \\
+                &=\int_{-1}^{0}(1+x)\mathrm{d}x+\int_{0}^{1}(1-x)\mathrm{d}x \\
+                &=1 \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+    \end{proof}
+    \item \begin{proof}[解]
+        先证明 $$\int_{-\infty}^{\infty}e^{-2\pi|\xi|y}e^{2\pi i\xi x}\mathrm{d}\xi=P_y(x)$$ \par
+        将等式左侧的积分以 $0$ 为界拆成两部分, \begin{equation}
+            \begin{aligned}
+                \int_{0}^{\infty}e^{-2\pi|\xi|y}e^{2\pi i\xi x}\mathrm{d}\xi
+                &=\frac{e^{2\pi i(x+iy)\xi}}{2\pi i(x+iy)}\bigg|_{0}^{\infty} \\
+                &=-\frac{1}{2\pi i(x+iy)} \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        同理有 $$\int_{-\infty}^{0}e^{-2\pi|\xi|y}e^{2\pi i\xi x}\mathrm{d}\xi=\frac{1}{2\pi i(x-iy)}$$ \par
+        因此可得 $$\int_{-\infty}^{\infty}e^{-2\pi|\xi|y}e^{2\pi i\xi x}\mathrm{d}\xi=\frac{1}{2\pi i}\left(\frac{1}{x-iy}-\frac{1}{x+iy}\right)=\frac{y}{\pi(x^2+y^2)}$$ \par
+        综上, $$P_y(x)=\frac{y}{\pi(x^2+y^2)}\rightarrow\hat{P_y}(\xi)=e^{-2\pi|\xi|y}$$ \par
+        $P_y(x)$ 的 Fourier 逆变换为 $e^{-2\pi|-\xi|y}=e^{-2\pi|\xi|y}$ .
+    \end{proof}
+    \item \begin{proof}
+        \begin{equation}
+            \begin{aligned}
+                |f*g(x)|
+                &=\left|\int_{-\infty}^{\infty}f(x-y)g(y)\mathrm{d}y\right| \\
+                &=\left|\int_{|y|\leq\frac{|x|}{2}}f(x-y)g(y)\mathrm{d}y+\int_{|y|\geq\frac{|x|}{2}}f(x-y)g(y)\mathrm{d}y\right| \\
+                &\leq\int_{|y|\leq\frac{|x|}{2}}|f(x-y)g(y)|\mathrm{d}y+\int_{|y|\geq\frac{|x|}{2}}|f(x-y)g(y)|\mathrm{d}y \\
+                &\leq\int_{|y|\leq\frac{|x|}{2}}\frac{A}{1+(x-y)^2}|g(y)|\mathrm{d}y+\int_{|y|\geq\frac{|x|}{2}}|f(x-y)|\frac{B}{1+y^2}\mathrm{d}y \\
+                &\leq\frac{1}{1+x^2/4}\left(A\int_{-\infty}^{\infty}|g(y)|\mathrm{d}y+B\int_{-\infty}^{\infty}|f(y)|\mathrm{d}y\right) \\
+                &\leq\frac{1}{1+x^2/4}\left(A\int_{-\infty}^{\infty}\frac{B}{1+y^2}\mathrm{d}y+B\int_{-\infty}^{\infty}\frac{A}{1+y^2}\mathrm{d}y\right) \\
+                &=\frac{2AB}{1+x^2/4}\int_{-\infty}^{\infty}\frac{1}{1+y^2}\mathrm{d}y \\
+                &=\frac{2AB}{1+x^2/4}\arctan y\bigg|_{-\infty}^{\infty} \\
+                &=\frac{2AB\pi}{1+x^2/4} \\
+                &\leq\frac{C}{1+x^2}
+            \end{aligned}
+            \nonumber
+        \end{equation}
+    \end{proof}
+\end{enumerate}
+\end{document}
