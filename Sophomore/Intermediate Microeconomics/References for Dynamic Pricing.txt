@@ -1,0 +1,11 @@
+References for Dynamic Pricing
+(Not related to exams! Just for those interested.)
+
+In class (Wednesday section), we briefly mentioned the dynamic pricing problem faced by a monopolist. A survey is:
+Elmaghraby, Wedad, and Pınar Keskinocak. "Dynamic pricing in the presence of inventory considerations: Research overview, current practices, and future directions." Management science 49, no. 10 (2003): 1287-1309.
+
+A paper particularly related to sales of concert tickets is:
+Gallego, Guillermo, and Garrett Van Ryzin. "Optimal dynamic pricing of inventories with stochastic demand over finite horizons." Management science 40, no. 8 (1994): 999-1020.
+
+To understand the technical details in those papers, you have to know some basics of optimal control theory / calculus of variation. A quick intro to this field of math is Chapter 8-10 of the book:
+Sydsæter, Knut, Atle Seierstad, and Arne Strom. Further mathematics for economic analysis. Pearson education, 2008.

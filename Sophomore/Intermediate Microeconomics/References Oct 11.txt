@@ -1,0 +1,23 @@
+Some references：
+
+1. A new black market
+《校外培训行政处罚暂行办法》
+http://www.moe.gov.cn/srcsite/A02/s5911/moe_621/202309/t20230912_1079788.html
+Concern of education inequailty:
+[1]周子焜,雷晓燕,沈艳.教育减负、家庭教育支出与教育公平[J].经济学(季刊),2023,23(03):841-859.DOI:10.13821/j.cnki.ceq.2023.03.02.
+
+2. Kuhn-Tucker conditions (for more mathematically mature students)
+Wikipedia entry:
+https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions
+Econ lecture note at Stanford:
+https://web.stanford.edu/~jdlevin/Econ%20202/Consumer%20Theory.pdf
+Kuhn-Tucker is in Section 4 of the note.
+
+3. More utility function forms
+Wikipedia entry:
+https://en.wikipedia.org/wiki/Utility
+See Section "Functions", subsection "Examples"
+
+4. How ChatGPT may help to prepare for job interviews
+打工人神器！用GPT4模拟面试，从此没有找不到的工作！HR们危险了？？
+https://www.bilibili.com/video/BV16H4y1f7jW

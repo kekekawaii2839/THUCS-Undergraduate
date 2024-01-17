@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\title{HW4}
+\author{Li Haolun\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item $\Pi(s)=8s-c(s)=2s^2-8s+18\leq\Pi(2)=10$ , so he'll fix 2 cars per week.
+    \item \begin{enumerate}
+        \item[(a)] $\text{MC}(y)=2y$ , $\text{AVC}(y)=y$ , $\text{ATC}(y)=y+\frac{10}{y}$ .
+        \item[(b)] $p_{min}=\text{ATC}(y)_{min}=2\sqrt{10}$ .
+    \end{enumerate}
+    \item The expected cost of each bird on the fine is $\$1,000\times0.1=\$100$ . \par
+    So the expected cost per bird is $\$40\times2+\$100=\$180$ . \par
+    Since the market is competitive, the price of bird is $\$180$ .
+    \item Average cost for each firm is $y+\frac{4}{y}$ . \par
+    In long run, the price should be equal to the minimum AC, which is $4$ . \par
+    Assume there's $N$ firms in the market, then the equilibrium quantity is $2N$ . \par
+    According to the demand curve, $2N=D(4)=50-4=46$ , so $N=23$ .
+    \item[] \begin{enumerate}
+        \item[5.1] \begin{enumerate}
+            \item[a)] $s=4T+0=80\Rightarrow T=20$ .
+            \item[b)] Cost of teaching to raise one point: $\frac{\omega_T}{4}$ , cost of encouragement to raise one point: $\omega_e$ . \par
+            So if $\omega_T>4\omega_e$ , encouragement is cheaper, otherwise teaching is cheaper.
+            \item[c)] \begin{equation}
+                c(\omega_T,\omega_e;s)=\begin{cases}
+                    \omega_e\cdot s & \text{if } \omega_T>4\omega_e \\
+                    \omega_T\cdot\frac{s}{4} & \text{if } \omega_T\leq4\omega_e
+                \end{cases}
+                \nonumber
+            \end{equation}
+            \item[d)] \begin{equation}
+                e(\omega_T,\omega_e;s)=\begin{cases}
+                    s & \text{if } \omega_T>4\omega_e \\
+                    0 & \text{if } \omega_T\leq4\omega_e
+                \end{cases}
+                \nonumber
+            \end{equation}
+        \end{enumerate} 
+        \item[5.2] \begin{enumerate}
+            \item[e)] $s_i=2\sqrt{T}+\sqrt{e_i}=2\sqrt{T}+\sqrt{h-T}$ \par
+            $\Rightarrow$ $\frac{\partial s_i}{\partial T}=\frac{1}{\sqrt{T}}-\frac{1}{2\sqrt{h-T}}=0$ \par
+            $\Rightarrow$ $T=\frac{4}{5}h$ , $e_i=\frac{1}{5}h$ .
+            \item[f)] \begin{equation}
+                \begin{aligned}
+                    S
+                    &=\sum_{i=1}^n s_i \\
+                    &=2n\sqrt{T}+\sum_{i=1}^{n}\sqrt{e_i} \\
+                    &=2n\sqrt{T}+\sqrt{nh-nT} \quad\text{consider all students are equivalent}\\
+                \end{aligned}
+                \nonumber
+            \end{equation} \par
+            $\Rightarrow$ $\frac{\partial S}{\partial T}=\frac{n}{\sqrt{T}}-\frac{n}{2\sqrt{nh-nT}}=0$ \par
+            $\Rightarrow$ $T=\frac{4n}{4n+1}h$ , $e_i=\frac{1}{4n+1}h$ .
+            \item[g)] The more students, the less time spent on encouragement.
+        \end{enumerate}
+        \item[5.3] \begin{enumerate}
+            \item[h)] The larger $A_i$ , the more time spent on this student's encouragement.
+            If his compensation is determined by the top-performing students in the class, he'll spend more time on the top-performing student's encouragement. \par
+            If it's determined by the lowest score, he'll spend more time on the bottom-performing student's encouragement.
+        \end{enumerate}
+    \end{enumerate}
+    \item[6] \begin{enumerate}
+        \item[(a)] $y$ is the quantity of good the monopolist produce, $q_l$ is the quantity of labor the monopolist use, $\omega$ is the labor's wage, and suppose one unit of labor produce $k$ units of production . \par
+        Assume the demand curve is $D(p)=D_0-p$ . \par
+        $\text{MC}(y)=\frac{k}{\omega}$
+        \item[(b)] $\text{MR}(y)=D_0-2y$ .
+        \item[(c)] $y^{*}=\frac{D_0-\frac{k}{\omega}}{2}$ , $p^{*}=\frac{D_0+\frac{k}{\omega}}{2}$.
+        \item[(d)] $\omega=n\times kp^{*}=\frac{kD_0+\frac{k^2}{\omega}}{2}$ .
+    \end{enumerate}
+\end{enumerate}
+\end{document}

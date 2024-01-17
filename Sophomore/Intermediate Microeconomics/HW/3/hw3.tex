@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\title{HW3}
+\author{Li Haolun\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item $\text{net surplus}=\int_{0}^{3}(150-30q)\mathrm{d}q-3\times60=135$ .
+    \item $(1,2)$ : $x_1=10$ , $x_2=0$ , $U=10$ . \par
+    $(4,2)$ : $x_1=0$ , $x_2=5$ , $U=5$ . \par
+    $\Rightarrow$ $\text{CV}=20-10=10$ , $\text{EV}=10-5=5$ .
+    \item \begin{enumerate}
+        \item[(a)] $D(50)=50$ .
+        \item[(b)] $\int_{0}^{50}D(p)\mathrm{d}p=\int_{0}^{50}(100-p)\mathrm{d}p=3750$ .
+        \item[(c)] \$$2500$ .
+        \item[(d)] $3750-2500=1250$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $\epsilon=\frac{\frac{\mathrm{d}D}{D}}{\frac{\mathrm{d}p}{p}}=\frac{\mathrm{d}D}{\mathrm{d}p}\frac{p}{D}=\frac{p}{p-40}$ .
+        \item[(b)] $\epsilon=\frac{\mathrm{d}D}{\mathrm{d}p}\frac{p}{D}=-60p^{-4}\frac{p}{20p^{-3}}=-3$ .
+        \item[(c)] $\epsilon=\frac{\mathrm{d}D}{\mathrm{d}p}\frac{p}{D}=-2(p+4)^{-3}\frac{p}{(p+4)^{-2}}=\frac{-2p}{p+4}$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $P(q)=10-q$ .
+        \item[(b)] $\text{total revenue}=10q-q^2$ , $\text{average revenue}=10-q$ , $\text{marginal revenue}=10-2q$ .
+        \item[(c)] $q=5$ $\Rightarrow$ $p=5$ .
+        \item[(d)] $q=5$ , $\epsilon=\frac{\mathrm{d}q}{\mathrm{d}p}\frac{p}{q}=-\frac{p}{10-p}=-1$
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $\text{equilibrium price}=20$ , $\text{equilibrium quantity}=60$ .
+        \item[(b)] $p_D=p_S+10$ \par
+        $D=100-2(p_S+10)=S=3p_S$
+        \item[(c)] $\Rightarrow$ $p_S=16$ , $p_D=26$ , $q=48$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $\text{equilibrium price}=20$ , $\text{equilibrium quantity}=100$ .
+        \item[(b)] $p_D+10=p_S$ $\Rightarrow$ $p_D=15$ , $p_S=25$ , $q=125$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] \begin{equation}
+            \begin{cases}
+                \text{decreasing returns to scale} & \text{if } a+b>1 \\
+                \text{constant returns to scale} & \text{if } a+b=1 \\
+                \text{increasing returns to scale} & \text{if } a+b<1
+            \end{cases}
+        \end{equation}
+        \item[(b)] $\frac{\partial^2f}{\mathrm{d}x_1^2}=Ca(a-1)x_1^{a-2}x_2^b<0$ $\Rightarrow$ $a<1$ .
+        \item[(c)] $\frac{\partial^2x_2}{\partial x_1^2}=(1+\frac{a}{b})\frac{af^{\frac{1}{b}}}{bC^{\frac{1}{b}}}x_1^{-2-\frac{a}{b}}>0$ $\Rightarrow$ $a,b,c>0$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $\Pi(x)=400\sqrt{x}-50x$ .
+        \item[(b)] $x^{*}=16$, $\max(\Pi)=\Pi(16)=800$ .
+        \item[(c)] $\Pi^{'}(x)=320\sqrt{x}-40x$ $\Rightarrow$ $x^{'*}=16$ , $\max(\Pi^{'})=640$ .
+        \item[(d)] $\Pi_{\text{after-tax}}=200\sqrt{x}-25x$ $\Rightarrow$ $x_{\text{after-tax}}^{*}=16$ , $\max(\Pi_{\text{after-tax}})=400$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $4\times(\frac{1}{2}x_1^{-\frac{1}{2}}x_2^{\frac{1}{4}})=\omega_1$ , $4\times(\frac{1}{4}x_1^{\frac{1}{2}}x_2^{-\frac{3}{4}})=\omega_2$ .
+        \item[(b)] $\Rightarrow$ $x_1=\frac{8}{\omega_1^3\omega_2}$ , $x_2=\frac{4}{\omega_1^2\omega_2^2}$ .
+    \end{enumerate}
+\end{enumerate}
+\end{document}

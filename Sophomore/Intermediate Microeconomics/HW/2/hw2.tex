@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+\title{HW2}
+\author{Li Haolun\ 2022011545}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] 
+        \begin{equation}
+            \begin{aligned}
+                k(x_1,x_2)
+                &=-\frac{\frac{\partial U}{\partial x_1}}{\frac{\partial U}{\partial x_2}} \\
+                &=-\frac{3x_1^2x_2^5}{5x_1^3x_2^4} \\
+                &=-\frac{3x_2}{5x_1}
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        \item[(b)] We have $\frac{3x_2}{5x_1}=\frac{p_1}{p_2}$ , which is eqivalent to $5p_1x_1=3p_2x_2$. 
+        So the expenditure share of goods 1 is $\frac{3}{3+5}=\frac{3}{8}$ .
+        \item[(c)] 
+        \begin{equation}
+            \begin{aligned}
+                k(x_1,x_2)
+                &=-\frac{\frac{\partial U}{\partial x_1}}{\frac{\partial U}{\partial x_2}} \\
+                &=-\frac{ax_2}{bx_1} \\
+                &=-\frac{p_1}{p_2}
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        $\Rightarrow bp_1x_1=ap_2x_2$ , so the expenditure share of goods 1 is $\frac{a}{a+b}$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] 
+        \begin{equation}
+            \begin{aligned}
+                k(x_1,x_2)
+                &=-\frac{\frac{\partial U}{\partial x_1}}{\frac{\partial U}{\partial x_2}} \\
+                &=\frac{1}{100-2x_2} \\
+                &=-\frac{p_1}{p_2} \\
+                &=-\frac{1}{4}
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        $\Rightarrow$ $4=100-2x_2$ \par
+        $\Rightarrow$ $x_1^*=308$ , $x_2^*=48$ .
+        \item[(b)] We still have $4=100-2x_2$ , so $x_1^*=808$ , $x_2^*=48$ .
+        \item[(c)] From the utility function, we always have $4=100-2x_2$ , which means that $x_2$ is always $48$ . \par
+        So, if the consumer consumes both goods, her income $a$ must be larger than $48\times4=192$ . \par
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $q=0.02\times7500-3\times30=60$ .
+        \item[(b)] Before the price of a blind box rose, Li Hua spent $5700$ Yuan on all other goods.
+        So, Li Hua need $5700+60\times40=8100$ Yuan after the price rose. \par
+        And he would buy $q^{'}=0.02\times8100-3\times40=42$ boxes at this income.
+        \item[(c)] $q^{''}=0.02\times7500-3\times40=30$ .
+        \item[(d)] Substitution effect: $q^{'}-q=-18$ . \par
+        Income effect: $q^{''}-q^{'}=-12$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] \leavevmode\vadjust{\vspace{-\baselineskip}}\newline
+        \begin{figure}[!htb]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (0,0) -- (6,0) node[right] {$h$};
+                \draw[->] (0,0) -- (0,6) node[above] {$s$};
+                \draw[domain=0:5, samples=100] plot (\x, {2.5-0.5*\x});
+                \node[right] at(4,1) {$1000h+2000s=200000$};
+                \draw[domain=0:15/4, samples=100] plot (\x, {15/4-\x});
+                \node[right] at(1,3) {$h+s=150$};
+                \fill (2.5,5/4) circle (0.05);
+                \node[above] at(3,5/4) {(100,50)};
+            \end{tikzpicture}
+        \end{figure} \par
+        $1000h+2000s=200000$ means the hotel manager's budget constraint. \par
+        $h+s=150$ means the hotel manager's reality constraint. \par
+        So, he will buy $100$ hard mattresses. \par
+        \item[(b)] \leavevmode\vadjust{\vspace{-\baselineskip}}\newline
+        \begin{figure}[!htb]
+            \centering
+            \begin{tikzpicture}
+                \draw[->] (0,0) -- (6,0) node[right] {$h$};
+                \draw[->] (0,0) -- (0,6) node[above] {$s$};
+                \draw[domain=0:5, samples=100] plot (\x, {2.5-0.25*\x});
+                \node[right] at(4,1) {$500h+2000s=200000$};
+                \draw[domain=0:15/4, samples=100] plot (\x, {15/4-\x});
+                \node[right] at(0.5,3.5) {$h+s=150$};
+                \fill (5/3,25/12) circle (0.05);
+                \node[above] at(3,2) {($\frac{200}{3}$ , $\frac{250}{3}$)};
+            \end{tikzpicture}
+        \end{figure} \par
+        Now he will buy $\frac{200}{3}$ hard mattresses and $\frac{250}{3}$ soft mattresses. \par
+        Hard mattress is Giffen good for him.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] 
+        \begin{equation}
+            \begin{aligned}
+                k(c,r)
+                &=-\frac{\frac{\partial U}{\partial r}}{\frac{\partial U}{\partial c}} \\
+                &=-\frac{c}{r} \\
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        For Magneto, her budget constraint is $c+50r=4000$ . \par
+        So we have $\frac{c}{r}=50$ . And the solution is $c=2000$ , $r=40$ .
+        \item[(b)] \begin{equation}
+            \begin{cases}
+                c+40r=3200 & r\geq40 \\
+                c+60r=4000 & r<40
+            \end{cases}
+            \nonumber
+        \end{equation}
+        \item[(c)] No, he won't. \par
+        When $r\geq40$ , we have $\frac{c}{r}=40$ , then $r=40$ . \par
+        When $r<40$ , we have $\frac{c}{r}=60$ , then $r=\frac{100}{3}$ . \par
+        The best choice for Xavier is $c=2000$ , $r=\frac{100}{3}$ .
+        \item[(d)] Magneto has the better job, because $U_M=2000\times\frac{100}{3}>U_X=1600\times40$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] He will choose 10 hours for leisure.
+        \item[(b)] His budget constraint is $C+10R=190$ . \par
+        \begin{equation}
+            \begin{aligned}
+                k(C,R)
+                &=-\frac{\frac{\partial U}{\partial R}}{\frac{\partial U}{\partial C}} \\
+                &=2R-20 \\
+                &=-10
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        So we have $R=5$ , $C=140$ . He will choose to work 11 hours.
+        \item[(c)] Now his budget constraint is $C+8R=190\times0.8=152$ . \par
+        We still have $R=6$ , then $C=104$ . He will choose to work 10 hours.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $m_1+\frac{m_2}{1+r}=c_1+\frac{c_2}{1+r}$ .
+        \item[(b)] He can consume $m_1(1+r)+m_2$ , which is the future value of his endowment.
+        \item[(c)] He can consume $m_1+\frac{m_2}{(1+r)}$ , which is the present value of his endowment.
+        \item[(d)] Slope is $-(1+r)$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] In this question, $m_1=1000$ , $m_2=150$ , $r=-0.25$ . \par
+        So villagers' budget constraint in present value terms is $1200=c_1+\frac{4}{3}c_2$ . \par
+        \begin{equation}
+            \begin{aligned}
+                k(c_1,c_2)
+                &=-\frac{\frac{\partial U}{\partial c_1}}{\frac{\partial U}{\partial c_2}} \\
+                &=-\frac{c_2}{c_1} \\
+                &=-(1+r)=-0.75
+            \end{aligned}
+            \nonumber
+        \end{equation} \par
+        $\Rightarrow$ $c_1=600$ , $c_2=450$ .
+        \item[(b)] Since the villagers can sell and buy wheat in any year, 
+        and the price is \$1 per kilo, so villagers' money can be seen as wheat, and they don't have to suffer from the loss during storage. \par
+        So villagers' budget constraint in present value terms is $1000+150/(1+0.1)=\frac{12500}{11}=c_1+\frac{c_2}{1.1}$ . \par
+        We have $\frac{c_2}{c_1}=1.1$ , then $c_2=625$  \par
+        Now, the villagers will consume $c_1=\frac{6250}{11}$ , $c_2=625$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] $P(m)=20=40-2m\Rightarrow m=10$ . His consumer's surplus is $\frac{20\times10}{2}=100$ . 
+        \item[(b)] Now he will consume $15$ cups per month, and his consumer's surplus is $\frac{30\times15}{2}=225$ . \par
+        So Mr. Hacker’s change in consumer’s surplus is $+125$ .
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item[(a)] Oliver has quasilinear utility function. His inverse demand function is $P(x)=60-x$ .
+        \item[(b)] He will consume $30$ bottles of wine.
+        \item[(c)] $10$ .
+        \item[(d)] In (b), his consumer's surplus is $\frac{30\times30}{2}=450$ . \par
+        In (c), his consumer's surplus is $\frac{10\times10}{2}=50$ . \par
+        So, the change in consumer’s surplus is $-400$ .
+    \end{enumerate}
+\end{enumerate}
+\end{document}
