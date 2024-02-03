@@ -28,7 +28,7 @@
 |  -  | 30240604 |[面向计算机科学的离散数学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/discrete%20math)|黄民烈| √ |
 |2023夏|10680092 |思政实践|何建宇| × |
 |  -  | 30240522 |[程序设计训练](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/ProgramAndTraining)|东昱晓| √ |
-|2023秋|10420803 |概率论与数理统计|唐宏岩| × |
+|2023秋|10420803 |[概率论与数理统计](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Probability%26Statistics)|唐宏岩| √ |
 |  -  | 10421432 |[微积分T(3)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/calculus)|艾颖华| √ |
 |  -  | 10430494 |[大学物理B(2)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Physics/2023F)|张卫华| √ |
 |  -  | 10680073 |马克思主义基本原理|王代月| × |
