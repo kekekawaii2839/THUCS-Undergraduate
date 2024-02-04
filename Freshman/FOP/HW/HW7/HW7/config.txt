@@ -1,9 +1,0 @@
-#
-#
-###
-SIZE = 7
-#SIZE = 10000
-SIZE = 5
-RAND = 0
-SDCNJSNC
-#
