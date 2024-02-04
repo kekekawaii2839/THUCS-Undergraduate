@@ -34,5 +34,5 @@
 |  -  | 10680073 |马克思主义基本原理|王代月| × |
 |  -  | 30240184 |数据结构|邓俊辉| × |
 |  -  | 30240593 |[计算机系统概论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/ICS)|张悠慧| √ |
-|  -  | 30510123 |会计学原理|张海燕| × |
+|  -  | 30510123 |[会计学原理](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Introduction%20to%20Accounting)|张海燕| √ |
 |  -  | 30510743 |[中级微观经济学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Intermediate%20Microeconomics)|吴星晔| √ |
