@@ -1,0 +1,2 @@
+https://math.stackexchange.com/questions/132625/inequality-n-choose-k-leq-left-fracen-k-rightk
+https://math.stackexchange.com/questions/2256379/show-that-sumk-i-0-binomni-leq-2-binomnk-sum-of-the-first-k
