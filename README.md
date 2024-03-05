@@ -36,3 +36,12 @@
 |  -  | 30240593 |[计算机系统概论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/ICS)|张悠慧| √ |
 |  -  | 30510123 |[会计学原理](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Introduction%20to%20Accounting)|张海燕| √ |
 |  -  | 30510743 |[中级微观经济学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Intermediate%20Microeconomics)|吴星晔| √ |
+|2023春|10510123 |中国文明|刘丰| × |
+|  -  | 10510173 |批判性思维与道德推理|姜朋| × |
+|  -  | 30240042 |人工智能导论|艾清遥| × |
+|  -  | 30240343 |数字逻辑电路|赵有健| × |
+|  -  | 30240551 |数字逻辑实验|全成斌| × |
+|  -  | 30510973 |计量经济学（1）|冯颖杰| × |
+|  -  | 30511053 |公司金融|沈涛| × |
+|  -  | 40512182 |金融科技|冯润桓| × |
+|  -  | 40512273 |博弈论与机制设计|周俊杰| × |
