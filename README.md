@@ -45,3 +45,5 @@
 |  -  | 30511053 |公司金融|沈涛| × |
 |  -  | 40512182 |金融科技|冯润桓| × |
 |  -  | 40512273 |博弈论与机制设计|周俊杰| × |
+
+![visitors](https://api.visitorbadge.io/api/visitors?path=https://github.com/kekekawaii2839/THUCS-Undergraduate)
