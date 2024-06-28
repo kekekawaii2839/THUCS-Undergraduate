@@ -14,7 +14,6 @@
 |  -  | 10421414 |[微积分T(1)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/calculus)|王晓峰| √ |
 |  -  | 10510072 |中文写作|高静| × |
 |  -  | 10680053 |[思想道德与法治](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Ideology%2CMorality%20and%20Rule%20of%20Law)|戴木才| √ |
-|  -  | 10680061 |形势与政策（1）|李蕉| × |
 |  -  | 14201092 |英语听说交流（A）|吴炜| × |
 |  -  | 20510154 |[经济学原理](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Principles%20of%20Economics)|钱颖一| √ |
 |  -  | 30240233 |[程序设计基础](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/FOP)|徐明星| √ |
@@ -22,8 +21,6 @@
 |  -  | 10421424 |[微积分T(2)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/calculus)|王晓峰| √ |
 |  -  | 10430484 |[大学物理B(1)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Physics/2023S)|胡震| √ |
 |  -  | 10610193 |[中国近现代史纲要](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Outline%20of%20Modern%20Chinese%20History)|王宪明| √ |
-|  -  | 10680032 |毛泽东思想和中国特色社会主义理论体系概论(1)|路子达| × |
-|  -  | 10680081 |形势与政策（2）|李蕉| × |
 |  -  | 30240532 |[面向对象程序设计基础](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/OOP)|黄民烈| √ |
 |  -  | 30240604 |[面向计算机科学的离散数学](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/discrete%20math)|黄民烈| √ |
 |2023夏|10680092 |思政实践|何建宇| × |
@@ -31,7 +28,6 @@
 |2023秋|10420803 |[概率论与数理统计](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Probability%26Statistics)|唐宏岩| √ |
 |  -  | 10421432 |[微积分T(3)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/calculus)|艾颖华| √ |
 |  -  | 10430494 |[大学物理B(2)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Physics/2023F)|张卫华| √ |
-|  -  | 10680073 |马克思主义基本原理|王代月| × |
 |  -  | 30240184 |[数据结构](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/DSA)|邓俊辉| √ |
 |  -  | 30240593 |[计算机系统概论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/ICS)|张悠慧| √ |
 |  -  | 30510123 |[会计学原理](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Introduction%20to%20Accounting)|张海燕| √ |
