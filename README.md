@@ -9,7 +9,6 @@
 |2022夏|12090052 |[军事理论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/military%20training)| - | √ |
 |  -  | 12090062 |军事技能| - | × |
 |2022秋|00240301 |人工智能前沿探讨|朱军| × |
-|  -  | 02070012 |党的知识概论|张岱渭| × |
 |  -  | 10421334 |[线性代数（英）](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/Linear%20Algebra)|杨一龙| √ |
 |  -  | 10421414 |[微积分T(1)](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Freshman/calculus)|王晓峰| √ |
 |  -  | 10510072 |中文写作|高静| × |
