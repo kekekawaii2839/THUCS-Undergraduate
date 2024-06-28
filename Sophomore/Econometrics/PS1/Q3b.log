@@ -1,0 +1,7 @@
+. gen female = (gender == 2)
+
+. summarize female
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      female |      2,429    .2984767     .457684          0          1

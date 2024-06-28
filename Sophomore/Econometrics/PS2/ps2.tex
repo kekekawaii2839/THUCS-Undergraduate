@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+\usepackage{stata}
+
+\title{PS2}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item \begin{proof}
+            Let $e=\beta_2x_2+u$ , then the new regression is $y=\beta_0+\beta_1x_1+e$ . \par
+            And $\mathbb{E}[e|x_1]=\beta_2\mathbb{E}[x_2|x_1]+\mathbb{E}[u|x_1]=0+0=0$ , 
+            so it's actually a simple linear regression model. \par
+            And the OLS estimator of $\beta_1$ is $\tilde{\beta_1}$ , which means $\mathbb{E}[\tilde{\beta_1}]=\beta_1$ .
+        \end{proof}
+        \item \begin{proof}
+            Using the conclusion in OLS, we have $\mathbb{V}[\tilde{\beta_1}|x_1]=\frac{\mathbb{V}[e|x_1]}{\sum_{i=1}^{n}(x_{i1}-\overline{x_1})^2}$ . \par
+            Then, we only need to proof: $\mathbb{V}[e|x_1]=\sigma_u^2+\beta_2^2\sigma_2^2$ . \par
+            \begin{equation}
+                \begin{aligned}
+                    \mathbb{V}[e|x_1]
+                    &=\mathbb{V}[u+\beta_2x_2|x_1] \\
+                    &=\mathbb{V}[u|x_1]+\beta_2^2\mathbb{V}[x_2|x_1] \\
+                    &=\sigma_u^2+\beta_2^2\sigma_2^2
+                \end{aligned}
+                \nonumber
+            \end{equation}
+            So, $\mathbb{V}[\tilde{\beta_1}|x_1]=\frac{\sigma_u^2+\beta_2^2\sigma_2^2}{\sum_{i=1}^{n}(x_{i1}-\overline{x_1})^2}$ .
+        \end{proof}
+        \item $R_1^2\rightarrow0$ , since the more samples we have, the more accurate the estimator is, and the variance of the estimator is smaller.
+        \item $\hat{\beta_1}$ , since it has a smaller variance when $n$ is large.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item $\mathbb{V}[\hat{\beta}_1-\hat{\beta}_2]=\mathbb{V}[\hat{\beta}_1]+\mathbb{V}[\hat{\beta}_2]-2Cov[\hat{\beta}_1,\hat{\beta}_2]$ .
+        \item t-stat: \begin{equation}
+            \begin{aligned}
+                t
+                &=\frac{\hat{\beta}_1-\hat{\beta}_2-1}{\text{se}(\hat{\beta}_1-\hat{\beta}_2)} \\
+                &=\frac{\hat{\beta}_1-\hat{\beta}_2-1}{\sqrt{\text{se}(\hat{\beta}_1)^2+\text{se}(\hat{\beta}_2)^2-2Cov(\hat{\beta}_1,\hat{\beta}_2)}}
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        \item \begin{equation}
+            \begin{aligned}
+                y
+                &=\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3+u \\
+                &=\beta_0+(\beta_2+\theta_1)x_1+\beta_2x_2+\beta_3x_3+u \\
+                &=\beta_0+\theta_1 x_1+\beta_2(x_1+x_2)+\beta_3x_3+u \\
+                &=\beta_0+\theta_1 x_1+\beta_2z+\beta_3x_3+u \quad(z=x_1+x_2)\\
+            \end{aligned}
+            \nonumber
+        \end{equation}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item See the log file.
+        \item Overestimate. Because the higher IQ and longer education time, the higher wage.(By intuition)
+        \item See the log file.
+        \item The longer the education time, the higher the wage.
+        \item Conclusion: 0.0118>1\% , so the null hypothesis can not be rejected.
+        \item $\beta_2=\beta_1$ .
+        \item Conclusion: the confidence interval of $\theta$ doesn't contain 0, so the null hypothesis is rejected.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,10 @@
+. predict ln_wage_hat, xb
+
+. gen residual = ln_wage - ln_wage_hat
+
+. summarize ln_wage_hat residual
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ ln_wage_hat |      2,429    10.72336    .1241931   10.35617   11.07885
+    residual |      2,429    3.34e-09    .7523697  -3.072877   2.525533

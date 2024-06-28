@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+\usepackage{stata}
+
+\title{PS1}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \sum_{i=1}^{n}y_i
+                    &=\sum_{i=1}^{n}(x_{i1}+1-x_{i1})\times y_i \\
+                    &=\sum_{i=1}^{n}x_{i1}\times y_i+\sum_{i=1}^{n}(1-x_{i1})\times y_i \\
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+        \item \begin{equation}
+            \begin{aligned}
+                \hat{\beta}_1
+                &=\frac{\sum_{i=1}^{n}(x_{i1}-\overline{x})(y_i-\overline{y})}{\sum_{i=1}^{n}(x_{i1}-\overline{x})^2} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i-\overline{x}\sum_{i=1}^{n}y_i-\overline{y}\sum_{i=1}^{n}x_{1i}+\sum_{i=1}^{n}\overline{x}\overline{y}}{\sum_{i=1}^{n}x_{1i}-2\overline{x}\sum_{i=1}^{n}x_{1i}+\overline{x}\sum_{i=1}^{n}x_{1i}} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i-\overline{x}\sum_{i=1}^{n}y_i-\overline{y}\sum_{i=1}^{n}x_{1i}+\overline{x}\sum_{i=1}^{n}y_i}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i-\overline{y}\sum_{i=1}^{n}x_{1i}}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}}-\frac{\overline{y}}{1-\overline{x}} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}}-\frac{\sum_{i=1}^{n}y_i}{\sum_{i=1}^{n}(1-x_{i1})} \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}}-\frac{\sum_{i=1}^{n}x_{i1}y_i}{\sum_{i=1}^{n}(1-x_{i1})}-\frac{\sum_{i=1}^{n}(1-x_{i1})y_i}{\sum_{i=1}^{n}(1-x_{i1})} \\
+                &=\left(\sum_{i=1}^{n}x_{i1}y_i\right)\left(\frac{1}{(1-\overline{x})\sum_{i=1}^{n}x_{1i}}-\frac{1}{\sum_{i=1}^{n}(1-x_{i1})}\right)-\frac{\sum_{i=1}^{n}(1-x_{i1})y_i}{n_0} \\
+                &=\left(\sum_{i=1}^{n}x_{i1}y_i\right)\frac{n-\sum_{i=1}^{n}x_{1i}}{\sum_{i=1}^{n}(1-x_{1i})\sum_{i=1}^{n}x_{1i}}-\overline{y}_0 \\
+                &=\frac{\sum_{i=1}^{n}x_{i1}y_i}{\sum_{i=1}^{n}x_{1i}}-\overline{y}_0 \\
+                &=\overline{y}_1-\overline{y}_0 \\
+                \hat{\beta}_0
+                &=\overline{y}-\hat{\beta}_1\overline{x} \\
+                &=\frac{\sum_{i=1}^{n}y_i}{n}-(\overline{y}_1-\overline{y}_0)\frac{\sum_{i=1}^{n}x_{1i}}{n} \\
+                &=\overline{y}_0\frac{\sum_{i=1}^{n}x_{1i}}{n}+\frac{\sum_{i=1}^{n}y_i}{n}-\frac{\overline{y}_1\sum_{i=1}^{n}x_{1i}}{n} \\
+                &=\overline{y}_0\frac{\sum_{i=1}^{n}x_{1i}}{n}+\frac{\sum_{i=1}^{n}y_i}{n}-\frac{\overline{y}_1\times n_1}{n} \\
+                &=\overline{y}_0\frac{\sum_{i=1}^{n}x_{1i}}{n}+\frac{\sum_{i=1}^{n}(1-x_{i1})y_i}{n} \\
+                &=\overline{y}_0\frac{\sum_{i=1}^{n}x_{1i}}{n}+\overline{y}_0\frac{\sum_{i=1}^{n}(1-x_{1i})}{n} \\
+                &=\overline{y}_0
+            \end{aligned}
+            \nonumber
+        \end{equation}
+        \item $\hat{\beta}_1$ represents the difference between y on $x=1$ and y on $x=0$, and $\hat{\beta}_0$ represents the average of y on $x=0$.
+        \item \begin{proof}
+            \begin{equation}
+                \begin{aligned}
+                    \mathbb{E}[\hat{\beta}_1]
+                    &=\beta_1 \\
+                    &=\frac{\mathbb{E}[y]-\beta_0}{\mathbb{E}[x_1]} \\
+                    &=\frac{\mathbb{E}[y|x_1=1]P(x_1=1)+\mathbb{E}[y|x_1=0]P(x_1=0)-\mathbb{E}[y|x_1=0]}{P(x_1=0)\times0+P(x_1=1)\times1} \\
+                    &=\frac{\mathbb{E}[y|x_1=1]P(x_1=1)-\mathbb{E}[y|x_1=0]P(x_1=1)}{P(x_1=1)} \\
+                    &=\mathbb{E}[y|x_1=1]-\mathbb{E}[y|x_1=0] \\
+                \end{aligned}
+                \nonumber
+            \end{equation}
+        \end{proof}
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item There's 3 possible explanations for the correlation between smoking and baby's weight.
+        \begin{enumerate}
+            \item The more the mother smoked, the less the baby's weight.
+            \item The less the baby's weight, the more the mother smoked.
+            \item There's a third variable that affects both the mother's smoking and the baby's weight in the contrary way.
+        \end{enumerate}
+        \item Because the more the mother smoked, the less the baby's weight, and the effect of smoking on baby's weight is quite big.
+        \item Yes, it's possible according to the common sense.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item \begin{stlog}
+            \input{Q3a.log}
+        \end{stlog}
+        \item \begin{stlog}
+            \input{Q3b.log}
+        \end{stlog} \par
+        Female in the sample accounts for 29.85\%.
+        \item \begin{stlog}
+            \input{Q3c.log}
+        \end{stlog} \par
+        So, we have $\text{wage}=62580.26-14935.5\times\text{female}$ . \par
+        Using my conclusion in Q1, this regression result means that 
+        the wage difference between female and male is $-14935.5$ yuan, 
+        and the average wage for male is $62580.26$ yuan.
+        \item \begin{stlog}
+            \input{Q3d.log}
+        \end{stlog} \par
+        If \textbf{\texttt{schooling\_yr}} increases by 1, the \textbf{log(\texttt{wage})} will increase by 0.043.
+        \item \begin{stlog}
+            \input{Q3e.log}
+        \end{stlog} \par
+        The residual is very small, which suggests that the model fits the data well.
+        \item In (d) , we have $R^2=0.0265$ , indicating that there may be other factors not included in the model.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

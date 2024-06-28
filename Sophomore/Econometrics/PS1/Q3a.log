@@ -1,0 +1,10 @@
+
+. use "EduIncome_24.dta"
+
+. summarize birthyear wage schooling_yr
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   birthyear |      2,429    1974.794      10.584       1955       1990
+        wage |      2,429    58122.36    41021.76   2113.569   608707.9
+schooling_yr |      2,429    7.656237    2.927878          0         15
