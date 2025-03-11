@@ -40,7 +40,7 @@
 |  -  | 30511053 |公司金融|沈涛| × |
 |  -  | 40512182 |金融科技|冯润桓| × |
 |  -  | 40512273 |博弈论与机制设计|周俊杰| × |
-|2024秋|10510103 |西方文明|朱孝远| × |
+|2024秋|10510103 |[西方文明](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Junior/Western%20Civilization)|朱孝远| √ |
 |  -  | 14205174 |[日语（第二外国语）（1）](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Junior/Japanese)|金雪梅| √ |
 |  -  | 30511033 |金融经济学导论|张丽宏| × |
 |  -  | 40240354 |计算机组成原理|陆游游| × |
