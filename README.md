@@ -34,7 +34,7 @@
 |2024春|10510123 |[中国文明](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Chinese%20Civilization)|刘丰| √ |
 |  -  | 10510173 |[批判性思维与道德推理](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/CTMR)|姜朋| √ |
 |  -  | 30240042 |[人工智能导论](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Introduction%20to%20AI)|艾清遥| √ |
-|  -  | 30240343 |数字逻辑电路|赵有健| × |
+|  -  | 30240343 |[数字逻辑电路](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/DigitalLogic)|赵有健| √ |
 |  -  | 30240551 |数字逻辑实验|全成斌| × |
 |  -  | 30510973 |[计量经济学（1）](https://github.com/kekekawaii2839/THUCS-Undergraduate/tree/master/Sophomore/Econometrics)|冯颖杰| √ |
 |  -  | 30511053 |公司金融|沈涛| × |
@@ -47,6 +47,6 @@
 |  -  | 40240513 |计算机网络原理|吴建平| × |
 |  -  | 40510693 |财产与责任保险|王珺| × |
 |  -  | 40512212 |机器学习在金融中的应用|朱英姿| × |
-|  -  | 40700143 |社会网分析|郑路| × |
+|2025春| ||||
 
 ![visitors](https://api.visitorbadge.io/api/visitors?path=https://github.com/kekekawaii2839/THUCS-Undergraduate)
